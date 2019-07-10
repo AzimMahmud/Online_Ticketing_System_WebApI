@@ -5,21 +5,10 @@ using System.Linq;
 using System.Web;
 using BusTicket.API.Models;
 
-namespace WebApplication1.Models
+namespace BusTicket.API.Models
 {
     public class BusDetail
     {
-        public BusDetail(int busDetailID, int brandID, int busCategoryID, int vendorID, Vendor vendor, Brand brand, BusCategory busCategory)
-        {
-            this.BusDetailID = busDetailID;
-            this.BrandID = brandID;
-            this.BusCategoryID = busCategoryID;
-            this.VendorID = vendorID;
-            this.Vendor = vendor;
-            this.Brand = brand;
-            this.BusCategory = busCategory;
-        }
-
         [Key]
         public int BusDetailID { get; set; }
         public int BrandID { get; set; }

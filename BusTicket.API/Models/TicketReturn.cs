@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication1.Models
+namespace BusTicket.API.Models
 {
     public class TicketReturn
     {
+        [Key]
         public int TicktReturnID { get; set; }
         public int InvoiceID { get; set; }
         public string Comment { get; set; }

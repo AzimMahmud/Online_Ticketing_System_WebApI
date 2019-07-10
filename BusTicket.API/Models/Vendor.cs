@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication1.Models
+
+namespace BusTicket.API.Models
 {
     public class Vendor
     {
+        [Key]
         public int VendorID { get; set; }
         public string VendorName { get; set; }
         public string VendorPhone { get; set; }

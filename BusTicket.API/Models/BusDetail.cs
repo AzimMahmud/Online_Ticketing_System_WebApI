@@ -19,8 +19,8 @@ namespace BusTicket.API.Models
         public Brand Brand { get; set; }
         public BusCategory BusCategory { get; set; }
 
-        public ICollection<RouteDetails> RouteDetails { get; set; }
-        public ICollection<SeatLayout> SeatLayout { get; set; }
+        public virtual ICollection<RouteDetails> RouteDetails { get; set; }
+        public virtual ICollection<SeatLayout> SeatLayout { get; set; }
 
     }
 }

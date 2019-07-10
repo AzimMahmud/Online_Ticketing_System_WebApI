@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BusTicket.API.Data;
+using BusTicket.API.Models;
+using BusTicket.API.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace BusTicket.API
 {
@@ -29,15 +32,23 @@ namespace BusTicket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+ 
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
 
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
 
             services.AddCors();
 
-            var builder = new Autofac.ContainerBuilder();
+            // Configure AutoFac
+            var builder = new ContainerBuilder();
 
-            builder.RegisterType<BusDetailRepository>().As<IBusDetailsRepository>();
+            builder.RegisterType<BusDetailRepository>().As<IDataRepository<BusDetail>>();
+            builder.RegisterType<VendorRepository>().As<IDataRepository<Vendor>>();
 
 
             builder.Populate(services);
@@ -63,6 +74,8 @@ namespace BusTicket.API
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
+
+
         }
     }
 }

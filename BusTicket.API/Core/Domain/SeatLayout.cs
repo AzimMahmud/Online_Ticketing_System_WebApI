@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BusTicket.API.Models
+namespace BusTicket.API.Core.Domain
 {
     public class SeatLayout
     { 

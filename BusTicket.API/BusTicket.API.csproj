@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DI\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Persistence\EntityConfigurations\" />
+  </ItemGroup>
+
 </Project>

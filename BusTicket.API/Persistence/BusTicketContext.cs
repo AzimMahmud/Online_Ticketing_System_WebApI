@@ -1,12 +1,13 @@
+using BusTicket.API.Core.Domain;
 using Microsoft.EntityFrameworkCore;
-using BusTicket.API.Models;
 
 
-namespace BusTicket.API.Data
+
+namespace BusTicket.API.Persistence
 {
-    public class DataContext : DbContext
+    public class BusTicketContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public BusTicketContext(DbContextOptions<BusTicketContext> options) : base(options)
         {
         }
 

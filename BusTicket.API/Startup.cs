@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using BusTicket.API.Data;
-using BusTicket.API.Models;
-using BusTicket.API.Repositories;
+using BusTicket.API.Controllers;
+using BusTicket.API.Core;
+using BusTicket.API.Core.Repositories;
+
+using BusTicket.API.Persistence;
+using BusTicket.API.Persistence.Repositories;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,15 +45,16 @@ namespace BusTicket.API
 
 
 
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddDbContext<BusTicketContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
 
             services.AddCors();
 
             // Configure AutoFac
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<BusDetailRepository>().As<IDataRepository<BusDetail>>();
-            builder.RegisterType<VendorRepository>().As<IDataRepository<Vendor>>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            //builder.RegisterType<VendorRepository>().As<>();
+
 
 
             builder.Populate(services);

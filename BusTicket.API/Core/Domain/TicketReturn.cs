@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BusTicket.API.Models
+namespace BusTicket.API.Core.Domain
 {
-    public class BusReservationCancel
+    public class TicketReturn
     {
         [Key]
-        public int BusRsrvCnclID { get; set; }
+        public int TicktReturnID { get; set; }
         public int InvoiceID { get; set; }
         public string Comment { get; set; }
-        public string NoOfBus { get; set; }
+        public string NoOfTicket { get; set; }
         public DateTime ReturnDate { get; set; }
     }
 }

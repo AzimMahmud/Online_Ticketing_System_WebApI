@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BusTicket.API.Models
+namespace BusTicket.API.Core.Domain
 {
-    public class Brand
+    public class BusCategory
     {
         [Key]
-        public int BrandID { get; set; }
+        public int BusCategoryID { get; set; }
 
         [Required]
         public string Name { get; set; }

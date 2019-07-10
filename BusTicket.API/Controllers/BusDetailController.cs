@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusTicket.API.Core;
+using BusTicket.API.Core.Domain;
+using BusTicket.API.Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BusTicket.API.Models;
-using BusTicket.API.Repositories;
+
 
 namespace BusTicket.API.Controllers
 {
@@ -13,26 +15,27 @@ namespace BusTicket.API.Controllers
     [ApiController]
     public class BusDetailController : ControllerBase
     {
-        private readonly IDataRepository<BusDetail> _repo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BusDetailController(IDataRepository<BusDetail> repository)
+
+        public BusDetailController(IUnitOfWork unitOfWork)
         {
-            _repo = repository;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/BusDetail
         [HttpGet]
-        public async Task<IActionResult> GetBusDetails()
+        public IActionResult GetBusDetails()
         {
-            var users = await _repo.Get();
+            var users = _unitOfWork.BusDetail.GetAll();
             return Ok(users);
         }
 
         // GET: api/BusDetail/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBusDetail(int id)
+        public IActionResult GetBusDetail(int id)
         {
-            var busDetail = await _repo.GetByID(id);
+            var busDetail = _unitOfWork.BusDetail.Get(id);
 
             if (busDetail == null)
             {
@@ -44,26 +47,31 @@ namespace BusTicket.API.Controllers
 
         // PUT: api/BusDetail/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusDetail(int id, BusDetail busDetail)
+        public void PutBusDetail(BusDetail busDetail)
         {
-            return await _repo.Put(id, busDetail);
+            _unitOfWork.BusDetail.Update(busDetail);
+            _unitOfWork.Complete();
         }
 
         // POST: api/BusDetail
         [HttpPost]
-        public async Task<IActionResult> PostBusDetail([FromBody] BusDetail busDetail)
+        public void PostBusDetail([FromBody] BusDetail busDetail)
         {
-           var data = await _repo.Post(busDetail);
-    
-
-            return Ok(data);
+            _unitOfWork.BusDetail.Add(busDetail);
+            _unitOfWork.Complete();
         }
 
         // DELETE: api/BusDetail/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BusDetail>> DeleteBusDetail(int id)
+        public ActionResult<BusDetail> DeleteBusDetail(int id)
         {
-            var busDetail = await _repo.Delete(id);
+            var busDetail = _unitOfWork.BusDetail.Get(id);
+
+            if (busDetail == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.BusDetail.Remove(busDetail);
             return Ok(busDetail);
         }
 

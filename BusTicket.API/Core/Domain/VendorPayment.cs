@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BusTicket.API.Models
+namespace BusTicket.API.Core.Domain
 {
     public class VendorPayment
     {

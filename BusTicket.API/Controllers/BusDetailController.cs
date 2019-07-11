@@ -28,17 +28,17 @@ namespace BusTicket.API.Controllers
 
         // GET: api/BusDetail
         [HttpGet]
-        public IActionResult GetBusDetails()
+        public async Task<IActionResult> GetBusDetails()
         {
-            var users = _unitOfWork.BusDetail.GetAll();
+            var users = await _unitOfWork.BusDetail.GetAll();
             return Ok(users);
         }
 
         // GET: api/BusDetail/5
         [HttpGet("{id}")]
-        public IActionResult GetBusDetail(int id)
+        public async Task<IActionResult> GetBusDetail(int id)
         {
-            var busDetail = _unitOfWork.BusDetail.Get(id);
+            var busDetail = await _unitOfWork.BusDetail.Get(id);
 
             if (busDetail == null)
             {

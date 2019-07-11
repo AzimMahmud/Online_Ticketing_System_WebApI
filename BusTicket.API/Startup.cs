@@ -60,16 +60,13 @@ namespace BusTicket.API
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
             services.AddCors();
 
             // Configure AutoFac
             var builder = new ContainerBuilder();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-            //builder.RegisterType<VendorRepository>().As<>();
-
-
-
             builder.Populate(services);
 
             var container = builder.Build();

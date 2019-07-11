@@ -21,7 +21,6 @@ namespace BusTicket.API.Persistence.Repositories
         public BusDetailRepository(BusTicketContext context)
             : base(context)
         {
-
         }
 
         public IEnumerable<BusDetail> GetBusDetailWithVendor()

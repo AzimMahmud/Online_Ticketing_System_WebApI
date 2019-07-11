@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
+using BusTicket.API.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +18,12 @@ namespace BusTicket.API.Controllers
     public class BusDetailController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-
-        public BusDetailController(IUnitOfWork unitOfWork)
+        public BusDetailController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET: api/BusDetail
@@ -47,23 +50,30 @@ namespace BusTicket.API.Controllers
 
         // PUT: api/BusDetail/5
         [HttpPut("{id}")]
-        public void PutBusDetail(BusDetail busDetail)
+        public void PutBusDetail(BusDetailDTO busDetail)
         {
-            _unitOfWork.BusDetail.Update(busDetail);
+
+            var model = _mapper.Map<BusDetail>(busDetail);
+
+            _unitOfWork.BusDetail.Update(model);
             _unitOfWork.Complete();
         }
 
         // POST: api/BusDetail
         [HttpPost]
-        public void PostBusDetail([FromBody] BusDetail busDetail)
+        public void PostBusDetail(BusDetailDTO busDetail)
         {
-            _unitOfWork.BusDetail.Add(busDetail);
+            var model = _mapper.Map<BusDetail>(busDetail);
+
+            _unitOfWork.BusDetail.Add(model);
             _unitOfWork.Complete();
         }
 
+       
+
         // DELETE: api/BusDetail/5
         [HttpDelete("{id}")]
-        public ActionResult<BusDetail> DeleteBusDetail(int id)
+        public ActionResult<BusDetailDTO> DeleteBusDetail(int id)
         {
             var busDetail = _unitOfWork.BusDetail.Get(id);
 
@@ -71,7 +81,10 @@ namespace BusTicket.API.Controllers
             {
                 return NotFound();
             }
-            _unitOfWork.BusDetail.Remove(busDetail);
+
+            var model = _mapper.Map<BusDetail>(busDetail);
+            _unitOfWork.BusDetail.Remove(model);
+            _unitOfWork.Complete();
             return Ok(busDetail);
         }
 

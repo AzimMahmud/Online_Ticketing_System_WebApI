@@ -60,17 +60,17 @@ namespace BusTicket.API.Controllers
         }
 
         // DELETE: api/Vendor/5
-        [HttpDelete("{id}")]
-        public ActionResult<Vendor> DeleteVendor(int id)
-        {
-            var Vendor = _unitOfWork.Vendor.Get(id);
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<Vendor>> DeleteVendor(int id)
+        //{
+        //    var vendor = _unitOfWork.Vendor.Get(id);
 
-            if (Vendor == null)
-            {
-                return NotFound();
-            }
-            _unitOfWork.Vendor.Remove(Vendor);
-            return Ok(Vendor);
-        }
+        //    if (Vendor == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //   await _unitOfWork.Vendor.Remove(Vendor);
+        //    return Ok(Vendor);
+        //}
     }
 }

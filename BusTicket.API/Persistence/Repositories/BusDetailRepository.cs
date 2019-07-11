@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
 
@@ -16,9 +17,11 @@ namespace BusTicket.API.Persistence.Repositories
 {
     public class BusDetailRepository : Repository<BusDetail>, IBusDetails
     {
+        
         public BusDetailRepository(BusTicketContext context)
             : base(context)
         {
+
         }
 
         public IEnumerable<BusDetail> GetBusDetailWithVendor()
@@ -27,7 +30,6 @@ namespace BusTicket.API.Persistence.Repositories
         }
 
  
-
         public IEnumerable<BusDetail> GetBusDetailWithBrand()
         {
             return BusTicketContext.BusDetails

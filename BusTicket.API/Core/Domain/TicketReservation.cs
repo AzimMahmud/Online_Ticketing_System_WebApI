@@ -21,6 +21,6 @@ namespace BusTicket.API.Core.Domain
         public int RouteDetailsID { get; set; }
         public DateTime ReservationDate { get; set; }
 
-        public RouteDetails RouteDetails { get; set; }
+        public Route Route { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace BusTicket.WebAPI.Persistence
         public virtual DbSet<VendorPayment> VendorPayments { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<TicketReservation> TicketReservations { get; set; }
-        public virtual DbSet<RouteDetails> RouteDetailses { get; set; }
+        public virtual DbSet<RouteDetails> RouteDetails { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<TicketReturn> TicketReturns{ get; set; }
         public virtual DbSet<BusCategory> BusCategories  { get; set; }

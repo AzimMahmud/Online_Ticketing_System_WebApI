@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
+using BusTicket.API.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,63 +16,78 @@ namespace BusTicket.API.Controllers
     public class VendorController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-
-        public VendorController(IUnitOfWork unitOfWork)
+        public VendorController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        // GET: api/Vendor
+        
+        // GET: api/BusDetail
         [HttpGet]
-        public IActionResult GetVendors()
+        public async Task<IActionResult> GetVendorDetails()
         {
-            var vendors = _unitOfWork.Vendor.GetAll();
+            var vendors = await _unitOfWork.Vendor.GetAll();
+           
             return Ok(vendors);
         }
 
-        // GET: api/Vendor/5
+        // GET: api/BusDetail/5
         [HttpGet("{id}")]
-        public IActionResult GetVendor(int id)
+        public async Task<IActionResult> GetVendorDetail(int id)
         {
-            var Vendor = _unitOfWork.Vendor.Get(id);
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
 
-            if (Vendor == null)
+            if (vendorDetail == null)
             {
                 return NotFound();
             }
 
-            return Ok(Vendor);
+            return Ok(vendorDetail);
         }
 
-        // PUT: api/Vendor/5
+        // PUT: api/BusDetail/5
         [HttpPut("{id}")]
-        public void PutVendor(Vendor Vendor)
+        public async Task<IActionResult> PutVendorDetail(VendorDTO vendorDetail)
         {
-            _unitOfWork.Vendor.Update(Vendor);
-            _unitOfWork.Complete();
+
+            var model = _mapper.Map<Vendor>(vendorDetail);
+
+            _unitOfWork.Vendor.Update(model);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
         }
 
-        // POST: api/Vendor
+        // POST: api/BusDetail
         [HttpPost]
-        public void PostVendor([FromBody] Vendor Vendor)
+        public async Task<IActionResult> PostBusDetail(VendorDTO vendorDetail)
         {
-            _unitOfWork.Vendor.Add(Vendor);
-            _unitOfWork.Complete();
+            var model = _mapper.Map<Vendor>(vendorDetail);
+
+            _unitOfWork.Vendor.Add(model);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
         }
 
-        // DELETE: api/Vendor/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Vendor>> DeleteVendor(int id)
-        //{
-        //    var vendor = _unitOfWork.Vendor.Get(id);
 
-        //    if (Vendor == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //   await _unitOfWork.Vendor.Remove(Vendor);
-        //    return Ok(Vendor);
-        //}
+
+        // DELETE: api/BusDetail/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<BusDetailDTO>> DeleteVendorDetail(int id)
+        {
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
+
+            if (vendorDetail == null)
+            {
+                return NotFound();
+            }
+
+
+            _unitOfWork.Vendor.Remove(vendorDetail);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
+        }
     }
 }

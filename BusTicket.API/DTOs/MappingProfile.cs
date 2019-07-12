@@ -13,6 +13,15 @@ namespace BusTicket.API.DTOs
         {
             CreateMap<BusDetail, BusDetailDTO>();
             CreateMap<BusDetailDTO, BusDetail>();
+
+            CreateMap<BusCategory, BusCategoryDTO>();
+            CreateMap<BusCategoryDTO, BusCategory>();
+
+            CreateMap<Vendor, VendorDTO>();
+            CreateMap<VendorDTO, Vendor>();
+
+            CreateMap<Route, RouteDTO>();
+            CreateMap<RouteDTO, Route>();
         }
     }
 }

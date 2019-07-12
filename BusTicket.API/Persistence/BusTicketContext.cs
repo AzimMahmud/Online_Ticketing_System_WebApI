@@ -12,7 +12,7 @@ namespace BusTicket.API.Persistence
         }
 
 
-        public virtual DbSet<BusCategory> BusCategory { get; set; }
+        public virtual DbSet<BusCategory> BusCategories { get; set; }
         public virtual DbSet<BusDetail> BusDetails { get; set; }
         public virtual DbSet<BusReservation>  BusReservations { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
@@ -21,10 +21,9 @@ namespace BusTicket.API.Persistence
         public virtual DbSet<VendorPayment> VendorPayments { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<TicketReservation> TicketReservations { get; set; }
-        public virtual DbSet<RouteDetails> RouteDetailses { get; set; }
+        public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<TicketReturn> TicketReturns{ get; set; }
-        public virtual DbSet<BusCategory> BusCategories  { get; set; }
         public virtual DbSet<BusReservationCancel> BusReservationCancels { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
 

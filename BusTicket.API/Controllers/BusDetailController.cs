@@ -30,8 +30,8 @@ namespace BusTicket.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBusDetails()
         {
-            var users = await _unitOfWork.BusDetail.GetAll();
-            return Ok(users);
+            var busDetails = await _unitOfWork.BusDetail.GetAll();
+            return Ok(busDetails);
         }
 
         // GET: api/BusDetail/5
@@ -48,44 +48,44 @@ namespace BusTicket.API.Controllers
             return Ok(busDetail);
         }
 
+        // POST: api/BusDetail
+        [HttpPost]
+        public async Task<IActionResult> PostBusDetail(BusDetailDTO busDetail)
+        {
+            var model = _mapper.Map<BusDetail>(busDetail);
+
+            _unitOfWork.BusDetail.Add(model);
+            await _unitOfWork.Complete();
+            return Ok(busDetail);
+        }
+
         // PUT: api/BusDetail/5
         [HttpPut("{id}")]
-        public void PutBusDetail(BusDetailDTO busDetail)
+        public async Task<IActionResult> PutBusDetail(BusDetailDTO busDetail)
         {
 
             var model = _mapper.Map<BusDetail>(busDetail);
 
             _unitOfWork.BusDetail.Update(model);
-            _unitOfWork.Complete();
+           await _unitOfWork.Complete();
+           return Ok(busDetail);
         }
-
-        // POST: api/BusDetail
-        [HttpPost]
-        public void PostBusDetail(BusDetailDTO busDetail)
-        {
-            var model = _mapper.Map<BusDetail>(busDetail);
-
-            _unitOfWork.BusDetail.Add(model);
-            _unitOfWork.Complete();
-        }
-
-       
 
         // DELETE: api/BusDetail/5
         [HttpDelete("{id}")]
-        public ActionResult<BusDetailDTO> DeleteBusDetail(int id)
+        public async Task<ActionResult<BusDetailDTO>> DeleteBusDetail(int id)
         {
-            var busDetail = _unitOfWork.BusDetail.Get(id);
+            var busDetail = await _unitOfWork.BusDetail.Get(id);
 
             if (busDetail == null)
             {
                 return NotFound();
             }
 
-            var model = _mapper.Map<BusDetail>(busDetail);
-            _unitOfWork.BusDetail.Remove(model);
-            _unitOfWork.Complete();
-            return Ok(busDetail);
+
+            _unitOfWork.BusDetail.Remove(busDetail);
+           await _unitOfWork.Complete();
+           return Ok(busDetail);
         }
 
 

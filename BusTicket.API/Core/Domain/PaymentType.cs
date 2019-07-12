@@ -11,5 +11,6 @@ namespace BusTicket.API.Core.Domain
         [Key]
         public int PayTypID { get; set; }
         public string PaymentMethod { get; set; }
+        public bool IsActive { get; set; }
     }
 }

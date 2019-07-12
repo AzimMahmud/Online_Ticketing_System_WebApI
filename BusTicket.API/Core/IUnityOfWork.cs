@@ -11,6 +11,8 @@ namespace BusTicket.API.Core
     {
         IBusDetails BusDetail { get; set; }
         IVendor Vendor { get; set; }
+        IRoute Route { get; set; }
+        IBusCategory BusCategory { get; set; }
         Task<int> Complete();
     }
 }

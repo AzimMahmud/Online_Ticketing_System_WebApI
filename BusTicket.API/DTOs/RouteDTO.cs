@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace BusTicket.API.Core.Domain
+namespace BusTicket.API.DTOs
 {
-    public class RouteDetails
+    public class RouteDTO
     {
-        public int RouteDetailsID { get; set; }
+        public int RouteID { get; set; }
         public string BoardPoint { get; set; }
+
         public DateTime BoardTime { get; set; }
         public string DropPoint { get; set; }
         public DateTime DropTime { get; set; }
-        public int BusDetailsID { get; set; }
+        public int BusDetailID { get; set; }
 
         public decimal Fare { get; set; }
-
-        public BusDetail BusDetails { get; set; }
-        public ICollection<TicketReservation> TicketReservations { get; set; }
     }
 }

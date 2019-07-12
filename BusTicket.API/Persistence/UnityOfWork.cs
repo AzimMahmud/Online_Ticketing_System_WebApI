@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Repositories;
 using BusTicket.API.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc;
 
 
 namespace BusTicket.API.Persistence
@@ -19,11 +18,16 @@ namespace BusTicket.API.Persistence
             _context = context;
             BusDetail = new BusDetailRepository(_context);
             Vendor = new VendorRepository(_context);
-            
+            Route = new RouteRepository(_context);
+            BusCategory = new BusCategoryRepository(_context);
+
         }
 
         public IBusDetails BusDetail { get; set; }
         public IVendor Vendor { get; set; }
+        public IRoute Route { get; set; }
+        public IBusCategory BusCategory { get; set; }
+
         public async Task<int> Complete()
         {
             return await _context.SaveChangesAsync();

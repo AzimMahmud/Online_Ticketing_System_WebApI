@@ -4,18 +4,20 @@ using BusTicket.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusTicket.API.Migrations
 {
     [DbContext(typeof(BusTicketContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190712054538_UpdateDomainClassNames")]
+    partial class UpdateDomainClassNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -61,7 +63,7 @@ namespace BusTicket.API.Migrations
 
                     b.HasKey("BusCategoryID");
 
-                    b.ToTable("BusCategories");
+                    b.ToTable("BusCategory");
 
                     b.HasData(
                         new
@@ -135,19 +137,23 @@ namespace BusTicket.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Gender");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
                     b.Property<string>("NoOfBus");
 
-                    b.Property<string>("PassengerEmail");
+                    b.Property<string>("PassengerEmail")
+                        .IsRequired();
 
-                    b.Property<string>("PassengerName");
+                    b.Property<string>("PassengerName")
+                        .IsRequired();
 
-                    b.Property<string>("PassengerPhoneNo");
+                    b.Property<string>("PassengerPhoneNo")
+                        .IsRequired();
 
                     b.Property<DateTime>("ReservationDate");
 
-                    b.Property<decimal>("TotalAmount");
+                    b.Property<decimal>("Total");
 
                     b.HasKey("BusReservationID");
 
@@ -243,8 +249,6 @@ namespace BusTicket.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsActive");
-
                     b.Property<string>("PaymentMethod");
 
                     b.HasKey("PayTypID");
@@ -269,7 +273,7 @@ namespace BusTicket.API.Migrations
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.Route", b =>
                 {
-                    b.Property<int>("RouteID")
+                    b.Property<int>("RouteDetailID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -285,11 +289,11 @@ namespace BusTicket.API.Migrations
 
                     b.Property<decimal>("Fare");
 
-                    b.HasKey("RouteID");
+                    b.HasKey("RouteDetailID");
 
                     b.HasIndex("BusDetailID");
 
-                    b.ToTable("Routes");
+                    b.ToTable("RouteDetails");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.SeatLayout", b =>
@@ -335,9 +339,9 @@ namespace BusTicket.API.Migrations
 
                     b.Property<DateTime>("ReservationDate");
 
-                    b.Property<int>("RouteDetailsID");
+                    b.Property<int?>("RouteDetailID");
 
-                    b.Property<int?>("RouteID");
+                    b.Property<int>("RouteDetailsID");
 
                     b.Property<string>("SeatNo");
 
@@ -345,7 +349,7 @@ namespace BusTicket.API.Migrations
 
                     b.HasKey("TicketResrvID");
 
-                    b.HasIndex("RouteID");
+                    b.HasIndex("RouteDetailID");
 
                     b.ToTable("TicketReservations");
                 });
@@ -515,7 +519,7 @@ namespace BusTicket.API.Migrations
                 {
                     b.HasOne("BusTicket.API.Core.Domain.Route", "Route")
                         .WithMany("TicketReservations")
-                        .HasForeignKey("RouteID");
+                        .HasForeignKey("RouteDetailID");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.VendorPayment", b =>

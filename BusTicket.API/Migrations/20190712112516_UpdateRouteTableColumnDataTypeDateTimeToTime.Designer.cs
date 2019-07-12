@@ -4,14 +4,16 @@ using BusTicket.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusTicket.API.Migrations
 {
     [DbContext(typeof(BusTicketContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190712112516_UpdateRouteTableColumnDataTypeDateTimeToTime")]
+    partial class UpdateRouteTableColumnDataTypeDateTimeToTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +63,7 @@ namespace BusTicket.API.Migrations
 
                     b.HasKey("BusCategoryID");
 
-                    b.ToTable("BusCategories");
+                    b.ToTable("BusCategory");
 
                     b.HasData(
                         new
@@ -289,7 +291,7 @@ namespace BusTicket.API.Migrations
 
                     b.HasIndex("BusDetailID");
 
-                    b.ToTable("Routes");
+                    b.ToTable("RouteDetails");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.SeatLayout", b =>

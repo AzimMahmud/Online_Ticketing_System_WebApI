@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.Identity;
+using System;
 
-namespace BusTicket.API.Core.Domain
+namespace BusTicket.API.DTOs
 {
-    public class User : IdentityUser<int>
+    public class UserForListDto
     {
-        [Key]
+        public int Id { get; set; }
+        public string Username { get; set; }
         public string Gender { get; set; }
         public string Designation { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -20,8 +16,5 @@ namespace BusTicket.API.Core.Domain
         public DateTime LastActive { get; set; }
         public bool IsActive { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
-
-        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

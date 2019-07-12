@@ -22,6 +22,23 @@ namespace BusTicket.API.DTOs
 
             CreateMap<Route, RouteDTO>();
             CreateMap<RouteDTO, Route>();
+
+
+
+
+
+            CreateMap<User, UserForListDto>();
+            CreateMap<UserForListDto, User>();
+
+            CreateMap<User, UserForDetailedDto>();
+            CreateMap<UserForDetailedDto, User>();
+
+            CreateMap<User, UserForLoginDto>();
+            CreateMap<UserForLoginDto, User>();
+
+            CreateMap<User, UserForRegisterDto>();
+            CreateMap<UserForRegisterDto, User>();
+
         }
     }
 }

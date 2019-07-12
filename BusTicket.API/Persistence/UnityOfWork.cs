@@ -20,6 +20,7 @@ namespace BusTicket.API.Persistence
             Vendor = new VendorRepository(_context);
             Route = new RouteRepository(_context);
             BusCategory = new BusCategoryRepository(_context);
+          
 
         }
 
@@ -27,6 +28,7 @@ namespace BusTicket.API.Persistence
         public IVendor Vendor { get; set; }
         public IRoute Route { get; set; }
         public IBusCategory BusCategory { get; set; }
+ 
 
         public async Task<int> Complete()
         {

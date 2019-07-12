@@ -1,11 +1,14 @@
 using BusTicket.API.Core.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 
 namespace BusTicket.API.Persistence
 {
-    public class BusTicketContext : DbContext
+    public class BusTicketContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole, 
+        IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public BusTicketContext(DbContextOptions<BusTicketContext> options) : base(options)
         {
@@ -30,6 +33,23 @@ namespace BusTicket.API.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new {ur.UserId, ur.RoleId});
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(ur => ur.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(ur => ur.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
             modelBuilder.Entity<BusDetail>().HasData(   
                 new BusDetail {BusDetailID = 1, BrandID = 1, BusCategoryID = 1, VendorID = 1},
                 new BusDetail {BusDetailID = 2, BrandID = 2, BusCategoryID = 2, VendorID = 2},

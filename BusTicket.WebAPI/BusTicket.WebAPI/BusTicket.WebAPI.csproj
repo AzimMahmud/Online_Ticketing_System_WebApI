@@ -208,12 +208,37 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Core\Domain\Brand.cs" />
+    <Compile Include="Core\Domain\BusCategory.cs" />
+    <Compile Include="Core\Domain\BusDetail.cs" />
+    <Compile Include="Core\Domain\BusReservation.cs" />
+    <Compile Include="Core\Domain\BusReservationCancel.cs" />
+    <Compile Include="Core\Domain\Invoice.cs" />
+    <Compile Include="Core\Domain\Message.cs" />
+    <Compile Include="Core\Domain\PaymentType.cs" />
+    <Compile Include="Core\Domain\PromoOffer.cs" />
+    <Compile Include="Core\Domain\RouteDetails.cs" />
+    <Compile Include="Core\Domain\SeatLayout.cs" />
+    <Compile Include="Core\Domain\TicketReservation.cs" />
+    <Compile Include="Core\Domain\TicketReturn.cs" />
+    <Compile Include="Core\Domain\User.cs" />
+    <Compile Include="Core\Domain\Vendor.cs" />
+    <Compile Include="Core\Domain\VendorPayment.cs" />
+    <Compile Include="Core\IUnityOfWork.cs" />
+    <Compile Include="Core\Repositories\IBusDetails.cs" />
+    <Compile Include="Core\Repositories\IRepository.cs" />
+    <Compile Include="Core\Repositories\IVendor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Persistence\BusTicketContext.cs" />
+    <Compile Include="Persistence\Repositories\BusDetailRepository.cs" />
+    <Compile Include="Persistence\Repositories\Repository.cs" />
+    <Compile Include="Persistence\Repositories\VendorRepository.cs" />
+    <Compile Include="Persistence\UnityOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -277,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Persistence\EntityConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

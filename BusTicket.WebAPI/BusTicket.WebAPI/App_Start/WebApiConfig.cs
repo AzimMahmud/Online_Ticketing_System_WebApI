@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using BusTicket.WebAPI.App_Start;
 using BusTicket.WebAPI.Core;
 using BusTicket.WebAPI.Core.Repositories;

@@ -14,7 +14,6 @@ namespace BusTicket.WebAPI.Controllers
     {
          private readonly IUnitOfWork _unitOfWork;
 
-
         public BrandController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -51,6 +50,7 @@ namespace BusTicket.WebAPI.Controllers
             await _unitOfWork.Complete();
             return Ok(brand);
         }
+
         // PUT: api/Brand/5
         [HttpPut]
         public async Task<IHttpActionResult> PutBrand(Brand brand)

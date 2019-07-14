@@ -224,8 +224,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\BusCategoryController.cs" />
+    <Compile Include="Controllers\BusDetailController.cs" />
+    <Compile Include="Controllers\BusReservationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentTypeController.cs" />
+    <Compile Include="Controllers\PromoOfferController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\SeatLayoutController.cs" />
+    <Compile Include="Controllers\TicketReservationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorPaymentController.cs" />
     <Compile Include="Core\Domain\Brand.cs" />
     <Compile Include="Core\Domain\BusCategory.cs" />
     <Compile Include="Core\Domain\BusDetail.cs" />

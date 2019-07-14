@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -107,6 +113,15 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -171,6 +186,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\UnityResolver .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -206,6 +222,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\Domain\Brand.cs" />
@@ -225,18 +242,50 @@
     <Compile Include="Core\Domain\Vendor.cs" />
     <Compile Include="Core\Domain\VendorPayment.cs" />
     <Compile Include="Core\IUnityOfWork.cs" />
+    <Compile Include="Core\Repositories\IAuthRepository.cs" />
+    <Compile Include="Core\Repositories\IBrand.cs" />
+    <Compile Include="Core\Repositories\IBusCategory.cs" />
     <Compile Include="Core\Repositories\IBusDetails.cs" />
+    <Compile Include="Core\Repositories\IBusReservation.cs" />
+    <Compile Include="Core\Repositories\IPaymentType.cs" />
+    <Compile Include="Core\Repositories\IPromoOffer.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
+    <Compile Include="Core\Repositories\IRoute.cs" />
+    <Compile Include="Core\Repositories\ISeatLayout.cs" />
+    <Compile Include="Core\Repositories\ITicketReservation.cs" />
     <Compile Include="Core\Repositories\IVendor.cs" />
+    <Compile Include="Core\Repositories\IVendorPayment.cs" />
+    <Compile Include="DTOs\BusCategoryDTO.cs" />
+    <Compile Include="DTOs\BusDetailDTO.cs" />
+    <Compile Include="DTOs\MappingProfile.cs" />
+    <Compile Include="DTOs\RouteDTO.cs" />
+    <Compile Include="DTOs\UserForDetailedDto.cs" />
+    <Compile Include="DTOs\UserForListDto.cs" />
+    <Compile Include="DTOs\UserForLoginDto.cs" />
+    <Compile Include="DTOs\UserForRegisterDto.cs" />
+    <Compile Include="DTOs\VendorDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907130713465_InitialCreate.cs" />
+    <Compile Include="Migrations\201907130713465_InitialCreate.Designer.cs">
+      <DependentUpon>201907130713465_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Persistence\BusTicketContext.cs" />
+    <Compile Include="Persistence\Repositories\BrandRepository.cs" />
+    <Compile Include="Persistence\Repositories\BusCategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\BusDetailRepository.cs" />
+    <Compile Include="Persistence\Repositories\BusReservationRepository.cs" />
+    <Compile Include="Persistence\Repositories\PaymentTypeRepository.cs" />
+    <Compile Include="Persistence\Repositories\PromoOfferRepository.cs" />
     <Compile Include="Persistence\Repositories\Repository.cs" />
+    <Compile Include="Persistence\Repositories\RouteRepository.cs" />
+    <Compile Include="Persistence\Repositories\SeatLayoutRepository.cs" />
+    <Compile Include="Persistence\Repositories\TicketReservationRepository.cs" />
+    <Compile Include="Persistence\Repositories\VendorPaymentRepository.cs" />
     <Compile Include="Persistence\Repositories\VendorRepository.cs" />
     <Compile Include="Persistence\UnityOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -332,6 +381,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907130713465_InitialCreate.resx">
+      <DependentUpon>201907130713465_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

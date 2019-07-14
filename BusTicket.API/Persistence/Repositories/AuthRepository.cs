@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
+using BusTicket.API.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusTicket.API.Persistence.Repositories
@@ -19,18 +21,16 @@ namespace BusTicket.API.Persistence.Repositories
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username && x.PasswordHash == password);
 
             if (user == null)
                 return null;
 
-            //if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                //return null;
+            // if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            //     return null;
 
             return user;
         }
-
-      
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
@@ -47,15 +47,15 @@ namespace BusTicket.API.Persistence.Repositories
 
         public async Task<User> Register(User user, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            //byte[] passwordHash, passwordSalt;
+            //CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            //user.PasswordHash = passwordHash;
-            //user.PasswordSalt = passwordSalt;
+            //user.PasswordHash = passwordHash.ToString();
+            //await _context.Users.AddAsync(user);
 
-            await _context.Users.AddAsync(user);
-
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
+            
+        
 
             return user;
         }

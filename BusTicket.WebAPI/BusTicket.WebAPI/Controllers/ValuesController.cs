@@ -4,16 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BusTicket.WebAPI.Core.Repositories;
 
 namespace BusTicket.WebAPI.Controllers
 {
-    [Authorize]
+    
     public class ValuesController : ApiController
     {
+   
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] {"str"};
         }
 
         // GET api/values/5

@@ -1,5 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using BusTicket.WebAPI.Core.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -18,16 +20,35 @@ namespace BusTicket.WebAPI.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class BusTicketContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public BusTicketContext()
             : base("DbCon", throwIfV1Schema: false)
         {
         }
         
-        public static ApplicationDbContext Create()
+        public static BusTicketContext Create()
         {
-            return new ApplicationDbContext();
+            return new BusTicketContext();
         }
+
+
+        public virtual DbSet<BusCategory> BusCategories { get; set; }
+        public virtual DbSet<BusDetail> BusDetails { get; set; }
+        public virtual DbSet<BusReservation> BusReservations { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<PromoOffer> PromoOffers { get; set; }
+        public virtual DbSet<VendorPayment> VendorPayments { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<TicketReservation> TicketReservations { get; set; }
+        public virtual DbSet<RouteDetails> RouteDetails { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<TicketReturn> TicketReturns { get; set; }
+      
+        public virtual DbSet<BusReservationCancel> BusReservationCancels { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+
+
     }
 }

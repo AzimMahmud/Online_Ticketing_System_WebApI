@@ -15,11 +15,6 @@ namespace BusTicket.API.Persistence.Repositories
             : base(context)
         {
         }
-
-       
-        public BusTicketContext BusTicketContext
-        {
-            get { return Context as BusTicketContext; }
-        }
+        public BusTicketContext BusTicketContext => Context as BusTicketContext;
     }
 }

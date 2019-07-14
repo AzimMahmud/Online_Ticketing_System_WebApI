@@ -417,8 +417,7 @@ namespace BusTicket.API.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("Gender")
-                        .IsRequired();
+                    b.Property<string>("Gender");
 
                     b.Property<bool>("IsActive");
 
@@ -452,8 +451,6 @@ namespace BusTicket.API.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Gender");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");

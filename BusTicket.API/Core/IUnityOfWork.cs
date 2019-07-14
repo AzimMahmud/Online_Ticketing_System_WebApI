@@ -13,6 +13,9 @@ namespace BusTicket.API.Core
         IVendor Vendor { get; set; }
         IRoute Route { get; set; }
         IBusCategory BusCategory { get; set; }
+        IBrand Brand { get; set; }
+        IPaymentType PaymentType { get; set; }
+        IPromoOffer PromoOffer { get; set; }
         Task<int> Complete();
     }
 }

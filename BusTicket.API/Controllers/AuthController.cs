@@ -12,6 +12,8 @@ using BusTicket.API.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 using Microsoft.Extensions.Configuration;
 
@@ -47,7 +49,7 @@ namespace BusTicket.API.Controllers
             var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
 
             //return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, userToReturn);
-            return Ok();
+            return Ok(userToReturn);
 
         }
       

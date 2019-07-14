@@ -9,7 +9,7 @@ namespace BusTicket.API.Core.Domain
 {
     public class User : IdentityUser<int>
     {
-        [Key]
+        
         public string Gender { get; set; }
         public string Designation { get; set; }
         public DateTime DateOfBirth { get; set; }

@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 
-
 namespace BusTicket.WebAPI.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
@@ -19,7 +18,8 @@ namespace BusTicket.WebAPI.Core.Repositories
 
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
-        void Update(TEntity entity);
+        void Update(TEntity entities);
+
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
     }

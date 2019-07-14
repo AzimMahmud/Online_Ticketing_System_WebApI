@@ -16,6 +16,6 @@ namespace BusTicket.API.Core.Domain
         public DateTime MessageDeliveryTime { get; set; }
         public DateTime MessageDeliveryDate { get; set; }
 
-        public User User { get; set; }
+        
     }
 }

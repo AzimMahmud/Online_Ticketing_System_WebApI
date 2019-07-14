@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BusTicket.API.Core.Domain
 {
-    public class UserRole : IdentityUserRole<int>
+    public class UserRole 
     {
 
-        public User User { get; set; }
-        public Role Role { get; set; }
+     
 
     }
 }

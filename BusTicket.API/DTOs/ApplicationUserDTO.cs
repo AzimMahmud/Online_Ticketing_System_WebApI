@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace BusTicket.API.DTOs
 {
-    public class UserForRegisterDto
+    public class ApplicationUserDTO
     {
         [Required]
         public string Username { get; set; }
+
+        [Required]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(8, MinimumLength = 4, ErrorMessage = "You must specify a password between 4 and 8 characters")]
@@ -35,10 +38,10 @@ namespace BusTicket.API.DTOs
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
 
-        [DefaultValue(true)]
+        [DefaultValue(1)]
         public bool IsActive { get; set; }
 
-        public UserForRegisterDto()
+        public ApplicationUserDTO()
         {
             Created = DateTime.Now;
             LastActive = DateTime.Now;

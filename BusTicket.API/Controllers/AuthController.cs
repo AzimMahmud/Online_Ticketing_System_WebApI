@@ -9,13 +9,16 @@ using AutoMapper;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
 using BusTicket.API.DTOs;
+using BusTicket.API.Helper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BusTicket.API.Controllers
 {
@@ -24,72 +27,78 @@ namespace BusTicket.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _repo;
-        private readonly IConfiguration _config;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _singInManager;
         private readonly IMapper _mapper;
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        private readonly ApplicationSettings _appSettings;
+
+        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings, IMapper mapper)
         {
+            _userManager = userManager;
+            _singInManager = signInManager;
             _mapper = mapper;
-            _config = config;
-            _repo = repo;
+            _appSettings = appSettings.Value;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        [HttpPost]
+        [Route("Register")]
+        //POST : /api/ApplicationUser/Register
+        public async Task<Object> PostApplicationUser(ApplicationUserDTO model)
         {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
-
-            if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Username already exists");
-
-            var userToCreate = _mapper.Map<User>(userForRegisterDto);
-
-            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
-
-            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
-
-            //return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, userToReturn);
-            return Ok(userToReturn);
-
-        }
-      
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
-        {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
-
-            if (userFromRepo == null)
-                return Unauthorized();
-
-            var claims = new[]
+            var applicationUser = new ApplicationUser()
             {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.UserName)
+                UserName = model.Username,
+                Email = model.Email,
+                DateOfBirth = model.DateOfBirth,
+                JoiningDate = model.JoiningDate,
+                Gender = model.Gender,
+                Address = model.Address,
+                Designation = model.Designation
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            try
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            var user = _mapper.Map<UserForListDto>(userFromRepo);
-
-            return Ok(new
+                var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
-                token = tokenHandler.WriteToken(token),
-                user
-            });
+
+                throw ex;
+            }
         }
+
+
+        [HttpPost]
+        [Route("Login")]
+        //POST : /api/ApplicationUser/Login
+        public async Task<IActionResult> Login(UserLoginDTO model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                //Get role assigned to the user
+                var role = await _userManager.GetRolesAsync(user);
+                IdentityOptions _options = new IdentityOptions();
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("UserID",user.Id.ToString()),
+                        new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                return Ok(new { token });
+            }
+            else
+                return BadRequest(new { message = "Username or password is incorrect." });
+        }
+
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusTicket.API.Migrations
 {
     [DbContext(typeof(BusTicketContext))]
-    [Migration("20190712172508_AddIndentityModule")]
-    partial class AddIndentityModule
+    [Migration("20190714153806_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,23 +33,6 @@ namespace BusTicket.API.Migrations
                     b.HasKey("BrandID");
 
                     b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            BrandID = 1,
-                            Name = "Hino"
-                        },
-                        new
-                        {
-                            BrandID = 2,
-                            Name = "Mac"
-                        },
-                        new
-                        {
-                            BrandID = 3,
-                            Name = "Scania"
-                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusCategory", b =>
@@ -63,18 +46,6 @@ namespace BusTicket.API.Migrations
                     b.HasKey("BusCategoryID");
 
                     b.ToTable("BusCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            BusCategoryID = 1,
-                            Name = "Non-AC"
-                        },
-                        new
-                        {
-                            BusCategoryID = 2,
-                            Name = "AC"
-                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusDetail", b =>
@@ -98,36 +69,6 @@ namespace BusTicket.API.Migrations
                     b.HasIndex("VendorID");
 
                     b.ToTable("BusDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            BusDetailID = 1,
-                            BrandID = 1,
-                            BusCategoryID = 1,
-                            VendorID = 1
-                        },
-                        new
-                        {
-                            BusDetailID = 2,
-                            BrandID = 2,
-                            BusCategoryID = 2,
-                            VendorID = 2
-                        },
-                        new
-                        {
-                            BusDetailID = 3,
-                            BrandID = 1,
-                            BusCategoryID = 1,
-                            VendorID = 3
-                        },
-                        new
-                        {
-                            BusDetailID = 4,
-                            BrandID = 2,
-                            BusCategoryID = 2,
-                            VendorID = 2
-                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusReservation", b =>
@@ -233,8 +174,6 @@ namespace BusTicket.API.Migrations
 
                     b.HasKey("MessageID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Messages");
                 });
 
@@ -266,31 +205,6 @@ namespace BusTicket.API.Migrations
                     b.HasKey("PromoID");
 
                     b.ToTable("PromoOffers");
-                });
-
-            modelBuilder.Entity("BusTicket.API.Core.Domain.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.Route", b =>
@@ -395,40 +309,109 @@ namespace BusTicket.API.Migrations
                     b.ToTable("TicketReturns");
                 });
 
-            modelBuilder.Entity("BusTicket.API.Core.Domain.User", b =>
+            modelBuilder.Entity("BusTicket.API.Core.Domain.Vendor", b =>
+                {
+                    b.Property<int>("VendorID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("VendorAddress");
+
+                    b.Property<string>("VendorEmail");
+
+                    b.Property<string>("VendorName");
+
+                    b.Property<string>("VendorPhone");
+
+                    b.HasKey("VendorID");
+
+                    b.ToTable("Vendors");
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.VendorPayment", b =>
+                {
+                    b.Property<int>("VendorPaymentID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("PaymentDate");
+
+                    b.Property<string>("PaymentDescription");
+
+                    b.Property<string>("PaymentMethod");
+
+                    b.Property<decimal>("TotalAmount");
+
+                    b.Property<int>("VendorID");
+
+                    b.HasKey("VendorPaymentID");
+
+                    b.HasIndex("VendorID");
+
+                    b.ToTable("VendorPayments");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<string>("ClaimType");
 
-                    b.Property<string>("Address");
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<string>("Designation");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Gender")
-                        .IsRequired();
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<DateTime>("JoiningDate");
-
-                    b.Property<DateTime>("LastActive");
-
-                    b.Property<DateTime>("LeavingDate");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -455,8 +438,6 @@ namespace BusTicket.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Gender");
-
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -466,90 +447,11 @@ namespace BusTicket.API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
-            modelBuilder.Entity("BusTicket.API.Core.Domain.UserRole", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("BusTicket.API.Core.Domain.Vendor", b =>
-                {
-                    b.Property<int>("VendorID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("VendorAddress");
-
-                    b.Property<string>("VendorEmail");
-
-                    b.Property<string>("VendorName");
-
-                    b.Property<string>("VendorPhone");
-
-                    b.HasKey("VendorID");
-
-                    b.ToTable("Vendors");
-
-                    b.HasData(
-                        new
-                        {
-                            VendorID = 1,
-                            VendorAddress = "120 A, Dhaka, Bangladesh",
-                            VendorEmail = "greenline@gmail.com",
-                            VendorName = "Green Line",
-                            VendorPhone = "01731569155"
-                        },
-                        new
-                        {
-                            VendorID = 2,
-                            VendorAddress = "130 B, Dhaka, Bangladesh",
-                            VendorEmail = "shohag@gmail.com",
-                            VendorName = "Shohag",
-                            VendorPhone = "01731569165"
-                        },
-                        new
-                        {
-                            VendorID = 3,
-                            VendorAddress = "140 A, Dhaka, Bangladesh",
-                            VendorEmail = "skyline@gmail.com",
-                            VendorName = "Sky Line",
-                            VendorPhone = "01861569155"
-                        });
-                });
-
-            modelBuilder.Entity("BusTicket.API.Core.Domain.VendorPayment", b =>
-                {
-                    b.Property<int>("VendorPaymentID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("PaymentDate");
-
-                    b.Property<string>("PaymentDescription");
-
-                    b.Property<string>("PaymentMethod");
-
-                    b.Property<decimal>("TotalAmount");
-
-                    b.Property<int>("VendorID");
-
-                    b.HasKey("VendorPaymentID");
-
-                    b.HasIndex("VendorID");
-
-                    b.ToTable("VendorPayments");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -559,26 +461,8 @@ namespace BusTicket.API.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -587,15 +471,18 @@ namespace BusTicket.API.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -604,19 +491,59 @@ namespace BusTicket.API.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("RoleId");
 
-                    b.Property<string>("Name");
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Designation");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<DateTime>("JoiningDate");
+
+                    b.Property<DateTime>("LastActive");
+
+                    b.Property<DateTime>("LeavingDate");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusDetail", b =>
@@ -634,14 +561,6 @@ namespace BusTicket.API.Migrations
                     b.HasOne("BusTicket.API.Core.Domain.Vendor", "Vendor")
                         .WithMany("BusDetails")
                         .HasForeignKey("VendorID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BusTicket.API.Core.Domain.Message", b =>
-                {
-                    b.HasOne("BusTicket.API.Core.Domain.User", "User")
-                        .WithMany("Messages")
-                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -667,19 +586,6 @@ namespace BusTicket.API.Migrations
                         .HasForeignKey("RouteID");
                 });
 
-            modelBuilder.Entity("BusTicket.API.Core.Domain.UserRole", b =>
-                {
-                    b.HasOne("BusTicket.API.Core.Domain.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("BusTicket.API.Core.Domain.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("BusTicket.API.Core.Domain.VendorPayment", b =>
                 {
                     b.HasOne("BusTicket.API.Core.Domain.Vendor", "Vendor")
@@ -688,33 +594,46 @@ namespace BusTicket.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("BusTicket.API.Core.Domain.Role")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BusTicket.API.Core.Domain.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BusTicket.API.Core.Domain.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("BusTicket.API.Core.Domain.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

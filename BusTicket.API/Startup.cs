@@ -11,9 +11,9 @@ using BusTicket.API.Controllers;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
-using BusTicket.API.Data;
-using BusTicket.API.DTOs;
 
+using BusTicket.API.DTOs;
+using BusTicket.API.Helper;
 using BusTicket.API.Persistence;
 using BusTicket.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -47,33 +47,58 @@ namespace BusTicket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+
+            //Inject AppSettings
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             // Configure DbContext File
             services.AddDbContext<BusTicketContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
 
             // Identity Configuration 
-            //IdentityBuilder identityBuilder = services.AddIdentityCore<User>(opt =>
-            //{
-            //    opt.Password.RequireDigit = false;
-            //    opt.Password.RequireNonAlphanumeric = false;
-            //    opt.Password.RequiredLength = 4;
-            //    opt.Password.RequireUppercase = false;
-            //});
 
-            //identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(Role), identityBuilder.Services);
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<BusTicketContext>();
 
-            //identityBuilder.AddEntityFrameworkStores<BusTicketContext>();
-            //identityBuilder.AddRoleValidator<RoleValidator<Role>>();
-            //identityBuilder.AddRoleManager<RoleManager<Role>>();
-            //identityBuilder.AddSignInManager<SignInManager<User>>();
-           
+            services.Configure<IdentityOptions>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 4;
+                }
+            );
+
+
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+
             // Json Formatting Configuration
             services.AddMvc(opt =>
                 {
-                    //var policy = new AuthorizationPolicyBuilder()
-                    //    .RequireAuthenticatedUser()
-                    //    .Build();
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
 
-                    //opt.Filters.Add(new AuthorizeFilter(policy));
+                    opt.Filters.Add(new AuthorizeFilter(policy));
                 })
                 .AddJsonOptions(options => {
                     options.SerializerSettings.Formatting = Formatting.Indented;
@@ -82,29 +107,9 @@ namespace BusTicket.API
 
 
 
-            //services.AddAuthentication(x =>
-            //    {
-            //        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    })
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.SaveToken = true;
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-            //                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-            //            ValidateIssuer = false,
-            //            ValidateAudience = false,
-            //            RequireExpirationTime = false,
-            //            ValidateLifetime = true
-            //        };
-            //    });
+          
 
             services.AddCors();
-            //services.AddTransient<Seed>();
 
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc =>
@@ -123,7 +128,6 @@ namespace BusTicket.API
             var builder = new ContainerBuilder();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-            builder.RegisterType<AuthRepository>().As<IAuthRepository>().InstancePerLifetimeScope();
             builder.Populate(services);
 
             var container = builder.Build();
@@ -146,7 +150,7 @@ namespace BusTicket.API
             // app.UseHttpsRedirection();
             //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseMvc();
 

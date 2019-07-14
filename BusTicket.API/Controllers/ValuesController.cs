@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusTicket.API.Core.Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusTicket.API.Controllers
@@ -10,36 +13,49 @@ namespace BusTicket.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        private UserManager<ApplicationUser> _userManager;
+        public ValuesController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Authorize]
+        //GET : /api/UserProfile
+        public async Task<Object> GetUserProfile()
         {
-            return new string[] { "value1", "value3" };
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            return new
+            {
+                user.Email,
+                user.UserName,
+                user.IsActive
+            };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("ForAdmin")]
+        public string GetForAdmin()
         {
-            return "value";
+            return "Web method for Admin";
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet]
+        [Authorize(Roles = "Customer")]
+        [Route("ForCustomer")]
+        public string GetCustomer()
         {
+            return "Web method for Customer";
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet]
+        [Authorize(Roles = "Admin,Customer")]
+        [Route("ForAdminOrCustomer")]
+        public string GetForAdminOrCustomer()
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return "Web method for Admin or Customer";
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BusTicket.API.DTOs
 {
-    public class UserForLoginDto
+    public class UserLoginDTO
     {
         public string Username { get; set; }
         public string Password { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BusTicket.API.Core.Domain
 {
-    public class User : IdentityUser<int>
+    public class ApplicationUser : IdentityUser
     {
         
         public string Gender { get; set; }
@@ -20,8 +20,6 @@ namespace BusTicket.API.Core.Domain
         public DateTime LastActive { get; set; }
         public bool IsActive { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
-
-        public ICollection<UserRole> UserRoles { get; set; }
+       
     }
 }

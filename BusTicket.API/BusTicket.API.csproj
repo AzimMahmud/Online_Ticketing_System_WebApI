@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Helper\" />
     <Folder Include="Persistence\EntityConfigurations\" />
   </ItemGroup>

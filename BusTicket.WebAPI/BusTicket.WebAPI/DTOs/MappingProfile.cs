@@ -9,37 +9,44 @@ using BusTicket.WebAPI.Core.Domain;
 
 namespace BusTicket.WebAPI.DTOs
 {
-    public class MappingProfile : Profile
+    public static class MappingProfile 
     {
-        public MappingProfile()
+        public static void Initialize()
         {
-            CreateMap<BusDetail, BusDetailDTO>();
-            CreateMap<BusDetailDTO, BusDetail>();
 
-            CreateMap<BusCategory, BusCategoryDTO>();
-            CreateMap<BusCategoryDTO, BusCategory>();
+            Mapper.Initialize((config) =>
+            {
+                config.CreateMap<BusCategory, BusCategoryDTO>().ReverseMap();
+                config.CreateMap<BusCategoryDTO, BusCategory>().ReverseMap();
+            });
 
-            CreateMap<Vendor, VendorDTO>();
-            CreateMap<VendorDTO, Vendor>();
+            //CreateMap<BusDetail, BusDetailDTO>();
+            //CreateMap<BusDetailDTO, BusDetail>();
 
-            CreateMap<Route, RouteDTO>();
-            CreateMap<RouteDTO, Route>();
+            //CreateMap<BusCategory, BusCategoryDTO>();
+            //CreateMap<BusCategoryDTO, BusCategory>();
+
+            //CreateMap<Vendor, VendorDTO>();
+            //CreateMap<VendorDTO, Vendor>();
+
+            //CreateMap<Route, RouteDTO>();
+            //CreateMap<RouteDTO, Route>();
 
 
 
 
 
-            CreateMap<User, UserForListDto>();
-            CreateMap<UserForListDto, User>();
+            //CreateMap<User, UserForListDto>();
+            //CreateMap<UserForListDto, User>();
 
-            CreateMap<User, UserForDetailedDto>();
-            CreateMap<UserForDetailedDto, User>();
+            //CreateMap<User, UserForDetailedDto>();
+            //CreateMap<UserForDetailedDto, User>();
 
-            CreateMap<User, UserForLoginDto>();
-            CreateMap<UserForLoginDto, User>();
+            //CreateMap<User, UserForLoginDto>();
+            //CreateMap<UserForLoginDto, User>();
 
-            CreateMap<User, UserForRegisterDto>();
-            CreateMap<UserForRegisterDto, User>();
+            //CreateMap<User, UserForRegisterDto>();
+            //CreateMap<UserForRegisterDto, User>();
 
         }
     }

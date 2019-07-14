@@ -24,6 +24,10 @@ namespace BusTicket.API.Persistence
             Brand = new BrandRepository(_context);
             PaymentType = new PaymentTypeRepository(_context);
             PromoOffer = new PromoOfferRepository(_context);
+            BusReservation = new BusReservationRepository(_context);
+            SeatLayout = new SeatLayoutRepository(_context);
+            TicketReservation = new TicketReservationRepository(_context);
+            VendorPayment = new VendorPaymentRepository(_context);
 
         }
 
@@ -34,7 +38,11 @@ namespace BusTicket.API.Persistence
         public IBrand Brand { get; set; }
         public IPaymentType PaymentType { get; set; }
         public IPromoOffer PromoOffer { get; set; }
- 
+        public IBusReservation BusReservation { get; set; }
+        public ISeatLayout SeatLayout { get; set; }
+        public ITicketReservation TicketReservation { get; set; }
+        public IVendorPayment VendorPayment { get; set; }
+
 
         public async Task<int> Complete()
         {

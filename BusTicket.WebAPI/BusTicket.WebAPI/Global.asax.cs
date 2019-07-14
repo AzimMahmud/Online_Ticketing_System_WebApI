@@ -7,8 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BusTicket.WebAPI.App_Start;
-
-
+using BusTicket.WebAPI.DTOs;
 
 
 namespace BusTicket.WebAPI
@@ -19,6 +18,8 @@ namespace BusTicket.WebAPI
         {
 
             AreaRegistration.RegisterAllAreas();
+            MappingProfile.Initialize();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

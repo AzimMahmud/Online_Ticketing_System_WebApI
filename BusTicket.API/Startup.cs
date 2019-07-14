@@ -13,7 +13,7 @@ using BusTicket.API.Core.Domain;
 using BusTicket.API.Core.Repositories;
 using BusTicket.API.Data;
 using BusTicket.API.DTOs;
-using BusTicket.API.Helper;
+
 using BusTicket.API.Persistence;
 using BusTicket.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -82,26 +82,26 @@ namespace BusTicket.API
 
 
 
-            services.AddAuthentication(x =>
-                {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        RequireExpirationTime = false,
-                        ValidateLifetime = true
-                    };
-                });
+            //services.AddAuthentication(x =>
+            //    {
+            //        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    })
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.SaveToken = true;
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuerSigningKey = true,
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+            //                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+            //            ValidateIssuer = false,
+            //            ValidateAudience = false,
+            //            RequireExpirationTime = false,
+            //            ValidateLifetime = true
+            //        };
+            //    });
 
             services.AddCors();
             //services.AddTransient<Seed>();
@@ -146,7 +146,7 @@ namespace BusTicket.API
             // app.UseHttpsRedirection();
             //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseMvc();
 

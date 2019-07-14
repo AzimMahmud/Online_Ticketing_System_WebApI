@@ -47,15 +47,15 @@ namespace BusTicket.API.Persistence.Repositories
 
         public async Task<User> Register(User user, string password)
         {
-            //byte[] passwordHash, passwordSalt;
-            //CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            //user.PasswordHash = passwordHash.ToString();
-            //await _context.Users.AddAsync(user);
+            user.PasswordHash = passwordHash.ToString();
+            await _context.Users.AddAsync(user);
 
-            //await _context.SaveChangesAsync();
-            
-        
+            await _context.SaveChangesAsync();
+
+
 
             return user;
         }

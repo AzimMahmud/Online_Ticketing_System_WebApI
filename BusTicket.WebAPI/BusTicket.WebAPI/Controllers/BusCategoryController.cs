@@ -31,7 +31,7 @@ namespace BusTicket.WebAPI.Controllers
 
 
         // GET: api/BusCategory/5
-        [HttpGet, Route("{id}")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetBusCategory(int id)
         {
             var busCategory = await _unitOfWork.BusCategory.Get(id);
@@ -56,7 +56,7 @@ namespace BusTicket.WebAPI.Controllers
         }
 
         // PUT: api/BusCategory/5
-        [HttpPut, Route("{id}")]
+        [HttpPut]
         public async Task<IHttpActionResult> PutBusCategory(BusCategoryDTO busCategory)
         {
 
@@ -67,8 +67,8 @@ namespace BusTicket.WebAPI.Controllers
             return Ok(busCategory);
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete, Route("{id}")]
+        // DELETE: api/BusCategory/5
+        [HttpDelete]
         public async Task<IHttpActionResult> DeleteBusCategory(int id)
         {
             var busCategory = await _unitOfWork.BusCategory.Get(id);

@@ -11,42 +11,45 @@ namespace BusTicket.WebAPI.DTOs
 {
     public static class MappingProfile 
     {
-        public static void Initialize()
+        public static IMapper Initialize()
         {
 
-            Mapper.Initialize((config) =>
+            var configuration = new MapperConfiguration((config) =>
             {
-                config.CreateMap<BusCategory, BusCategoryDTO>().ReverseMap();
-                config.CreateMap<BusCategoryDTO, BusCategory>().ReverseMap();
+              
+
+                config.CreateMap<BusDetail, BusDetailDTO>();
+                config.CreateMap<BusDetailDTO, BusDetail>();
+
+                config.CreateMap<BusCategory, BusCategoryDTO>();
+                config.CreateMap<BusCategoryDTO, BusCategory>();
+
+                config.CreateMap<Vendor, VendorDTO>();
+                config.CreateMap<VendorDTO, Vendor>();
+
+                config.CreateMap<Route, RouteDTO>();
+                config.CreateMap<RouteDTO, Route>();
+
+                config.CreateMap<User, UserForListDto>();
+                config.CreateMap<UserForListDto, User>();
+
+                config.CreateMap<User, UserForDetailedDto>();
+                config.CreateMap<UserForDetailedDto, User>();
+
+                config.CreateMap<User, UserForLoginDto>();
+                config.CreateMap<UserForLoginDto, User>();
+
+                config.CreateMap<User, UserForRegisterDto>();
+                config.CreateMap<UserForRegisterDto, User>();
             });
 
-            //CreateMap<BusDetail, BusDetailDTO>();
-            //CreateMap<BusDetailDTO, BusDetail>();
 
-            //CreateMap<BusCategory, BusCategoryDTO>();
-            //CreateMap<BusCategoryDTO, BusCategory>();
 
-            //CreateMap<Vendor, VendorDTO>();
-            //CreateMap<VendorDTO, Vendor>();
-
-            //CreateMap<Route, RouteDTO>();
-            //CreateMap<RouteDTO, Route>();
+            var mapper = configuration.CreateMapper();
 
 
 
-
-
-            //CreateMap<User, UserForListDto>();
-            //CreateMap<UserForListDto, User>();
-
-            //CreateMap<User, UserForDetailedDto>();
-            //CreateMap<UserForDetailedDto, User>();
-
-            //CreateMap<User, UserForLoginDto>();
-            //CreateMap<UserForLoginDto, User>();
-
-            //CreateMap<User, UserForRegisterDto>();
-            //CreateMap<UserForRegisterDto, User>();
+            return mapper;
 
         }
     }

@@ -1,0 +1,22 @@
+<div class="container" style="margin-top: 10%; margin-bottom: 10%;">
+  <img src="../../assets/images/busLogo.png" alt="Bus Logo" class="busLogo" />
+  <p>Please Choose the API Key</p>
+
+  <button
+    *ngIf="!coreApi"
+    (click)="setCoreAPI()"
+    [hidden]="!show"
+    class="btn btn-primary btn-CoreApi"
+  >
+    Core Api
+  </button>
+
+  <button
+    *ngIf="!webApi"
+    (click)="setWebAPI()"
+    [hidden]="!show"
+    class="btn btn-primary btn-WebApi"
+  >
+    Web Api
+  </button>
+</div>

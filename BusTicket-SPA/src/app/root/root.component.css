@@ -1,0 +1,20 @@
+.btn-CoreApi {
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px 0 0 5px;
+}
+
+.btn-WebApi {
+  background-color: #235699;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
+}
+
+.busLogo {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}

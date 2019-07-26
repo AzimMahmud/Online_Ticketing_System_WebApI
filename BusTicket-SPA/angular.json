@@ -20,18 +20,14 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/assets/css/style.css",
               "src/assets/css/theme-pink.css",
               "src/assets/css/animate.css",
-              "src/assets/admin/css/style.css",
+              "src/assets/css/style.css",
+              "src/assets/admin/css/style-admin.css",
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/jquery.min.js",
-              "src/assets/js/jquery.uniform.min.js",
-              "src/assets/js/jquery.slicknav.min.js",
-              "src/assets/js/wow.min.js",
-              "src/assets/js/scripts.js"
+             
             ]
           },
           "configurations": {

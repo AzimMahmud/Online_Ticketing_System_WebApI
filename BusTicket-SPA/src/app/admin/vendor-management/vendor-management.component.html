@@ -1,3 +1,102 @@
-<p>
-  vendor-management works!
-</p>
+ <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header bg-info">
+                                    <h4 class="m-b-0 text-white">Create Vendor</h4>
+                                </div>
+
+
+
+                                <div class="button-box m-t-20">
+                                    <button type="button" class="btn btn-primary btn pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add New</button>
+                                </div>
+                                <div class="table-responsive p-t-10">
+                                    <table id="myTable" class="table table-bordered table-striped" >
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone No</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th class="text-nowrap">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let v of vendors">
+                                            <tr>
+                                                <td>{{v.vendorID}}</td>
+                                                <td>{{v.vendorName}}</td>
+                                                <td>{{v.vendorPhone}}</td>
+                                                <td>{{v.vendorEmail}}</td>
+                                                <td>{{v.vendorAddress}}</td>
+                                                <td class="text-nowrap">
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                                </td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-info">
+                                                <h4 class="modal-title text-white" id="exampleModalLabel1">Create Vendor</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="#" class="form-horizontal form-bordered">
+                                                    <div class="form-body">
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Name</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" placeholder="Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Phone</label>
+                                                            <div class="col-md-9">
+                                                                <input type="number" class="form-control" placeholder="Phone Number">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Email</label>
+                                                            <div class="col-md-9">
+                                                                <input type="email" class="form-control" placeholder="Email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Address</label>
+                                                            <div class="col-md-9">
+                                                                <textarea  class="form-control" placeholder="Address"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <div class="offset-sm-3 col-sm-9">
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input id="checkbox33" type="radio">
+                                                                    <label for="checkbox33" class="font-16">IsActive?</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+                                                <button type="button" class="btn btn-inverse">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

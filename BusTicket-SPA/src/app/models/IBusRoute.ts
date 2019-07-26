@@ -1,4 +1,7 @@
 import { IBusDetails } from "./IBusDetails";
+import { IBrand } from "./IBrand";
+import { IBusCategory } from "./IBusCategory";
+import { IVendor } from "./IVendor";
 
 export interface IBusRoute {
   routeId: number;
@@ -8,5 +11,4 @@ export interface IBusRoute {
   dropTime: any;
   busDetailId: number;
   fare: any;
-  busDetails: IBusDetails[];
 }

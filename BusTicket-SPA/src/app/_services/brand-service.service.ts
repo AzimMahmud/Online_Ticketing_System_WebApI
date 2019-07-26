@@ -6,12 +6,16 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class BrandService {
-  baseUrl = "http://localhost:5000";
+  baseUrl: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    this.baseUrl = window.localStorage.getItem("apikey");
+  }
 
   getBrands() {
-    this.http.get(this.baseUrl + "/api/Brand").pipe(map(res => res.json()));
+    return this.http
+      .get(this.baseUrl + "/api/Brand")
+      .pipe(map(res => res.json()));
   }
   getBrandById(id) {
     this.http

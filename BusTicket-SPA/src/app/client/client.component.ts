@@ -1,13 +1,30 @@
 import { Component, OnInit } from "@angular/core";
+import { DynamicScriptLoaderService } from "../dynamic-script-loader-service.service";
 
 @Component({
   templateUrl: "./client.component.html",
   styleUrls: ["./client.component.css"]
 })
 export class ClientComponent implements OnInit {
-  constructor() {}
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService) {}
 
-  ngOnInit() {
-    console.log(window.localStorage.key(0));
+  public ngOnInit() {
+    this.loadScripts();
+  }
+
+  private loadScripts() {
+    // You can load multiple scripts by just providing the key as argument into load method of the service
+    this.dynamicScriptLoader
+      .load(
+      "jquery-client",
+      "uniform-client",
+      "slicknav-client",
+      "wow-client",
+      "custom-client"
+      )
+      .then(data => {
+        // Script Loaded Successfully
+      })
+      .catch(error => console.log(error));
   }
 }

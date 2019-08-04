@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusTicket.API.Core;
+using BusTicket.API.Core.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +13,70 @@ namespace BusTicket.API.Controllers
     [ApiController]
     public class PromoOfferController : ControllerBase
     {
-        // GET: api/PromoOffer
+        private readonly IUnitOfWork _unitOfWork;
+
+
+        public PromoOfferController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+
+        }
+
+        // GET: api/PaymentType
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetPromoOffer()
         {
-            return new string[] { "value1", "value2" };
+            var promoOffer = await _unitOfWork.PromoOffer.GetAll();
+            return Ok(promoOffer);
         }
 
-        // GET: api/PromoOffer/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+
+        // GET: api/PaymentType/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPromoOffer(int id)
         {
-            return "value";
+            var promoOffer = await _unitOfWork.PromoOffer.Get(id);
+
+            if (promoOffer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(promoOffer);
         }
 
-        // POST: api/PromoOffer
+        // POST: api/PaymentType
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostPromoOffer(PromoOffer promoOffer)
         {
+
+            _unitOfWork.PromoOffer.Add(promoOffer);
+            await _unitOfWork.Complete();
+            return Ok(promoOffer);
         }
 
-        // PUT: api/PromoOffer/5
+        // PUT: api/BusCategory/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutPromoOffer(PromoOffer promoOffer)
         {
+            _unitOfWork.PromoOffer.Update(promoOffer);
+            await _unitOfWork.Complete();
+            return Ok(promoOffer);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<PromoOffer>> DeletePromoOffer(int id)
         {
+            var promoOffer = await _unitOfWork.PromoOffer.Get(id);
+
+            if (promoOffer == null)
+            {
+                return BadRequest();
+            }
+            _unitOfWork.PromoOffer.Remove(promoOffer);
+            await _unitOfWork.Complete();
+            return Ok(promoOffer);
         }
     }
 }

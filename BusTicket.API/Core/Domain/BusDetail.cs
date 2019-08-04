@@ -19,8 +19,8 @@ namespace BusTicket.API.Core.Domain
         public Brand Brand { get; set; }
         public BusCategory BusCategory { get; set; }
 
-        public virtual ICollection<Route> RouteDetails { get; set; }
-        public virtual ICollection<SeatLayout> SeatLayout { get; set; }
+        public ICollection<Route> RouteDetails { get; set; }
+        public ICollection<SeatLayout> SeatLayout { get; set; }
 
     }
 }

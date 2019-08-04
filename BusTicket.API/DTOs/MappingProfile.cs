@@ -23,6 +23,9 @@ namespace BusTicket.API.DTOs
             CreateMap<Route, RouteDTO>();
             CreateMap<RouteDTO, Route>();
 
+            CreateMap<Brand, BrandDTO>();
+            CreateMap<BrandDTO, Brand>();
+
 
 
 

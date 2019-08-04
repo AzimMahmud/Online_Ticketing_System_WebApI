@@ -11,12 +11,12 @@ namespace BusTicket.API.Core.Domain
         public int RouteID { get; set; }
         public string BoardPoint { get; set; }
 
-        [DataType(dataType: DataType.Time)]
-        public DateTime BoardTime { get; set; }
+        [DataType(DataType.Time)]
+        public TimeSpan BoardTime { get; set; }
         public string DropPoint { get; set; }
 
-        [DataType(dataType: DataType.Time)]
-        public DateTime DropTime { get; set; }
+        [DataType(DataType.Time)]
+        public TimeSpan DropTime { get; set; }
         public int BusDetailID { get; set; }
 
         public decimal Fare { get; set; }

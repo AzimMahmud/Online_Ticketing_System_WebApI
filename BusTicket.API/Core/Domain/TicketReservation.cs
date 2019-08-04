@@ -15,10 +15,12 @@ namespace BusTicket.API.Core.Domain
         public string PassengerPhoneNo { get; set; }
         public string PassengerEmail { get; set; }
         public string Gender { get; set; }
-        public string NoOfTicket { get; set; }
+        public int NoOfTicket { get; set; }
         public decimal UnitPrice { get; set; }
         public string SeatNo { get; set; }
-        public int RouteDetailsID { get; set; }
+        public int RouteID { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
 
         public Route Route { get; set; }

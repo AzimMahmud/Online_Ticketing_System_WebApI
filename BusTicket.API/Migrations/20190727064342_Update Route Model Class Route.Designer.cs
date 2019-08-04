@@ -4,14 +4,16 @@ using BusTicket.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusTicket.API.Migrations
 {
     [DbContext(typeof(BusTicketContext))]
-    partial class BusTicketContextModelSnapshot : ModelSnapshot
+    [Migration("20190727064342_Update Route Model Class Route")]
+    partial class UpdateRouteModelClassRoute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,7 +324,7 @@ namespace BusTicket.API.Migrations
 
                     b.Property<string>("Gender");
 
-                    b.Property<int>("NoOfTicket");
+                    b.Property<string>("NoOfTicket");
 
                     b.Property<string>("PassengerEmail");
 
@@ -343,34 +345,6 @@ namespace BusTicket.API.Migrations
                     b.HasIndex("RouteID");
 
                     b.ToTable("TicketReservations");
-
-                    b.HasData(
-                        new
-                        {
-                            TicketResrvID = 1,
-                            Gender = "Male",
-                            NoOfTicket = 1,
-                            PassengerEmail = "faoasal@gmail.com",
-                            PassengerName = "Faiasl",
-                            PassengerPhoneNo = "34242",
-                            ReservationDate = new DateTime(1910, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RouteID = 1,
-                            SeatNo = "4",
-                            UnitPrice = 900m
-                        },
-                        new
-                        {
-                            TicketResrvID = 2,
-                            Gender = "Male",
-                            NoOfTicket = 1,
-                            PassengerEmail = "faoaaal@gmail.com",
-                            PassengerName = "Abir",
-                            PassengerPhoneNo = "3488242",
-                            ReservationDate = new DateTime(1910, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RouteID = 2,
-                            SeatNo = "4",
-                            UnitPrice = 900m
-                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.TicketReturn", b =>

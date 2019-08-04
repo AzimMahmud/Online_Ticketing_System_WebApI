@@ -8,5 +8,6 @@ namespace BusTicket.API.Core.Repositories
 {
     public interface IRoute : IRepository<Route>
     {
+        Task<object> GetAllRoutesDetails(string boardPoint, string dropPoint, string journeyDate);
     }
 }

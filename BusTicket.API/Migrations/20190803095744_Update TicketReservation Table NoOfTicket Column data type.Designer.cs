@@ -4,14 +4,16 @@ using BusTicket.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusTicket.API.Migrations
 {
     [DbContext(typeof(BusTicketContext))]
-    partial class BusTicketContextModelSnapshot : ModelSnapshot
+    [Migration("20190803095744_Update TicketReservation Table NoOfTicket Column data type")]
+    partial class UpdateTicketReservationTableNoOfTicketColumndatatype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

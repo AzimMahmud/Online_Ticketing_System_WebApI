@@ -91,5 +91,13 @@ namespace BusTicket.API.Controllers
             await _unitOfWork.Complete();
             return Ok(routeDetail);
         }
+
+        // Get RoutesDetails
+        [HttpGet("RouteDetails")]
+        public async Task<IActionResult> GetRoutesDetails(string bPoint, string dPoint, string jDate)
+        {
+            var routeDetail = await _unitOfWork.Route.GetAllRoutesDetails(bPoint, dPoint, jDate);
+            return Ok(routeDetail);
+        }
     }
 }

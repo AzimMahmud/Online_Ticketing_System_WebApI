@@ -4,127 +4,53 @@
       <div class="card">
         <div class="card-body">
           <div class="card-header bg-info">
-            <h4 class="m-b-0 text-white">Create Promo Offer</h4>
+            <h4 class="m-b-0 text-white">Promo Offer</h4>
           </div>
 
-          <div class="button-box m-t-20">
-            <button
-              type="button"
-              class="btn btn-primary btn pull-right"
-              data-toggle="modal"
-              data-target="#exampleModal"
-              data-whatever="@mdo"
-            >
-              Add New
-            </button>
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-right">
+              <button type="button" class="btn btn-primary" (click)="openModal(promoModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+            </div>
           </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table id="promoTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Promo ID</th>
+                    <th>Code</th>
+                    <th>Promo Details</th>
+                    <th>Is Acticve</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>fg</td>
+                    <td>dfg</td>
+                    <td>dfg</td>
+                    <td>dfg</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
 
-          <div class="table-responsive m-t-40">
-            <table id="myTable" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Promo ID</th>
-                  <th>Code</th>
-                  <th>Promo Details</th>
-                  <th>Is Acticve</th>
-                  <th class="text-nowrap">Action</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let p of promoOffers">
-                <tr>
-                  <td>{{ p.promoID }}</td>
-                  <td>{{ p.promoCode }}</td>
-                  <td>{{ p.promoDetails }}</td>
 
-                  <td class="text-nowrap">
-                    <a
-                      href="javascript:void(0)"
-                      data-toggle="tooltip"
-                      data-original-title="Edit"
-                    >
-                      <i class="fa fa-pencil text-inverse m-r-10"></i>
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      data-toggle="tooltip"
-                      data-original-title="Close"
-                    >
-                      <i class="fa fa-close text-danger"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>fg</td>
+                    <td>dfg</td>
+                    <td>dfg</td>
+                    <td>dfg</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
 
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel1"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header bg-info">
-                  <h4 class="modal-title text-white" id="exampleModalLabel1">
-                    Create Promo Offer
-                  </h4>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="#" class="form-horizontal form-bordered">
-                    <div class="form-body">
-                      <div class="form-group row p-l-30 p-r-30">
-                        <label class="control-label text-right col-md-4"
-                          >Code</label
-                        >
-                        <div class="col-md-8">
-                          <input
-                            type="text"
-                            placeholder="Promo Code"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row p-l-30 p-r-30">
-                        <label class="control-label text-right col-md-4"
-                          >Promo Details</label
-                        >
-                        <div class="col-md-8">
-                          <textarea
-                            placeholder="Promo Details"
-                            class="form-control"
-                          ></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group row p-l-30 p-r-30">
-                        <div class="offset-sm-3 col-sm-9">
-                          <div class="checkbox checkbox-success">
-                            <input id="checkbox33" type="checkbox" />
-                            <label for="checkbox33" class="font-16"
-                              >IsActive?</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-info">
-                    <i class="fa fa-check"></i> Submit
-                  </button>
-                  <button type="button" class="btn btn-inverse">Cancel</button>
-                </div>
-              </div>
+                     
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -132,3 +58,55 @@
     </div>
   </div>
 </div>
+
+<!--This Is Modal Template-->
+<ng-template #promoModal>
+  <div class="modal-header bg-info">
+    <h4 class="modal-title text-white" id="exampleModalLabel1">Create Promo Offer</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form class="form-horizontal form-bordered">
+    <div class="modal-body">
+      <div class="form-body">
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="code" class="control-label text-right col-md-4 label-input">Code</label>
+          <div class="col-md-8">
+            <input id="code" type="text" placeholder="Promo Code" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="promoDetails" class="control-label text-right col-md-4 label-input">Promo Details</label>
+          <div class="col-md-8">
+            <textarea id="promoDetails" placeholder="Promo Details" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row p-l-30 p-r-30">
+          <div class="offset-sm-4 col-sm-8">
+            <div class="checkbox checkbox-success">
+              <input id="activeCheckbox" type="checkbox" />
+              <label for="activeCheckbox" class="form-check-lebel">IsActive?</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+<!--This is Delete Confirmation Template-->
+
+<ng-template #deleteConfirmation>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

@@ -1,0 +1,154 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Bus Reservation</h4>
+          </div>
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-right">
+              <button type="button" class="btn btn-primary" (click)="openModal(busReservationModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table id="busReservationTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Bus Reservation ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>No Of Bus</th>
+                    <th>Reservation Date</th>
+                    <th>Total</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                      
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--This Is Modal Template-->
+
+<ng-template #busReservationModal>
+  <div class="modal-header bg-info">
+    <h4 class="modal-title text-white" id="exampleModal">Bus Reservation</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form action="#" class="form-horizontal form-bordered">
+    <div class="modal-body" style=" max-height: calc(100% - 120px); overflow-y: scroll;">
+      <div class="form-body">
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="name" class="control-label text-right col-md-3 label-input">Name</label>
+          <div class="col-md-9">
+            <input id="name" type="text" placeholder="Passenger Name" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="phone" class="control-label text-right col-md-3 label-input">Phone</label>
+          <div class="col-md-9">
+            <input id="phone" type="text" placeholder="Passenger Phone Number" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="email" class="control-label text-right col-md-3 label-input">Email</label>
+          <div class="col-md-9">
+            <input id="email" type="email" placeholder="Passenger Email" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="gender" class="control-label text-right col-md-3 label-input">Gender</label>
+          <div class="col-md-9">
+            <select id="gender" class="form-control custom-select">
+              <option value="">---Select---</option>
+              <option value="">Male</option>
+              <option value="">Female</option>
+              <option value="">Others</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="noOfBus" class="control-label text-right col-md-3 label-input">No of Bus</label>
+          <div class="col-md-9">
+            <input id="noOfBus" type="number" min="0" placeholder="No of Bus" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="reservationDate" class="control-label text-right col-md-3 label-input">Reservation Date</label>
+          <div class="col-md-9">
+            <input id="reservationDate" type="text" class="form-control" placeholder="dd/mm/yyyy" bsDatepicker>
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="total" class="control-label text-right col-md-3 label-input">Total</label>
+          <div class="col-md-9">
+            <input id="total" type="number" min="0" placeholder="Total Amount" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+<!--This is Delete Confirmation Template-->
+
+<ng-template #deleteConfirmation>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

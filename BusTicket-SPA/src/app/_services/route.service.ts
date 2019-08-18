@@ -3,6 +3,7 @@ import { Http } from "@angular/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/internal/operators/map";
 import { IRoutesDetails } from "../models/IRoutesDetails";
+import { IRouteAvailabilityDetails } from "../models/IRouteAvailabilityDetails";
 
 @Injectable({
   providedIn: "root"
@@ -14,9 +15,21 @@ export class RouteService {
     this.baseUrl = window.localStorage.getItem("apikey");
   }
 
-  getRoutes(): Observable<IRoutesDetails> {
+  getRoutes(
+    bPont: string,
+    dPoint: string,
+    jDate: string
+  ): Observable<IRouteAvailabilityDetails> {
     return this.http
-      .get(this.baseUrl + "/api/Route/RouteDetails")
+      .get(
+        this.baseUrl +
+          "/api/Route/RouteDetails?bPoint=" +
+          bPont +
+          "&dPoint=" +
+          dPoint +
+          "&jDate=" +
+          jDate 
+      )
       .pipe(map(res => res.json()));
   }
   getRoutesById(id): Observable<IRoutesDetails> {

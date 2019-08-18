@@ -1,0 +1,137 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Vendor Payment</h4>
+          </div>
+
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-right">
+              <button type="button" class="btn btn-primary" (click)="openModal(vendorPaymentModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table id="vendorPaymentTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Vendor ID</th>
+                    <th>Vendor</th>
+                    <th>Payment Date</th>
+                    <th>Payment Method</th>
+                    <th>Payment Details</th>
+                    <th>Total Amount</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                      
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>Donna Snider</td>
+                    <td>Customer Support</td>
+                    <td>New York</td>
+                    <td>New York</td>
+                    <td>New York</td>
+                    <td>New York</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--This Is Modal Template-->
+
+<ng-template #vendorPaymentModal>
+  <div class="modal-header bg-info">
+    <h4 class="modal-title text-white" id="exampleModal">Create Vendor Payment</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form action="#" class="form-horizontal form-bordered">
+    <div class="modal-body">
+      <div class="form-body">
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="vendor" class="control-label text-right col-md-3 label-input">Vendor</label>
+          <div class="col-md-9">
+            <select id="vendor" class="form-control custom-select">
+              <option value="">Bind 1</option>
+              <option value="">Bind 2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="paymentDate" class="control-label text-right col-md-3 label-input">Payment Date</label>
+          <div class="col-md-9">
+            <input id="paymentDate" type="text" class="form-control" placeholder="Date Picker" bsDatepicker>
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="paymentMethod" class="control-label text-right col-md-3 label-input">Payment Method</label>
+          <div class="col-md-9">
+            <select id="paymentMethod" class="form-control custom-select">
+              <option value="Category 1">bKash</option>
+              <option value="Category 2">Card</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="paymentDescription" class="control-label text-right col-md-3 label-input">Payment Descriptions</label>
+          <div class="col-md-9">
+            <textarea id="paymentDescription" class="form-control" placeholder="Payment Descriptions"></textarea>
+          </div>
+        </div>
+        <div class="form-group row p-l-30 p-r-30">
+          <label for="total" class="control-label text-right col-md-3 label-input">Total Amount</label>
+          <div class="col-md-9">
+            <input id="total" type="number" min="0" class="form-control" placeholder="Total Amount">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+
+<!--This is Delete Confirmation Template-->
+
+<ng-template #deleteConfirmation>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

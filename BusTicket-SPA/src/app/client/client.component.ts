@@ -15,13 +15,7 @@ export class ClientComponent implements OnInit {
   private loadScripts() {
     // You can load multiple scripts by just providing the key as argument into load method of the service
     this.dynamicScriptLoader
-      .load(
-      "jquery-client",
-      "uniform-client",
-      "slicknav-client",
-      "wow-client",
-      "custom-client"
-      )
+      .load()
       .then(data => {
         // Script Loaded Successfully
       })

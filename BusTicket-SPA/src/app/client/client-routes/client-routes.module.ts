@@ -5,6 +5,8 @@ import { ClientComponent } from "../client.component";
 import { HomeComponent } from "../home/home.component";
 import { BusSearchComponent } from "../bus-search/bus-search.component";
 import { BusReservationComponent } from "../bus-reservation/bus-reservation.component";
+import { ContactComponent } from "../contact/contact.component";
+import { AboutComponent } from "../about/about.component";
 
 const routes: Routes = [
   {
@@ -12,11 +14,11 @@ const routes: Routes = [
     component: ClientComponent,
     children: [
       { path: "home", component: HomeComponent },
-      {
-        path: "searchBus/:bPoint/:dPoint/:rDate",
-        component: BusSearchComponent
-      },
-      { path: "busReservation", component: BusReservationComponent }
+      { path: "busreservation", component: BusReservationComponent },
+      { path: "bookticket", component: BusSearchComponent },
+      { path: "contact", component: ContactComponent },
+      
+
     ]
   }
 ];

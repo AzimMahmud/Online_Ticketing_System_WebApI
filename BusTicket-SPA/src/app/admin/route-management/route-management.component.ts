@@ -17,9 +17,9 @@ export class RouteManagementComponent implements OnInit {
   }
 
   refreshData() {
-    this.routeService.getRoutes().subscribe(r => {
-      console.log(r);
-      this.routes = r;
-    });
+    // this.routeService.getRoutes().subscribe(r => {
+    //   console.log(r);
+    //   this.routes = r;
+    // });
   }
 }

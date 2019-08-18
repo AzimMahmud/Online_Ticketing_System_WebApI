@@ -1,3 +1,176 @@
-<p>
-  bus-search works!
-</p>
+<main class="main-client" role="main">
+  <div class="container">
+    <div class="row tSearchHeader">
+      <div class="col-md-12 tSearchBottomMargin">
+        <div class="col-md-6 clearfix-client ">
+          <span class="oneway float-left"></span>
+          <p id="search_list_title" class="float-left ">
+            Chittagong - Dhaka on 08-August, 2019
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-10 m-b-30 col-md-12  tSearchHeaderBorder" id="booking" >
+        <form
+          (ngSubmit)="searchBus(f)"
+          ngNativeValidate
+          #f="ngForm"
+          role="form"
+        >
+          <!-- Row -->
+          <div class="row-client">
+            <div class="col-md-3 float-left">
+              <label class="m-t-20 float-left">Departure Date</label>
+              <input
+                type="text"
+                class="form-control "
+                placeholder="2017-06-04"
+                id="mdate"
+                ngModel
+                name="departDate"
+              />
+            </div>
+            <div class="col-md-3 float-left">
+              <div class="form-group">
+                <label class="m-t-20 float-left">From</label>
+
+                <select
+                  required
+                  ngModel
+                  name="pickLocation"
+                  class="form-control custom-select"
+                >
+                  <option selected value="">Select Place</option>
+                  <option value="CTH">Chittagong</option>
+                  <option value="DHK">Dhaka</option>
+                  <option value="KHU">Khulna</option>
+                  <option value="RAJ">Rajshahi</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3 float-left">
+              <div class="form-group">
+                <label class="m-t-20 float-left">To</label>
+                <select
+                  required
+                  ngModel
+                  [value]
+                  name="dropLocation"
+                  class="form-control custom-select"
+                >
+                  <option selected value="">Select Place</option>
+                  <option value="CTH">Chittagong</option>
+                  <option value="DHK">Dhaka</option>
+                  <option value="KHU">Khulna</option>
+                  <option value="RAJ">Rajshahi</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3  float-left">
+              <div class="m-b-40 pb-2"></div>
+
+              <button
+                type="submit"
+                [disabled]="!f.valid"
+                class="btn btn-block  "
+                id="btn-search"
+                
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          <div>
+
+          </div>
+          <!--// Row -->
+        </form>
+      </div>
+      <div class="col-md-12 content">
+        <h2 class="text-left">Departure</h2>
+
+        <div class="row tSearchBottomMargin">
+          <div class="col-md-6">
+            <button class="col-md-3 departureBtn btn btn-praimay"><i class="fa fa-angle-left"></i> Prev Day</button>
+            <button class="col-md-3 departureBtn btn btn-praimay">Next Day <i class="fa fa-angle-right"></i></button>
+            <button class="col-md-4 departureBtn btn btn-praimay" >Modify Search <i class="fa fa-search"></i></button>
+            <div class="col-md-2"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-2 float-left "><label class="float-left">Filter by:</label></div>
+            <div class="col-md-5 float-left" >       
+              <select required ngModel name="pickLocation"  class="form-control" tabindex="1" class="form-control boder-color-dark">
+                  <option selected value="">Operator</option>
+                  <option value="CTH">Chittagong</option>
+                  <option value="DHK">Dhaka</option>
+                  <option value="KHU">Khulna</option>
+                  <option value="RAJ">Rajshahi</option>
+  
+                </select>
+            </div>
+            <div class="col-md-5 float-left ">
+              <select required ngModel name="dropLocation" class="form-control" tabindex="2" class="form-control boder-color-dark">
+                <option selected value="">Bus Type</option>
+                <option value="CTH">Chittagong</option>
+                <option value="DHK">Dhaka</option>
+                <option value="KHU">Khulna</option>
+                <option value="RAJ">Rajshahi</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table borderless color-table dark-table">
+            <thead class="text-capitalize">
+              <tr class="center">
+                <th>Operator Details</th>
+                <th>Dep. Time</th>
+                <th>Arr. Time</th>
+                <th>Seats Available</th>
+                <th>Fare</th>
+              </tr>
+            </thead>
+            <tbody class="center text-capitalize">
+              <tr *ngFor="let data of rotDetails.details">
+                <td>
+                  <p class="float-left text-left">
+                    <b>{{ data.vendorName }}</b> <br />
+                    <span>{{ data.brand }}</span
+                    ><br />
+                    <span>{{ data.boardPoint }} to {{ data.dropPoint }}</span>
+                  </p>
+                </td>
+                <td>{{ data.boardTime }}</td>
+                <td>{{ data.dropTime }}</td>
+                <td>
+                  {{
+                    seatAvailableCheck(data.routeID) != null
+                      ? seatAvailableCheck(data.routeID)
+                      : 42
+                  }}
+                </td>
+                <td>
+                  <span class="fare float-right">৳ {{ data.fare }}</span>
+                  <div class="clearfix-client"></div>
+                  <div class="float-right">
+                    <a routerLink="/ticketBookStep1" class="btn grey "
+                      >select</a
+                    >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<div
+  id="ui-datepicker-div"
+  class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"
+></div>
+<script>
+  $("#mdate").bootstrapMaterialDatePicker({ weekStart: 0, time: false });
+</script>

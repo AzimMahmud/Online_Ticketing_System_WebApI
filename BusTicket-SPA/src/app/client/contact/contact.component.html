@@ -1,3 +1,80 @@
-<p>
-  contact works!
-</p>
+<main class="main-client" role="main">
+  <!-- Page info -->
+  <header class="site-title color clearfix-client">
+    <div class="wrap-client">
+      <div class="container">
+        <h1>Contact us</h1>
+        <nav role="navigation" class="breadcrumbs">
+          <ul>
+            <li><a routerLink="/client/home" title="Home">Home</a></li>
+            <li>Contact</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- //Page info -->
+  <!--- Google map -->
+  <!--<div id="map_canvas" class="gmap"></div>-->
+  <!--- //Google map -->
+ <!--- Content -->
+ <div class="wrap-client custom-m-t  content textongrey clearfix-client">
+    <h2>Send us a message</h2>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. All fields are required.</p>
+  </div>
+  <div class="wrap-client clearfix-client">
+    <div class="row-client">
+
+     
+      <!--- //Content -->
+      <!-- Form -->
+      <div class="row">
+        <div class="col-md-9 ">
+          <form method="post" action="contact_form_message.php" name="contactform" id="contactform">
+            <div id="message"></div>
+            <div class="row m-b-20">
+              <div class="col-md-6">
+                <label for="name">Name and surname</label>
+                <input type="text" id="name" class="form-control boder-color-dark"/>
+              </div>
+              <div class="col-md-6">
+                <label for="email">Email address</label>
+                <input type="email" id="email" class="form-control boder-color-dark"/>
+              </div>
+            </div>
+            
+            <div class="row m-b-20">
+              
+              <div class="col-md-12">
+                  <label for="comments">Message</label>
+                  <textarea class="col-md-12 form-control boder-color-dark" id="comments"  rows="3"></textarea>
+              </div>
+            </div>
+            <div class="col-md-12 actions" >
+                
+              <a href="#" class="btn btnSubmit float-right form-group" >Submit</a>
+    
+            </div>
+          </form>
+          </div>
+            <!-- //Form -->
+            <!--- Sidebar -->
+            <!--- Sidebar -->
+            <aside class="col-md-3 sidebar right">
+              <!-- Widget -->
+              <div class="widget">
+                <h4>Need help booking?</h4>
+                <div class="textwidget">
+                  <p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your needs.</p>
+                  <p class="contact-data"><span class="ico phone black"></span> +1 555 555 555</p>
+                </div>
+              </div>
+              <!-- //Widget -->
+              
+            </aside>
+        <!--- //Sidebar -->
+      </div>
+      <!--- //Sidebar -->
+    </div>
+  </div>
+</main>

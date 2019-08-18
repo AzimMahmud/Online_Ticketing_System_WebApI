@@ -2,54 +2,90 @@
   "use strict";
 
   $(document).ready(function() {
-    window.transfers.init();
+    transfers.init();
+   
   });
 
-  $(window).load(function() {
-    window.transfers.load();
+  $(window).on("load", function() {
+    transfers.load();
   });
 
-  window.transfers = {
+  // ANIMATIONS
+  new WOW().init();
+
+  var transfers = {
     init: function() {
       // MOBILE MENU
       $(".main-nav").slicknav({
-        prependTo: ".header .wrap",
+        prependTo: ".header .wrap-client",
         allowParentLinks: true,
         label: ""
       });
 
       // CUSTOM FORM ELEMENTS
-      $("input[type=radio], input[type=checkbox],input[type=number]").uniform();
-      $("select")
-        .not(".woocommerce select")
-        .uniform();
+      $(
+        "input[type=radio], input[type=checkbox],input[type=number], select"
+      ).uniform();
 
       // SEARCH RESULTS
       $(".information").hide();
-      $(".trigger").on("click", function() {
+      $(".trigger").click(function() {
         $(this)
           .parent()
           .parent()
           .nextAll(".information")
           .slideToggle(500);
       });
-      $(".close").on("click", function() {
+      $(".close").click(function() {
         $(".information").hide(500);
       });
 
       // FAQS
       $(".faqs dd").hide();
-      $(".faqs dt").on("click", function() {
+      $(".faqs dt").click(function() {
         $(this)
           .next(".faqs dd")
           .slideToggle(500);
         $(this).toggleClass("expanded");
       });
 
+      // CONTACT FORM
+      $("#contactform").submit(function() {
+        var action = $(this).attr("action");
+        $("#message").show(500, function() {
+          $("#message").hide();
+          $("#submit")
+            .after(
+              '<img src="images/contact-ajax-loader.gif" class="loader" />'
+            )
+            .attr("disabled", "disabled");
+
+          $.post(
+            action,
+            {
+              name: $("#name").val(),
+              email: $("#email").val(),
+              comments: $("#comments").val()
+            },
+            function(data) {
+              document.getElementById("message").innerHTML = data;
+              $("#message").slideDown("slow");
+              $("#contactform img.loader").fadeOut("slow", function() {
+                $(this).remove();
+              });
+              $("#submit").removeAttr("disabled");
+            }
+          );
+        });
+        return false;
+      });
+
       // TABS
-      $(".tab-content").hide();
-      $(".tab-content:first-of-type").show();
-      $(".tabs li:first-of-type").addClass("active");
+      $(".tab-content")
+        .hide()
+        .first()
+        .show();
+      $(".tabs li:first").addClass("active");
 
       $(".tabs a").on("click", function(e) {
         e.preventDefault();
@@ -64,64 +100,39 @@
           .hide();
       });
 
-      // SERVICES
-      $(".services-list .single")
-        .hide()
-        .first()
-        .show();
-      $(".categories li:first").addClass("active");
-
-      $(".categories a").on("click", function(e) {
-        $("div.success").hide();
-        $("div.error").hide();
-        $(this)
-          .closest("li")
-          .addClass("active")
-          .siblings()
-          .removeClass("active");
-        $($(this).attr("href"))
-          .show()
-          .siblings(".single")
-          .hide();
-        e.preventDefault();
-      });
-
       var hash = $.trim(window.location.hash);
-      if (hash) $('.categories a[href$="' + hash + '"]').trigger("click");
       if (hash) $('.tabs a[href$="' + hash + '"]').trigger("click");
 
       // SMOOTH ANCHOR SCROLLING
-      var $root = $("body,html");
+      var $root = $("html, body");
       $("a.anchor").on("click", function(e) {
         var href = $.attr(this, "href");
-        if (href.startsWith("#") && typeof $(href) != "undefined") {
-          href = href.substring(href.lastIndexOf("#") + 1);
-          var selector = "#" + href + ",." + href;
-          if ($(selector).length > 0) {
-            var heightOffset = $("header.header").height();
-            if ($("#wpadminbar").length > 0) {
-              heightOffset = heightOffset + $("#wpadminbar").height();
-            }
+        if (typeof $(href) != "undefined" && $(href).length > 0) {
+          var anchor = "";
 
-            var scrollTo = $(selector).offset().top - heightOffset;
+          if (href.indexOf("#") != -1) {
+            anchor = href.substring(href.lastIndexOf("#"));
+          }
 
+          var scrollToPosition = $(anchor).offset().top - 80;
+
+          if (anchor.length > 0) {
             $root.animate(
               {
-                scrollTop: scrollTo
+                scrollTop: scrollToPosition
               },
               500,
               function() {
-                // window.location.hash = '#' + href;
+                window.location.hash = anchor;
+                // This hash change will jump the page to the top of the div with the same id
+                // so we need to force the page to back to the end of the animation
+                $("html").animate({ scrollTop: scrollToPosition }, 0);
               }
             );
+            e.preventDefault();
           }
-          e.preventDefault();
         }
       });
-
-      if (hash == "#booking") $("a.anchor").trigger("click");
-
-      window.transfers.resizeFluidItems();
     },
     load: function() {
       // UNIFY HEIGHT
@@ -136,59 +147,8 @@
 
       // PRELOADER
       $(".preloader").fadeOut();
-    },
-    numberFormatI18N: function(number) {
-      var formattedNumber = "";
-
-      $.ajax({
-        url: TransfersAjax.ajaxurl,
-        data: {
-          action: "number_format_i18n_request",
-          number: number,
-          nonce: TransfersAjax.nonce
-        },
-        async: false,
-        success: function(data) {
-          formattedNumber = data;
-        },
-        error: function(errorThrown) {
-          console.log(errorThrown);
-        }
-      });
-
-      return formattedNumber;
-    },
-    resizeFluidItems: function() {
-      window.transfers.resizeFluidItem(".location-list .one-fourth");
-      window.transfers.resizeFluidItem(".one-half .post");
-    },
-    resizeFluidItem: function(filters) {
-      var filterArray = filters.split(",");
-
-      var arrayLength = filterArray.length;
-      for (var i = 0; i < arrayLength; i++) {
-        var filter = filterArray[i];
-        var maxHeight = 0;
-        if ($(filter + " .description div").length > 0) {
-          $(filter + " .description div").each(function() {
-            if ($(this).height() > maxHeight) {
-              maxHeight = $(this).height();
-            }
-          });
-        } else if ($(filter + " .entry-content").length > 0) {
-          $(filter + " .entry-content").each(function() {
-            if ($(this).height() > maxHeight) {
-              maxHeight = $(this).height();
-            }
-          });
-        }
-
-        if ($(filter + " .description div").length > 0) {
-          $(filter + ":not(.fluid-item) .description div").height(maxHeight);
-        } else if ($(filter + " .entry-content").length > 0) {
-          $(filter + ":not(.fluid-item) .entry-content").height(maxHeight);
-        }
-      }
     }
   };
+
 })(jQuery);
+

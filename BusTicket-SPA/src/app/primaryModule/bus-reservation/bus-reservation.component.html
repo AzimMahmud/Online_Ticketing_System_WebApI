@@ -1,0 +1,121 @@
+<main class="main" role="main">
+  <!-- Page info -->
+  <header class="site-title color">
+    <div class="wrap">
+      <div class="container">
+        <h1>Bus Reservation</h1>
+        <nav role="navigation" class="breadcrumbs">
+          <ul>
+            <li><a routerLink="/home" title="Home">Home</a></li>
+            <li>Bus Reservation</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- //Page info -->
+
+  <div class="wrap">
+    <div class="row">
+      <div class="three-fourth">
+        <form>
+          <header class="f-title color">Contact information</header>
+          <div class="f-row">
+            <div class="one-half">
+              <label for="name">Name and surname</label>
+              <input type="text" id="name" />
+            </div>
+            <div class="one-half">
+              <label for="company">Company name</label>
+              <input type="text" id="company" />
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="one-half">
+              <label for="number">Phone number</label>
+              <input type="number" id="number" />
+            </div>
+
+            <div class="one-half">
+              <label for="email">Email address</label>
+              <input type="email" id="email" />
+            </div>
+          </div>
+
+          <header class="f-title color">Journey Details</header>
+
+
+          <div class="f-row">
+            <div class="one-third">
+              <label for="dep-date">Pick up date and time</label>
+              <input type="text" id="dep-date" />
+            </div>
+            <div class="one-sixth">
+              <label for="passengers">No Of Bus</label>
+              <input type="number" id="passengers" min="1" />
+            </div>
+            <div class="one-half">
+              <label for="vehicle">Bus Type</label>
+              <select id="vehicle">
+                <option selected>Select Your Bus Type</option>
+                <option>Ac</option>
+                <option>Non-Ac</option>
+                <option>Private coach</option>
+                <option>Double Degger</option>
+                <option>Slipper</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="one-half">
+              <label for="pickuploc">Pick up location</label>
+              <input type="text" id="pickuploc" />
+            </div>
+            <div class="one-half">
+              <label for="dropoffloc">Drop off location</label>
+              <input type="text" id="dropoffloc" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <a href="#" class="btn medium color right">Submit request</a>
+          </div>
+        </form>
+      </div>
+
+      <!--- Sidebar -->
+      <aside class="one-fourth sidebar right">
+        <!-- Widget -->
+        <div class="widget">
+          <h4>Need help booking?</h4>
+          <div class="textwidget">
+            <p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your needs.</p>
+            <p class="contact-data"><span class="ico phone black"></span> +1 555 555 555</p>
+          </div>
+        </div>
+        <!-- //Widget -->
+        <!-- Widget -->
+        <div class="widget">
+          <h4>Advertisment</h4>
+          <a href="#"><img src="http://placehold.it/800x600" alt="" /></a>
+        </div>
+        <!-- //Widget -->
+        <!-- Widget -->
+        <div class="widget">
+          <h4>Why book with us?</h4>
+          <div class="textwidget">
+            <h5>Reliable and Safe</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+            <h5>No hidden fees</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+            <h5>We’re Always Here</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        <!-- //Widget -->
+      </aside>
+      <!--- //Sidebar -->
+    </div>
+  </div>
+</main>

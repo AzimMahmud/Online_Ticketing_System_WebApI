@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+/* Client Page Custom Css */
+body {
+  background-color: #fff;
+}
+.header {
+  border-bottom: 1px solid #e0e0e0;
+}
+.main {
+  padding: 20px 0 5px 0;
+}
+.oneway {
+  background: url(../src/assets/images/arrow-sprite.PNG) no-repeat;
+  background-position: -32px 1px;
+  height: 30px;
+  width: 33px;
+  text-indent: 40px;
+}
+
+.borderless,
+.borderless tr,
+.borderless td {
+  border: 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.borderless thead {
+  background-color: #f2f2f2;
+}
+
+#btn-search {
+  line-height: 1.8 !important;
+  background-color: white;
+  color: black;
+}
+#btn-search:hover {
+  background-color: black;
+}
+
+#search_list_title {
+  color: #212121;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  text-align: left;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-top: 7px;
+  margin-bottom: 0;
+  padding: 0px 0px 5px 0px;
+  border-bottom: 1px dashed #ec4747;
+}
+
+/*Admin template Custom CSS*/
+
+#sidebarnav li {
+  padding: 0;
+}
+
+/*Navigation Backgroung CSS*/
+.left-sidebar {
+  background: black;
+}
+
+.sidebar-nav ul li a.active {
+  font-weight: 500;
+  color: #fb9678;
+}
+
+html body .font-16 {
+  padding-left: 15px;
+}
+
+.label-input {
+  line-height: 2.8em;
+}
+
+.label-input-timePicker {
+  line-height: 6.3em;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 7px;
+}
+
+.dropdown-menu {
+  min-width: 15rem;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #e74c3c;
+  text-decoration: none;
+  background-color: #e6e6e6;
+}

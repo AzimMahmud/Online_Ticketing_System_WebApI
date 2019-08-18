@@ -1,0 +1,175 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Add Routes Details</h4>
+          </div>
+
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-right">
+              <button type="button" class="btn btn-primary" (click)="openModal(routeDetailsModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table id="routeDetailsTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Route Details ID</th>
+                    <th>Price</th>
+                    <th>Board Point</th>
+                    <th>End Point</th>
+                    <th>Board Time</th>
+                    <th>Drop Time</th>
+                    <th>Created By</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>61</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                    <td>$320,800</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                      
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Gavin Cortez</td>
+                    <td>Team Leader</td>
+                    <td>San Francisco</td>
+                    <td>22</td>
+                    <td>2008/10/26</td>
+                    <td>$235,500</td>
+                    <td>$235,500</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+                     
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--This Is Modal Template-->
+
+<ng-template #routeDetailsModal>
+  <div class="modal-header bg-info">
+    <h4 class="modal-title text-white">Route Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form action="#" class="form-horizontal form-bordered">
+    <div class="modal-body">
+      <div class="form-body">
+        <div class="row p-l-30 p-r-30">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="selectBus" class="control-label text-right col-md-5 label-input">Select Bus</label>
+              <div class="col-md-7">
+                <select id="selectBus" class="form-control custom-select">
+                  <option value="">Bus 1</option>
+                  <option value="">Bus 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="fare" class="control-label text-right col-md-5 label-input">Fare</label>
+              <div class="col-md-7">
+                <input id="fare" type="number" min="0" class="form-control" placeholder="Route Fare">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row p-l-30 p-r-30">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="boardPiont" class="control-label text-right col-md-5 label-input">Board Point</label>
+              <div class="col-md-7">
+                <input id="boardPiont" type="text" class="form-control" placeholder="Put the Pick Up Point">
+              </div>
+            </div>
+          </div>
+          <!--/span-->
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="dropPoint" class="control-label text-right col-md-5 label-input">Drop Point</label>
+              <div class="col-md-7">
+                <input id="dropPoint" type="text" class="form-control" placeholder="Put the Drop Point">
+              </div>
+            </div>
+          </div>
+          <!--/span-->
+        </div>
+        <div class="row p-l-30 p-r-30">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="boardTime" class="control-label text-right col-md-5 label-input-timePicker">Board Time</label>
+              <div class="col-md-7">
+                <timepicker id="boardTime" [showMeridian]="isMeridian" [showSpinners]="showSpinners"></timepicker>
+              </div>
+            </div>
+          </div>
+          <!--/span-->
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="dropTime" class="control-label text-right col-md-5 label-input-timePicker">Drop Time</label>
+              <div class="col-md-7">
+                <timepicker id="dropTime" [showMeridian]="isMeridian" [showSpinners]="showSpinners"></timepicker>
+              </div>
+            </div>
+          </div>
+          <!--/span-->
+        </div>
+        <div class="from-group row p-l-30 p-r-30">
+          <div class="col-md-6">
+            <div class="offset-sm-5 col-sm-7">
+              <div class="checkbox checkbox-success">
+                <input id="activeCheckbox" type="checkbox" />
+                <label for="activeCheckbox" class="form-check-lebel">IsActive?</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+
+<!--This is Delete Confirmation Template-->
+
+<ng-template #deleteConfirmation>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

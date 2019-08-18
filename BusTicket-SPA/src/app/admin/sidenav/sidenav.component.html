@@ -1,0 +1,77 @@
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+
+        <li class="user-pro">
+          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="assets/images/1.jpg" alt="user-img" class="img-circle"><span class="hide-menu">Mark Jeckson</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['userProfile']"><i class="ti-user"></i> My Profile</a></li>
+            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>           
+            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+            <i class="fa fa-dashboard"></i>
+            <span class="hide-menu">Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-bus"></i><span class="hide-menu">Bus Management</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['brand']">Brand</a></li>
+            <li><a [routerLink]="['busCategory']">Bus Category</a></li>
+            <li><a [routerLink]="['busDetails']">Bus details</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="waves-effect waves-dark" [routerLink]="['routeDetails']" aria-expanded="false"><i class="fa fa-road"></i><span class="hide-menu">Route Details</span></a>
+        </li>
+
+
+
+        <li>
+          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="hide-menu">Reservation</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['ticketReservation']">Ticket Reservation</a></li>
+            <li><a [routerLink]="['busReservation']">Bus Reservation</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Vendor</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a [routerLink]="['vendor']"> Vendor</a></li>
+            <li><a [routerLink]="['vendorPayment']"> Vendor Payment</a></li>
+
+          </ul>
+        </li>
+        
+        <li>
+          <a class="waves-effect waves-dark" [routerLink]="['user']" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">User</span></a>
+        </li>
+
+
+        <li>
+          <a class="waves-effect waves-dark" [routerLink]="['promo']" aria-expanded="false"><i class="fa fa-gift"></i><span class="hide-menu">Promo Offer</span></a>
+        </li>
+
+        <li>
+          <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+            <i class="fa fa-book"></i>
+            <span class="hide-menu">Report</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>

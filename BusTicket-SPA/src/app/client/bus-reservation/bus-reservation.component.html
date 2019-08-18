@@ -1,3 +1,118 @@
-<p>
-  bus-reservation works!
-</p>
+<main class="main-client" role="main">
+  <!-- Page info -->
+  <header class="site-title color clearfix-client">
+    <div class="wrap">
+      <div class="container">
+        <h1>Bus Reservation</h1>
+        <nav role="navigation" class="breadcrumbs">
+          <ul>
+            <li><a routerLink="/client/home" title="Home">Home</a></li>
+            <li>Bus Reservation</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- //Page info -->
+
+  <div class="wrap-client custom-m-t clearfix-client">
+    <div class="row-client">
+      <div class="col-md-9 float-left">
+        <form>
+          <header class="f-title color">Contact information</header>
+          <div class="row m-b-20">
+            <div class="col-md-6 ">
+              <label for="name">Name and surname</label>
+              <input placeholder="Name and surname" type="text" id="name" class="form-control boder-color-dark"/>
+            </div>
+            <div class="col-md-6  ">
+              <label for="company">Company name</label>
+              <input placeholder="Company name" type="text" id="company" class="form-control boder-color-dark"/>
+            </div>
+          </div>
+          <div class="row m-b-20" >
+            <div class="col-md-6 ">
+              <label for="poneNumber">Phone number</label>
+              <input placeholder="Phone number" type="text" id="poneNumber" class="form-control boder-color-dark" />
+            </div>
+
+            <div class="col-md-6 ">
+              <label for="emailAddress">Email address</label>
+              <input placeholder="Email address" type="email" id="emailAddress" class="form-control boder-color-dark"/>
+            </div>
+          </div>
+
+          <header class="f-title color">Journey Details</header>
+
+
+          <div class="row m-b-20">
+            <div class="col-md-4">
+              <label for="dep-date">Pick up date and time</label>
+              <input placeholder="Pick up date and time" type="text" id="dep-date" class="form-control boder-color-dark"/>
+            </div>
+            <div class="col-md-2">
+              <label for="passengers">No Of Bus</label>
+              <input placeholder="No Of Bus" type="number" id="passengers" min="1" class="form-control boder-color-dark"/>
+            </div>
+            <div class="col-md-6">
+              <label for="vehicle">Bus Type</label>
+              <select class="form-control" id="vehicle" tabindex="1" class="form-control boder-color-dark">
+                <option selected>Select Your Bus Type</option>
+                <option>Ac</option>
+                <option>Non-Ac</option>
+                <option>Private coach</option>
+                <option>Double Degger</option>
+                <option>Slipper</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-md-6 ">
+              <label for="pickuploc">Pick up location</label>
+              <input placeholder="Pick up location" type="text" id="pickuploc" class="form-control boder-color-dark"/>
+            </div>
+            <div class="col-md-6 ">
+              <label for="dropoffloc">Drop off location</label>
+              <input placeholder="Drop off location" type="text" id="dropoffloc" class="form-control boder-color-dark"/>
+            </div>
+          </div>
+
+          <div class="col-md-12 actions" >
+            <!-- <a href="#" class="btn medium color right ">Submit request</a> -->
+            <a href="#" class="btn btnSubmit float-right form-group" >Submit request</a>
+
+          </div>
+        </form>
+      </div>
+
+      <!--- Sidebar -->
+      <aside class="one-fourth sidebar right">
+        <!-- Widget -->
+        <div class="widget">
+          <h4>Need help booking?</h4>
+          <div class="textwidget">
+            <p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your needs.</p>
+            <p class="contact-data"><span class="ico phone black"></span> +1 555 555 555</p>
+          </div>
+        </div>
+        <!-- //Widget -->
+        
+        <!-- Widget -->
+        <div class="widget">
+          <h4>Why book with us?</h4>
+          <div class="textwidget">
+            <h5>Reliable and Safe</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+            <h5>No hidden fees</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+            <h5>We’re Always Here</h5>
+            <p>Lorem ipsum dolor sit amet,  do eiusmod tempor incididunt labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        <!-- //Widget -->
+      </aside>
+      <!--- //Sidebar -->
+    </div>
+  </div>
+</main>

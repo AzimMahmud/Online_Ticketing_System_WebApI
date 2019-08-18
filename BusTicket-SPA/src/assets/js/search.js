@@ -20,7 +20,14 @@
 			});
 
 			// DATE & TIME PICKER
-			$('#dep-date,#ret-date').datetimepicker();
+			$('#dep-date,#ret-date').datetimepicker({
+				showMillisec: false,
+				showMicrosec: false,
+				showTimezone: false,
+				numberOfMonths: 1,
+				addSliderAccess: true, 
+				sliderAccessArgs: { touchonly: false }                
+				});
 		}
 	}
 

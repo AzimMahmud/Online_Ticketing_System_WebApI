@@ -1,0 +1,123 @@
+<div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header bg-info">
+                                    <h4 class="m-b-0 text-white">Ticket Reservation</h4>
+                                </div>
+                                <div class="button-box m-t-20">
+                                    <button type="button" class="btn btn-primary btn pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add New</button>
+                                </div>
+
+                                <div class="table-responsive m-t-40">
+                                    <table id="myTable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Passenger Name</th>
+                                                <th>Phone No</th>
+                                                <th>No Of Ticket</th>
+                                                <th>Seat No</th>
+                                                <th>Total Fare</th>
+                                                <th class="text-nowrap">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let reservation of ticketReservation">
+
+                                            <tr>
+                                                <td>{{reservation.ticketResrvID}}</td>
+                                                <td>{{reservation.passengerName}}</td>
+                                                <td>{{reservation.passengerPhoneNo}}</td>
+                                                <td>{{reservation.noOfTicket}}</td>
+                                                <td>{{reservation.seatNo}}</td>
+                                                <td>{{reservation.unitPrice * reservation.noOfTicket}}</td>
+
+                                                <td class="text-nowrap">
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                                </td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" style="height:80%">
+                                        <div class="modal-content" style="height:80%">
+                                            <div class="modal-header bg-info">
+                                                <h4 class="modal-title text-white" id="exampleModal">Ticket Reservation</h4>
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            </div>
+                                            <div class="modal-body" style=" max-height: calc(100% - 120px); overflow-y: scroll;">
+                                                <form action="#" class="form-horizontal form-bordered">
+                                                    <div class="form-body">
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Name</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" placeholder="Passenger Name" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Phone</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" placeholder="Passenger Phone Number">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Gender</label>
+                                                            <div class="col-md-9">
+                                                                <select class="form-control custom-select">
+                                                                    <option value="">---Select---</option>
+                                                                    <option value="">Male</option>
+                                                                    <option value="">Female</option>
+                                                                    <option value="">Others</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">No Of Ticket</label>
+                                                            <div class="col-md-9">
+                                                                <input type="number" placeholder="No Of Ticket" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Unit Price</label>
+                                                            <div class="col-md-9">
+                                                                <input type="number" placeholder="Ticket Unit Price" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Route Details</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row p-l-30 p-r-30">
+                                                            <label class="control-label text-right col-md-3">Reservation Date</label>
+                                                            <div class="col-md-9">
+                                                                <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+                                                <button type="button" class="btn btn-inverse">Cancel</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

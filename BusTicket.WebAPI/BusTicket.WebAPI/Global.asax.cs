@@ -18,7 +18,7 @@ namespace BusTicket.WebAPI
         {
 
             AreaRegistration.RegisterAllAreas();
-            MappingProfile.Initialize();
+            //MappingProfile.Initialize();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

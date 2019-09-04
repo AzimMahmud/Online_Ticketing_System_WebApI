@@ -1,0 +1,285 @@
+<main class="main-client" role="main">
+  <!-- Search -->
+  <div class="output color twoway">
+    <div class="wrap-client">
+      <h1 class="text-center">Ticket Confirmmation</h1>
+    </div>
+  </div>
+  <!-- //Search -->
+
+  <div class="wrap-client custom-m-t m-b-20 clearfix-client">
+    <div class="row-client">
+      <div class="col-md-9 float-left">
+        <form [formGroup]="ticketConfirmForm" (ngSubmit)="onSubmit()">
+          <header class="f-title color">Passenger details</header>
+
+          <div class="row m-b-20">
+            <div class="col-md-6 ">
+              <label for="name">Name and surname</label>
+              <input
+                placeholder="Name and surname"
+                type="text"
+                id="name"
+                class="form-control boder-color-dark"
+                formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+              />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <label for="poneNumber">Phone number</label>
+              <input
+                placeholder="Phone number"
+                type="text"
+                id="poneNumber"
+                class="form-control boder-color-dark"
+                formControlName="phone"
+                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+              />
+              <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                <div *ngIf="f.phone.errors.required">
+                  Phone Number is required
+                </div>
+                <div *ngIf="f.phone.errors.number">
+                  Phone Number must be 11 digit
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-b-20">
+            <div class="col-md-6 ">
+              <label for="emailAddress">Email address</label>
+              <input
+                placeholder="Email address"
+                type="email"
+                id="emailAddress"
+                class="form-control boder-color-dark"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 radio-inline">
+              <label for="gender">Gender</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio1"
+                    value="male"
+                    formControlName="gender"
+                    [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+                  />
+                  <label class="form-check-label" for="inlineRadio1"
+                    >Male</label
+                  >
+                  <div
+                    *ngIf="submitted && f.gender.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.gender.errors.required">
+                      Gender is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio2"
+                    value="female"
+                    formControlName="gender"
+                    [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+                  />
+                  <label class="form-check-label" for="inlineRadio2"
+                    >Female</label
+                  >
+                  <div
+                    *ngIf="submitted && f.gender.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.gender.errors.required">
+                      Gender is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <header class="f-title color">Payment Details</header>
+
+          <!-- <a class="collapsLink " href="javascript:void(0)" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><b> <i
+                class="fa fa-hand-o-right easyStepsSafe"></i> Click here if you have a promotional discount code!!</b>
+          </a>
+          <hr>
+          <div id="collapseBasic" [collapse]="!isCollapsed">
+            <div class="row m-b-20">
+
+              <div class="col-md-4">
+                <input placeholder="Enter your promo code" type="text" id="promo" class="form-control boder-color-dark"
+                  formControlName="promo"/>
+
+              </div>
+
+              <div class="col-md-3">
+                <button class="btn btnSubmit form-control">Submit</button>
+              </div>
+
+            </div>
+          </div> -->
+
+          <div class="m-b-20">
+            <tabset>
+              <tab heading="bKash" id="bKash">
+                <div class="col-md-12 paymentTypeTab">
+                  <p>
+                    Your ticket(s) would be reserved and inactive for
+                    <span style="font-weight: bold;color:#fc0202;"
+                      >30 minutes</span
+                    >
+                    from the time of booking. Pay through bKash to our
+                    <b>Merchant Account No: 01791715774</b> and confirm your
+                    transaction ID within
+                    <span style="font-weight: bold;color:#fc0202;"
+                      >30 minutes</span
+                    >
+                    to get the confirmed ticket.
+                  </p>
+                  <button type="submit" class="btn btn-primary btnSubmit m-t-3">
+                    Confirm Reservation
+                  </button>
+                </div>
+              </tab>
+              <!-- <tab heading="Cash" id="cash">
+                <div class="row paymentTypeTab">
+                  <div class="col-md-12">
+                    <p>Your ticket(s) would be reserved and inactive till our call center agents call you and <span
+                        style="font-weight: bold;color:#fc0202;">verify your credentials.</span> Ticket(s) would become
+                      active when you pay the due amount during the delivery of ticket(s) at your doorstep.</p>
+                    <button class="btn btn-primary btnSubmit m-t-3">Confirm Reservation</button>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="City">Select Your city</label>
+                    <select class="form-control boder-color-dark"
+                     >
+                      <option>Dhaka</option>
+                      <option>Chattogram</option>
+                      <option>Comilla</option>
+                    </select>
+
+                  <div class="col-md-6">
+                    <label for="Area">Select Your area</label>
+                    <select class="form-control boder-color-dark"
+                      >
+                      <option>Dhaka</option>
+                      <option>Chattogram</option>
+                      <option>Comilla</option>
+                    </select>
+
+                  </div>
+
+                </div>
+                </div>
+              </tab> -->
+              <!-- <tab heading="Debit Card" id="debitCard">
+                <div class="col-md-12 paymentTypeTab">
+                  <p>You would be redirected to a third party payment gateway where you can pay with your credit or
+                    debit cards. Your payment transactions are <span style="font-weight: bold;color:#fc0202;">100%
+                      secure</span>. On successful payment, you would get a confirmed ticket.</p>
+                  <button class="btn btn-primary btnSubmit m-t-3">Confirm Reservation</button>
+                </div>
+              </tab> -->
+            </tabset>
+          </div>
+        </form>
+      </div>
+
+      <!--- Sidebar -->
+      <aside class="one-fourth sidebar right">
+        <!-- Widget -->
+        <div class="widget">
+          <h4>JURNEY DETAILS</h4>
+          <div class="summary">
+            <div>
+              <ul class="paside-ul">
+                <li class="paside-li">
+                  Date
+                  <span class="pull-right">{{ routeDetails.journeyDate }}</span>
+                </li>
+                <li class="paside-li">
+                  From
+                  <span class="pull-right">{{
+                    journeyDetails.bus.boardPoint
+                  }}</span>
+                </li>
+                <li class="paside-li">
+                  To<span class="pull-right">{{
+                    journeyDetails.bus.dropPoint
+                  }}</span>
+                </li>
+                <li class="paside-li">
+                  Brand<span class="pull-right">{{
+                    journeyDetails.bus.brand
+                  }}</span>
+                </li>
+                <li class="paside-li">
+                  <b
+                    >Site No.
+                    <span class="pull-right">{{
+                      journeyDetails.seats
+                    }}</span></b
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- <dl class="total">
+              <dt>Total</dt>
+              <dd>840,00 usd</dd>
+            </dl> -->
+          </div>
+        </div>
+
+        <div class="widget">
+          <h4>FARE DETAILS</h4>
+          <div class="summary">
+            <div>
+              <ul class="paside-ul">
+                <li class="paside-li">
+                  Ticket Price
+                  <span class="pull-right">{{ journeyDetails.fare }}</span>
+                </li>
+                <li class="paside-li">
+                  Charge <span class="pull-right">{{ charge }}</span>
+                </li>
+                <li class="paside-li">
+                  Discount<span class="pull-right">{{ discount }}</span>
+                </li>
+
+                <li class="paside-li">
+                  <b
+                    >Total <span class="pull-right">{{ totalAmount }}</span></b
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- //Widget -->
+      </aside>
+      <!--- //Sidebar -->
+    </div>
+  </div>
+</main>

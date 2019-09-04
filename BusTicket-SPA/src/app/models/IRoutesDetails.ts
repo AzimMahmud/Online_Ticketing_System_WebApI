@@ -8,4 +8,5 @@ export interface IRoutesDetails {
   brand: any;
   category: any;
   vendorName: any;
+  isActive: boolean;
 }

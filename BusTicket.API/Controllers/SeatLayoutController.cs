@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Persistence;
 using BusTicket.API.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class SeatLayoutController : ControllerBase
@@ -28,6 +30,8 @@ namespace BusTicket.API.Controllers
         {
             var seatLayouts = await _unitOfWork.SeatLayout.GetAll();
             return Ok(seatLayouts);
+
+
         }
 
         // GET: api/SeatLayout/5

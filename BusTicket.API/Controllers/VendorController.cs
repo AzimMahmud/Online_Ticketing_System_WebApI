@@ -6,11 +6,13 @@ using AutoMapper;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class VendorController : ControllerBase
@@ -24,13 +26,22 @@ namespace BusTicket.API.Controllers
             _mapper = mapper;
         }
 
-        
+
         // GET: api/BusDetail
         [HttpGet]
         public async Task<IActionResult> GetVendorDetails()
         {
-            var vendors = await _unitOfWork.Vendor.GetAll();
-           
+            var vendors = await _unitOfWork.Vendor.Find(i => i.IsActive == true);
+
+            return Ok(vendors);
+        }
+
+
+        // GET: api/BusDetail
+        [HttpGet("GetArchive")]
+        public async Task<IActionResult> GetArchiveVendorDetails()
+        {
+            var vendors = await _unitOfWork.Vendor.Find(i => i.IsActive == false);
             return Ok(vendors);
         }
 
@@ -49,7 +60,7 @@ namespace BusTicket.API.Controllers
         }
 
         // PUT: api/BusDetail/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> PutVendorDetail(VendorDTO vendorDetail)
         {
 
@@ -72,6 +83,17 @@ namespace BusTicket.API.Controllers
         }
 
 
+        //Soft Delete
+        [HttpPut("VendorDelete/{id}")]
+        public async Task<ActionResult<Vendor>> VendorSoftDelete(int id)
+        {
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
+            if (vendorDetail == null) return BadRequest();
+            vendorDetail.IsActive = false;
+            _unitOfWork.Vendor.Update(vendorDetail);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
+        }
 
         // DELETE: api/BusDetail/5
         [HttpDelete("{id}")]

@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
-import { IRoutesDetails } from '../models/IRoutesDetails';
-import { map } from 'rxjs/operators';
-import { ITicketReservation } from '../models/ITicketReservation';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import { Observable } from "rxjs";
+import { IRoutesDetails } from "../models/IRoutesDetails";
+import { map } from "rxjs/operators";
+import { ITicketReservation } from "../models/ITicketReservation";
+import { IPayment } from "../models/IPayment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TicketReservationService {
-
   baseUrl: any;
 
   constructor(private http: Http) {
@@ -18,29 +18,31 @@ export class TicketReservationService {
 
   getTicketReservations(): Observable<ITicketReservation> {
     return this.http
-      .get(this.baseUrl + "/api/ticketreservation")
+      .get(this.baseUrl + "/api/TicketReservation")
       .pipe(map(res => res.json()));
   }
   getgetTicketReservationByCustomer(id): Observable<ITicketReservation> {
     return this.http
-      .get(this.baseUrl + "/api/Ticketreservation/" + id)
+      .get(this.baseUrl + "/api/TicketReservation/" + id)
       .pipe(map(res => res.json()));
   }
 
-  postTicketReservation(formData) {
+  postTicketReservation(formData: ITicketReservation) {
+    console.log(formData);
     return this.http
-      .post(this.baseUrl + "/api/Ticketreservation", formData)
+      .post(this.baseUrl + "/api/TicketReservation/TicketPurchase", formData)
       .pipe(map(res => res.json()));
   }
   updateTicketReservation(formData) {
     return this.http
-      .put(this.baseUrl + "/api/Ticketreservation", formData)
+      .put(this.baseUrl + "/api/TicketReservation", formData)
       .pipe(map(res => res.json()));
   }
-  deleteTicketReservation(id) {
+  confirmPayment(payment: IPayment) {
+    // payment.status = true;
+    console.log(payment);
     return this.http
-      .delete(this.baseUrl + "/api/Ticketreservation/" + id)
+      .put(this.baseUrl + "/api/TicketReservation/PaymentConfirm", payment)
       .pipe(map(res => res.json()));
   }
-
 }

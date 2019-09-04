@@ -14,11 +14,18 @@ export class VendorService {
     this.baseUrl = window.localStorage.getItem("apikey");
   }
 
-  getVendors(): Observable<IVendor> {
+  getVendors(): Observable<IVendor[]> {
     return this.http
       .get(this.baseUrl + "/api/Vendor")
       .pipe(map(res => res.json()));
   }
+
+  getArchiveVendors(): Observable<IVendor[]> {
+    return this.http
+      .get(this.baseUrl + "/api/Vendor/GetArchive")
+      .pipe(map(res => res.json()));
+  }
+
   getVendorById(id) : Observable<IVendor> {
     return this.http
       .get(this.baseUrl + "/api/Vendor/" + id)
@@ -30,11 +37,19 @@ export class VendorService {
       .post(this.baseUrl + "/api/Vendor", formData)
       .pipe(map(res => res.json()));
   }
-  updateVendor(formData) {
+  updateVendor(id : number, formData: IVendor) {
+    formData.vendorID = id;
     return this.http
       .put(this.baseUrl + "/api/Vendor", formData)
       .pipe(map(res => res.json()));
   }
+
+  softDelete(vendorID: number) {
+    return this.http
+      .put(this.baseUrl + "/api/Vendor/VendorDelete/" + vendorID, null)
+      .pipe(map(res => res.json()));
+  }
+
   deleteVendor(id) {
     return this.http
       .delete(this.baseUrl + "/api/Vendor/" + id)

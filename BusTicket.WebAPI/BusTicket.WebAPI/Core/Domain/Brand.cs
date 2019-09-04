@@ -13,7 +13,7 @@ namespace BusTicket.WebAPI.Core.Domain
 
         [Required]
         public string Name { get; set; }
-
+        public bool IsActive { get; set; }
 
         public ICollection<BusDetail> BusDetails { get; set; }
     }

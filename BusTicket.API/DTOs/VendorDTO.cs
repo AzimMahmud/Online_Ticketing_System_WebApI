@@ -12,5 +12,6 @@ namespace BusTicket.API.DTOs
         public string VendorPhone { get; set; }
         public string VendorEmail { get; set; }
         public string VendorAddress { get; set; }
+        public bool IsActive { get; set; }
     }
 }

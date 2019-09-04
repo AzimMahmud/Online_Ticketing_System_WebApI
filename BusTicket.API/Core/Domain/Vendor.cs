@@ -15,10 +15,12 @@ namespace BusTicket.API.Core.Domain
         public string VendorPhone { get; set; }
         public string VendorEmail { get; set; }
         public string VendorAddress { get; set; }
+        public bool IsActive { get; set; }
 
 
 
         public ICollection<BusDetail> BusDetails { get; set; }
+        public ICollection<Payment> Payments { get; set; }
         public ICollection<VendorPayment> VendorPayments { get; set; }
     }
 }

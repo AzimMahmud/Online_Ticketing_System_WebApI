@@ -1,5 +1,6 @@
 export interface ITicketReservation {
   ticketResrvID: any;
+  ticketNo: any;
   passengerName: any;
   passengerPhoneNo: any;
   passengerEmail: any;
@@ -7,6 +8,11 @@ export interface ITicketReservation {
   noOfTicket: any;
   unitPrice: any;
   seatNo: any;
-  routeID: any;
+  routeDetailID: any;
   reservationDate: any;
+  paymentID: any;
+  paymentAmount: any;
+  transactionID: any;
+  paymentDate: any;
+  vendorName: any;
 }

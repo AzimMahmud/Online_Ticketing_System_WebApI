@@ -1,14 +1,11 @@
-import { IBusDetails } from "./IBusDetails";
-import { IBrand } from "./IBrand";
-import { IBusCategory } from "./IBusCategory";
-import { IVendor } from "./IVendor";
-
 export interface IBusRoute {
-  routeId: number;
-  boardPoint: string;
+  busRouteID: number;
+  boardPoint: any;
   boardTime: any;
-  dropPoint: string;
+  dropPoint: any;
   dropTime: any;
-  busDetailId: number;
+  busDetailID: number;
   fare: any;
+  createdBy: any;
+  isActive: boolean;
 }

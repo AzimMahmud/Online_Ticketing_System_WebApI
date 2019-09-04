@@ -18,12 +18,20 @@ namespace BusTicket.WebAPI.Core.Domain
         public string PassengerPhoneNo { get; set; }
 
         [Required]
+        [EmailAddress]
         public string PassengerEmail { get; set; }
 
         [Required]
         public string Gender { get; set; }
+
+        [Required]
         public string NoOfBus { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
-        public decimal Total { get; set; }
+
+        [Required]
+        public decimal TotalAmount { get; set; }
     }
 }

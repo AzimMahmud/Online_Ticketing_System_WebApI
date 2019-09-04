@@ -12,9 +12,12 @@ namespace BusTicket.WebAPI.Core.Repositories
     public interface IBusDetails : IRepository<BusDetail>
     {
 
-        IEnumerable<BusDetail> GetBusDetailWithVendor();
-        IEnumerable<BusDetail> GetBusDetailWithCategory();
-        IEnumerable<BusDetail> GetBusDetailWithBrand();
+        Task<IEnumerable<object>> GetBusInfo();
+        Task<IEnumerable<object>> GetArchiveBusInfo();
+        Task<IEnumerable<object>> GetALLDetailsWithVendorCategoryBrand(int busDetailsid);
+        Task<IEnumerable<object>> GetBusDetailWithVendor();
+        Task<IEnumerable<object>> GetBusDetailWithCategory();
+        Task<IEnumerable<object>> GetBusDetailWithBrand();
 
     }
 }

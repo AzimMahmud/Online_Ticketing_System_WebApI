@@ -27,8 +27,8 @@ namespace BusTicket.WebAPI.DTOs
                 config.CreateMap<Vendor, VendorDTO>();
                 config.CreateMap<VendorDTO, Vendor>();
 
-                config.CreateMap<Route, RouteDTO>();
-                config.CreateMap<RouteDTO, Route>();
+                //config.CreateMap<Route, RouteDTO>();
+                //config.CreateMap<RouteDTO, Route>();
 
                 config.CreateMap<User, UserForListDto>();
                 config.CreateMap<UserForListDto, User>();
@@ -41,6 +41,9 @@ namespace BusTicket.WebAPI.DTOs
 
                 config.CreateMap<User, UserForRegisterDto>();
                 config.CreateMap<UserForRegisterDto, User>();
+
+                config.CreateMap<Payment, PaymentDTO>();
+                config.CreateMap<PaymentDTO, Payment>();
             });
 
 

@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BusTicket.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class BusReservationController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -28,7 +29,7 @@ namespace BusTicket.WebAPI.Controllers
         }
 
         // GET: api/BusReservation/5
-        [HttpGet]
+        [HttpGet, Route("{id}")]
         public async Task<IHttpActionResult> GetBusReservation(int id)
         {
             var busReservation = await _unitOfWork.BusReservation.Get(id);
@@ -61,8 +62,9 @@ namespace BusTicket.WebAPI.Controllers
             return Ok(busReservation);
         }
 
+
         // DELETE: api/BusReservation/5
-        [HttpDelete]
+        [HttpDelete, Route("{id}")]
         public async Task<IHttpActionResult> DeleteBusReservation(int id)
         {
             var busReservation = await _unitOfWork.BusReservation.Get(id);

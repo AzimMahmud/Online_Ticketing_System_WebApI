@@ -16,9 +16,6 @@ namespace BusTicket.API.Persistence.Repositories
         public BrandRepository(BusTicketContext context) : base(context)
         {
         }
-        public BusTicketContext BusTicketContext
-        {
-            get { return Context as BusTicketContext; }
-        }
+        public BusTicketContext BusTicketContext => Context as BusTicketContext;
     }
 }

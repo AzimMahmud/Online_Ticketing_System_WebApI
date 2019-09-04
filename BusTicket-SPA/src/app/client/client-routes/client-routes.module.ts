@@ -6,7 +6,9 @@ import { HomeComponent } from "../home/home.component";
 import { BusSearchComponent } from "../bus-search/bus-search.component";
 import { BusReservationComponent } from "../bus-reservation/bus-reservation.component";
 import { ContactComponent } from "../contact/contact.component";
-import { AboutComponent } from "../about/about.component";
+import { TicketConfirmationComponent } from "../ticket-confirmation/ticket-confirmation.component";
+import { PaymentConfirmationComponent } from "../payment-confirmation/payment-confirmation.component";
+import { TicketPrintComponent } from "../ticket-print/ticket-print.component";
 
 const routes: Routes = [
   {
@@ -17,8 +19,9 @@ const routes: Routes = [
       { path: "busreservation", component: BusReservationComponent },
       { path: "bookticket", component: BusSearchComponent },
       { path: "contact", component: ContactComponent },
-      
-
+      { path: "ticketconfermation", component: TicketConfirmationComponent },
+      { path: "paymentconfirm", component: PaymentConfirmationComponent },
+      { path: "print", component: TicketPrintComponent }
     ]
   }
 ];

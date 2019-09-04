@@ -16,5 +16,13 @@ namespace BusTicket.API.Persistence.Repositories
         {
         }
         public BusTicketContext BusTicketContext => Context as BusTicketContext;
+
+
+
+        public Object GetTotalVendor()
+        {
+            var data = BusTicketContext.Vendors.GroupBy(g => g.VendorID).Count();
+            return new { totalVendor = data };
+        }
     }
 }

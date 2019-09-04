@@ -11,8 +11,14 @@ namespace BusTicket.WebAPI.Core.Domain
         [Key]
         public int BusRsrvCnclID { get; set; }
         public int InvoiceID { get; set; }
+
+        [Required]
         public string Comment { get; set; }
+
+        [Required]
         public string NoOfBus { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }
     }
 }

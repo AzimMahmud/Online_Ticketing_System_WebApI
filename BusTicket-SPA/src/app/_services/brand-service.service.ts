@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { map } from "rxjs/operators";
+import { IBrand } from "../models/IBrand";
 
 @Injectable({
   providedIn: "root"
@@ -17,24 +18,37 @@ export class BrandService {
       .get(this.baseUrl + "/api/Brand")
       .pipe(map(res => res.json()));
   }
-  getBrandById(id) {
-    this.http
+
+  getArchiveBrands() {
+    return this.http
+      .get(this.baseUrl + "/api/Brand/GetArchive")
+      .pipe(map(res => res.json()));
+  }
+
+  getBrandById(id: number) {
+    return this.http
       .get(this.baseUrl + "/api/Brand/" + id)
       .pipe(map(res => res.json()));
   }
 
-  createBrand(formData) {
-    this.http
+  createBrand(formData: any) {
+    return this.http
       .post(this.baseUrl + "/api/Brand", formData)
       .pipe(map(res => res.json()));
   }
-  updateBrand(formData) {
-    this.http
+  updateBrand(id: number, formData: IBrand) {
+    formData.brandId = id;
+    return this.http
       .put(this.baseUrl + "/api/Brand", formData)
       .pipe(map(res => res.json()));
   }
+  softDelete(brandID: number) {
+    return this.http
+      .put(this.baseUrl + "/api/Brand/BrandDelete/" + brandID, null)
+      .pipe(map(res => res.json()));
+  }
   deleteBrand(id) {
-    this.http
+    return this.http
       .delete(this.baseUrl + "/api/Brand/" + id)
       .pipe(map(res => res.json()));
   }

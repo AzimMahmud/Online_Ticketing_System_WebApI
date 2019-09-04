@@ -42,7 +42,7 @@ namespace BusTicket.WebAPI.Models
         public virtual DbSet<VendorPayment> VendorPayments { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<TicketReservation> TicketReservations { get; set; }
-        public virtual DbSet<RouteDetails> RouteDetails { get; set; }
+        public virtual DbSet<RouteDetail> RouteDetails { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<TicketReturn> TicketReturns { get; set; }
       

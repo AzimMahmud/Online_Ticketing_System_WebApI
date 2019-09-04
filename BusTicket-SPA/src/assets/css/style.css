@@ -1037,8 +1037,6 @@ div.radio input 						{opacity: 0;filter: alpha(opacity=0);-moz-opacity: 0;borde
 }
 
 
-
-
 /* 27. For image style in We Accept =========================================*/
 .weAccept{width: 250px; height: 100px; padding-right: 100px}
 .btn-purchaseTicket{
@@ -1093,3 +1091,29 @@ div.radio input 						{opacity: 0;filter: alpha(opacity=0);-moz-opacity: 0;borde
 .btnSubmit:hover{background-color: #cc2262}
 
 .custom-m-t {margin-top: 100px;}
+
+/* use in bus-search.component */
+.tSearchHeader{display: -webkit-box;display: flex;flex-wrap: wrap;margin-right: -10px;margin-left: -10px;margin-top: 40px;margin-bottom: 40px;}
+.tSearchHeaderBorder{margin-top: 400px;float: left;width: 100%;color: #fff;font-size: 15px;text-transform: uppercase;padding: 10px;margin: 0 0 0 0;border-radius: 10px;background-color:#cc2262;}
+.tSearchBottomMargin{margin-bottom: 10px;}
+.departureBtn{padding: 2px;background-color: #cc2262;color: white;margin: 2px;}
+
+.btnSearch{background-color: white; color: black; }	
+.btnSearch:hover{background-color: black !important;color: white}
+
+.btnSelect{background-color: #343A40; color: white; margin-top: 10px;}
+.btnSelect:hover{background-color:#cc2262; }
+
+.boder-color-dark{border-color: #000 !important;}
+
+/* use in contact.component */
+.btnSubmit{background-color: black; color: white; }
+.btnSubmit:hover{background-color: #cc2262;}
+
+.custom-m-t {margin-top: 100px;}
+
+/* use in ticketconfermation.component */
+.promoOffer{color: #1A0DAB;}
+.promoOffer{color: black;}
+
+.paymentTypeTab{margin: 0px; padding: 30px;text-align: center; background-color: #D3D3D3;}

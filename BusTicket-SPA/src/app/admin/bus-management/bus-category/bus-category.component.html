@@ -9,44 +9,80 @@
           </div>
           <div class="col-md-12 clearfix">
             <div class="button-box m-t-20 m-b-20 pull-right">
-              <button type="button" class="btn btn-primary" (click)="openModal(categoryModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+              <button type="button" class="btn btn-primary" (click)="addStart(busCategoryModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table id="categoryTable" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Bus Category ID</th>
-                    <th>Name</th>
-                    <th>Is Active</th>
-                    <th class="text-nowrap">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>                      
-                    </td>
-                  </tr>
-
-
-                  <tr>
-                    <td>Donna Snider</td>
-                    <td>Customer Support</td>
-                    <td>New York</td>
-                    <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>                      
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-left">
+              <button type="button" class="btn btn-primary" (click)="loadArchivedData()">
+                <i class="fa fa-plus-circle"></i>&nbsp;Archive Data
+              </button>
             </div>
+          </div>
+          <div class=" col-md-12">
+            <ng-template #nodata>
+              <h3 class="row offset-1">There is no data to show</h3>
+            </ng-template>
+            <div class="table-responsive"
+                 *ngIf="(allBusCategory | async)?.length > 0; else nodata">
+              <div class="col-sm-12 col-md-12">
+
+                <div class="dataTables_length" id="myTable_length">
+                  <label>
+                    Show <select name="myTable_length" [(ngModel)]="row"
+                                 aria-controls="myTable" class="form-control form-control-sm">
+                      <option value="1">1</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                    </select> entries
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div id="myTable_filter" class="dataTables_filter">
+                  <label>
+                    Search:<input type="search" [(ngModel)]="search"
+                                  class="form-control form-control-sm" placeholder="" aria-controls="myTable">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <table class="table table-bordered table-striped dataTable no-footer"
+                   role="grid"
+                   aria-describedby="myTable_info">
+              <thead>
+                <tr>
+                  <th class="sorting">Bus Category ID</th>
+                  <th class="sorting" (click)="sort('name')">Name</th>
+                   <th>Is Actice</th> 
+                  <th class="text-nowrap sorting">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of allBusCategory | async | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: row, currentPage: p };let i=index; ">
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.isActive }}</td>
+
+                  <td class="text-nowrap">
+                    <a href="javascript:void(0)"
+                       tooltip="Edit"
+                       (click)="editStart(busCategoryModal, item.busCategoryID)">
+                      <i class="fa fa-pencil text-inverse m-r-10"></i>
+                    </a>
+                    <a href="javascript:void(0)"
+                       tooltip="Delete"
+                       (click)="deleteStart(deleteConfirmation, item.busCategoryID)">
+                      <i class="fa fa-trash-o text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event" maxSize="2" directionLinks="true"></pagination-controls>
           </div>
         </div>
       </div>
@@ -56,26 +92,26 @@
 
 <!--This Is Modal Template-->
 
-<ng-template #categoryModal>
+<ng-template #busCategoryModal>
   <div class="modal-header bg-info">
     <h4 class="modal-title text-white">Create Bus Category</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form class="form-horizontal form-bordered">
+  <form class="form-horizontal form-bordered" [formGroup]="busCategoryForm" (ngSubmit)="submit()">
     <div class="modal-body">
       <div class="form-body">
         <div class="form-group row">
           <label for="name" class="control-label text-right col-md-3 label-input">Name</label>
           <div class="col-md-8">
-            <input id="name" type="text" placeholder="Brand Name" class="form-control">
+            <input id="name" type="text" placeholder="Category Name" class="form-control" formControlName="name">
           </div>
         </div>
         <div class="form-group row">
           <div class="offset-sm-3 col-sm-9">
             <div class="checkbox checkbox-success">
-              <input id="activeCheckbox" type="checkbox">
+              <input id="activeCheckbox" type="checkbox" formControlName="isActive">
               <label for="activeCheckbox" class="form-check-lebel">IsActive?</label>
             </div>
           </div>
@@ -84,7 +120,7 @@
 
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="submit" class="btn btn-info" id="btnSubmit"> <i class="fa fa-check"></i> {{ btnText }}</button>
       <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
     </div>
   </form>
@@ -96,7 +132,17 @@
 <ng-template #deleteConfirmation>
   <div class="modal-body text-center">
     <p>Do you want to confirm?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
-    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">
+      Yes
+    </button>
+    <button type="button" class="btn btn-primary" (click)="decline()">
+      No
+    </button>
   </div>
 </ng-template>
+
+
+
+
+
+

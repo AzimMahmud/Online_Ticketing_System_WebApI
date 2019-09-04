@@ -1,0 +1,264 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Ticket Confirmation</h4>
+          </div>
+
+          <div class="col-md-12">
+            <form action="#" class="form-horizontal form-bordered">
+              <div class="modal-body" style=" max-height: calc(100% - 120px);">
+                <div class="form-body">
+                  <h4>Journey Details</h4>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="control-label">Journey Date</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="John doe" readonly>
+
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+                      <div class="form-group ">
+                        <label class="control-label">Board Point</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="12n" readonly>
+                      </div>
+                    </div>
+                    <!--/span-->
+
+                    <div class="col-md-4">
+                      <div class="form-group ">
+                        <label class="control-label">Drop Point</label>
+                        <input type="text" id="lastName" class="form-control " placeholder="12n" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="control-label">Brand</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="John doe" readonly>
+
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-4">
+                      <div class="form-group ">
+                        <label class="control-label">Seat No.</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="12n" readonly>
+                      </div>
+                    </div>
+                    <!--/span-->
+
+                    <div class="col-md-4">
+                      <div class="form-group ">
+                        <label class="control-label">Journey Time</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="12n" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <h4>Personal Details</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="John doe">
+
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                      <div class="form-group ">
+                        <label class="control-label">Phone Number</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="12n">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="John doe">
+
+                      </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                      <div class="form-group  m-t-30 ">                       
+
+                          <label for="gender" class="control-label p-r-30">Gender</label>
+
+                          <input id="gender" type="radio" name="gender" class="p-r-40">Male
+                          <input id="gender" type="radio" name="gender" class="p-r-40">Female
+                        </div>
+                      </div>
+                    </div>
+
+                  <hr />
+                  <h4 style="text-align:right">Fare Details</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+
+                    </div>                   
+                   
+                    <div class="col-md-6">
+                      <label for="price"  class="col-sm-4">Ticket Price</label>                      
+                       <input  type="number" class="form-control col-sm-8" id="price" placeholder="Price" readonly>
+                      
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="charge" class="col-sm-4">Charge</label>
+                      <input type="number" class="form-control col-sm-8" id="price" placeholder="Charge" readonly>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="discount" class="col-sm-4">Discount</label>
+                      <input type="number" class="form-control col-sm-8" id="price" placeholder="Discount" readonly>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="total" class="col-sm-4">Total Amount</label>
+                      <input type="number" class="form-control col-sm-8" id="total" placeholder="Total" readonly>
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-info" value="Send">  Submit </button>
+                <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+              </div>
+            </form>
+
+
+
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--<div class="col-12 m-t-40">
+                      <h4 class="card-title">Bookmarked ribbons</h4>
+                      <h6 class="card-subtitle m-b-20">Add class: <code>.ribbon-bookmark</code> right after the <code>.ribbon</code> class.  </h6>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                          <div class="ribbon-wrapper card">
+                            <div class="ribbon ribbon-bookmark  ribbon-default">Ribbon</div>
+                            <p class="ribbon-content">Duis mollis, est non commodo luctus, nisi erat porttitor ligula</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                          <div class="ribbon-wrapper-reverse card">
+                            <div class="ribbon ribbon-bookmark ribbon-right ribbon-danger">Ribbon</div>
+                            <p class="ribbon-content">Duis mollis, est non commodo luctus, nisi erat porttitor ligula</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                          <div class="ribbon-vwrapper p-b-40 p-t-30 card">
+                            <div class="ribbon ribbon-bookmark ribbon-vertical-l ribbon-info"><i class="fa fa-heart"></i></div>
+                            <p class="ribbon-content">Duis mollis, est non commodo luctus, nisi erat porttitor ligula</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                          <div class="ribbon-wrapper-reverse card">
+                            <div class="ribbon ribbon-bookmark ribbon-vertical-r ribbon-success"><i class="fa fa-heart"></i></div>
+                            <p class="ribbon-content">Duis mollis, est non commodo luctus, nisi erat porttitor ligula</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>-->
+<!--<div class="control">
+  <label class="radio">
+    <input type="radio" name="answer">
+    Yes
+  </label>
+  <label class="radio">
+    <input type="radio" name="answer">
+    No
+  </label>
+</div>-->
+<!--<form class="form-horizontal">
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Username*</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Username">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Email*</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Website</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Website">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-3 text-right control-label col-form-label">Password*</label>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword4" class="col-sm-3 text-right control-label col-form-label">Re Password*</label>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Retype Password">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-3 col-sm-9">
+      <div class="checkbox checkbox-success">
+        <input id="checkbox33" type="checkbox">
+        <label for="checkbox33">Check me out !</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group m-b-0">
+    <div class="offset-sm-3 col-sm-9">
+      <button type="submit" class="btn btn-info waves-effect waves-light m-t-10">Sign in</button>
+    </div>
+  </div>
+</form>-->

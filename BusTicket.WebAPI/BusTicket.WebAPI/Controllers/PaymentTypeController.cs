@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BusTicket.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class PaymentTypeController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,12 +24,14 @@ namespace BusTicket.WebAPI.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetPaymentTypes()
         {
-            var paymentTypes = await _unitOfWork.PaymentType.GetAll();
-            return Ok(paymentTypes);
+            var paymentType = await _unitOfWork.PaymentType.GetAll();
+            return Ok(paymentType);
+           
         }
 
+
         // GET: api/PaymentType/5
-        [HttpGet]
+        [HttpGet, Route("{id}")]
         public async Task<IHttpActionResult> GetPaymentType(int id)
         {
             var paymentType = await _unitOfWork.PaymentType.Get(id);
@@ -45,28 +48,31 @@ namespace BusTicket.WebAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> PostPaymentType(PaymentType paymentType)
         {
-            if (paymentType == null) return BadRequest();
+
             _unitOfWork.PaymentType.Add(paymentType);
             await _unitOfWork.Complete();
             return Ok(paymentType);
         }
 
-        // PUT: api/PaymentType/5
-        [HttpPut]
+        // PUT: api/BusCategory/5
+        [HttpPut, Route("{id}")]
         public async Task<IHttpActionResult> PutPaymentType(PaymentType paymentType)
         {
-            if (paymentType == null) return BadRequest();
             _unitOfWork.PaymentType.Update(paymentType);
             await _unitOfWork.Complete();
             return Ok(paymentType);
         }
 
-        // DELETE: api/PaymentType/5
-        [HttpDelete]
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete,Route("{id}")]
         public async Task<IHttpActionResult> DeletePaymentType(int id)
         {
             var paymentType = await _unitOfWork.PaymentType.Get(id);
-            if (paymentType == null) return BadRequest();
+
+            if (paymentType == null)
+            {
+                return BadRequest();
+            }
             _unitOfWork.PaymentType.Remove(paymentType);
             await _unitOfWork.Complete();
             return Ok(paymentType);

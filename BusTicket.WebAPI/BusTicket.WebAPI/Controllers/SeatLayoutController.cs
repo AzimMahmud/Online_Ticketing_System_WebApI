@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BusTicket.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class SeatLayoutController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,10 +26,11 @@ namespace BusTicket.WebAPI.Controllers
         {
             var seatLayouts = await _unitOfWork.SeatLayout.GetAll();
             return Ok(seatLayouts);
+
         }
 
         // GET: api/SeatLayout/5
-        [HttpGet]
+        [HttpGet, Route("{id}")]
         public async Task<IHttpActionResult> GetSeatLayout(int id)
         {
             var seatLayout = await _unitOfWork.SeatLayout.Get(id);
@@ -41,6 +43,7 @@ namespace BusTicket.WebAPI.Controllers
             return Ok(seatLayout);
         }
 
+
         // POST: api/SeatLayout
         [HttpPost]
         public async Task<IHttpActionResult> PostSeatLayout(SeatLayout seatLayout)
@@ -50,6 +53,8 @@ namespace BusTicket.WebAPI.Controllers
             await _unitOfWork.Complete();
             return Ok(seatLayout);
         }
+
+
 
         // PUT: api/SeatLayout/5
         [HttpPut]
@@ -62,7 +67,7 @@ namespace BusTicket.WebAPI.Controllers
         }
 
         // DELETE: api/SeatLayout/5
-        [HttpDelete]
+        [HttpDelete,Route("{id}")]
         public async Task<IHttpActionResult> DeleteSeatLayout(int id)
         {
             var seatLayout = await _unitOfWork.SeatLayout.Get(id);

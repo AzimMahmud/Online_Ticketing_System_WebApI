@@ -4,4 +4,5 @@ export interface IBusDetails {
   brandID: any;
   busCategoryID: any;
   vendorID: any;
+  isActive: boolean;
 }

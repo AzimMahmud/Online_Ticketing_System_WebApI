@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormControl } from "@angular/forms";
 import { BsDatepickerConfig } from "ngx-bootstrap/datepicker";
 
-import { Cities } from "src/app/_shared/Cities";
+import { CityList, HomeCity } from "src/app/_shared/Cities";
+import { Observable } from "rxjs";
+import { startWith, map } from "rxjs/operators";
 
 @Component({
   templateUrl: "./home.component.html",
@@ -11,8 +13,9 @@ import { Cities } from "src/app/_shared/Cities";
 })
 export class HomeComponent implements OnInit {
   isCollapsed = false;
-  private city = new Cities();
-  cities = this.city.cities;
+  private cityList = new HomeCity();
+  cities = this.cityList.cities;
+
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
@@ -23,7 +26,11 @@ export class HomeComponent implements OnInit {
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    localStorage.removeItem("routeDetails");
+    localStorage.removeItem("journey");
+    localStorage.removeItem("ticketReservationData");
+  }
 
   searchBus(form?: NgForm) {
     console.log(form);
@@ -31,6 +38,7 @@ export class HomeComponent implements OnInit {
     let destination = form.value.dropPoint;
     let date = form.value.departDate;
     let datevalue = new Date(date).toLocaleDateString();
+
     this.router.navigate(["client/bookticket"], {
       queryParams: {
         bPoint: leaving_form,

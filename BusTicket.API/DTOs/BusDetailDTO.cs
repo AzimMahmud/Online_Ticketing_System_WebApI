@@ -12,5 +12,6 @@ namespace BusTicket.API.DTOs
         public int BrandID { get; set; }
         public int BusCategoryID { get; set; }
         public int VendorID { get; set; }
+        public bool IsActive { get; set; }
     }
 }

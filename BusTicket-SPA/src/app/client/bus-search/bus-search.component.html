@@ -5,12 +5,16 @@
         <div class="col-md-6 clearfix-client ">
           <span class="oneway float-left"></span>
           <p id="search_list_title" class="float-left ">
-            Chittagong - Dhaka on 08-August, 2019
+            {{ boardPoint }} - {{ dropPoint }} on {{ journeyDate }}
           </p>
         </div>
       </div>
 
-      <div class="pt-10 m-b-30 col-md-12  tSearchHeaderBorder" id="booking" >
+      <div
+        class="pt-10 m-b-30 col-md-12  tSearchHeaderBorder"
+        id="modifySearchForm"
+        [collapse]="isCollapsed"
+      >
         <form
           (ngSubmit)="searchBus(f)"
           ngNativeValidate
@@ -24,9 +28,9 @@
               <input
                 type="text"
                 class="form-control "
-                placeholder="2017-06-04"
-                id="mdate"
-                ngModel
+                placeholder="mm-dd-yyyy"
+                bsDatepicker
+                [(ngModel)]="model.departDate"
                 name="departDate"
               />
             </div>
@@ -34,36 +38,27 @@
               <div class="form-group">
                 <label class="m-t-20 float-left">From</label>
 
-                <select
-                  required
-                  ngModel
-                  name="pickLocation"
-                  class="form-control custom-select"
-                >
-                  <option selected value="">Select Place</option>
-                  <option value="CTH">Chittagong</option>
-                  <option value="DHK">Dhaka</option>
-                  <option value="KHU">Khulna</option>
-                  <option value="RAJ">Rajshahi</option>
-                </select>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="picup place"
+                  [typeahead]="cities"
+                  [(ngModel)]="model.picupPoint"
+                  name="picupPoint"
+                />
               </div>
             </div>
             <div class="col-md-3 float-left">
               <div class="form-group">
                 <label class="m-t-20 float-left">To</label>
-                <select
-                  required
-                  ngModel
-                  [value]
-                  name="dropLocation"
-                  class="form-control custom-select"
-                >
-                  <option selected value="">Select Place</option>
-                  <option value="CTH">Chittagong</option>
-                  <option value="DHK">Dhaka</option>
-                  <option value="KHU">Khulna</option>
-                  <option value="RAJ">Rajshahi</option>
-                </select>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="drop place"
+                  [typeahead]="cities"
+                  [(ngModel)]="model.dropPoint"
+                  name="dropPoint"
+                />
               </div>
             </div>
             <div class="col-md-3  float-left">
@@ -72,105 +67,155 @@
               <button
                 type="submit"
                 [disabled]="!f.valid"
-                class="btn btn-block  "
+                class="btn btn-block"
                 id="btn-search"
-                
               >
                 Search
               </button>
             </div>
           </div>
-          <div>
-
-          </div>
+          <div></div>
           <!--// Row -->
         </form>
       </div>
+
       <div class="col-md-12 content">
         <h2 class="text-left">Departure</h2>
 
         <div class="row tSearchBottomMargin">
           <div class="col-md-6">
-            <button class="col-md-3 departureBtn btn btn-praimay"><i class="fa fa-angle-left"></i> Prev Day</button>
-            <button class="col-md-3 departureBtn btn btn-praimay">Next Day <i class="fa fa-angle-right"></i></button>
-            <button class="col-md-4 departureBtn btn btn-praimay" >Modify Search <i class="fa fa-search"></i></button>
+            <!-- <button class="col-md-3 departureBtn btn btn-praimay">
+              <i class="fa fa-angle-left"></i> Prev Day
+            </button> -->
+            <!-- <button class="col-md-3 departureBtn btn btn-praimay">
+              Next Day <i class="fa fa-angle-right"></i>
+            </button> -->
+            <button
+              class="col-md-4 departureBtn btn btn-praimay"
+              (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed"
+              aria-controls="modifySearchForm"
+            >
+              Modify Search <i class="fa fa-search"></i>
+            </button>
             <div class="col-md-2"></div>
           </div>
           <div class="col-md-6">
-            <div class="col-md-2 float-left "><label class="float-left">Filter by:</label></div>
-            <div class="col-md-5 float-left" >       
-              <select required ngModel name="pickLocation"  class="form-control" tabindex="1" class="form-control boder-color-dark">
-                  <option selected value="">Operator</option>
-                  <option value="CTH">Chittagong</option>
-                  <option value="DHK">Dhaka</option>
-                  <option value="KHU">Khulna</option>
-                  <option value="RAJ">Rajshahi</option>
-  
-                </select>
+            <div class="col-md-2 float-left ">
+              <!-- <label class="float-left">Filter by:</label> -->
+            </div>
+            <div class="col-md-5 float-left">
+              <!-- <select required ngModel name="pickLocation" class="form-control" tabindex="1"
+                class="form-control boder-color-dark">
+                <option selected value="">Operator</option>
+                <option value="CTH">Chittagong</option>
+                <option value="DHK">Dhaka</option>
+                <option value="KHU">Khulna</option>
+                <option value="RAJ">Rajshahi</option>
+              </select> -->
             </div>
             <div class="col-md-5 float-left ">
-              <select required ngModel name="dropLocation" class="form-control" tabindex="2" class="form-control boder-color-dark">
+              <!-- <select required ngModel name="dropLocation" class="form-control" tabindex="2"
+                class="form-control boder-color-dark">
                 <option selected value="">Bus Type</option>
                 <option value="CTH">Chittagong</option>
                 <option value="DHK">Dhaka</option>
                 <option value="KHU">Khulna</option>
                 <option value="RAJ">Rajshahi</option>
-              </select>
+              </select> -->
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="table-responsive">
-          <table class="table borderless color-table dark-table">
-            <thead class="text-capitalize">
-              <tr class="center">
-                <th>Operator Details</th>
-                <th>Dep. Time</th>
-                <th>Arr. Time</th>
-                <th>Seats Available</th>
-                <th>Fare</th>
-              </tr>
-            </thead>
-            <tbody class="center text-capitalize">
-              <tr *ngFor="let data of rotDetails.details">
-                <td>
-                  <p class="float-left text-left">
-                    <b>{{ data.vendorName }}</b> <br />
-                    <span>{{ data.brand }}</span
-                    ><br />
-                    <span>{{ data.boardPoint }} to {{ data.dropPoint }}</span>
-                  </p>
-                </td>
-                <td>{{ data.boardTime }}</td>
-                <td>{{ data.dropTime }}</td>
-                <td>
-                  {{
-                    seatAvailableCheck(data.routeID) != null
-                      ? seatAvailableCheck(data.routeID)
-                      : 42
-                  }}
-                </td>
-                <td>
-                  <span class="fare float-right">৳ {{ data.fare }}</span>
-                  <div class="clearfix-client"></div>
-                  <div class="float-right">
-                    <a routerLink="/ticketBookStep1" class="btn grey "
-                      >select</a
+      <div class="table-responsive">
+        <table
+          class="table table-bordered table-striped dataTable no-footer dark-table"
+          role="grid"
+          aria-describedby="myTable_info"
+        >
+          <thead>
+            <tr>
+              <th class="sorting">
+                <a href="javascript:void(0)" (click)="sort('vendorName')"
+                  >Operator Details</a
+                >
+              </th>
+              <th class="sorting">
+                <a href="javascript:void(0)" (click)="sort('boardTime')"
+                  >Dep. Time</a
+                >
+              </th>
+              <th class="sorting">
+                <a href="javascript:void(0)" (click)="sort('dropTime')"
+                  >Arr. Time</a
+                >
+              </th>
+              <th class="sorting">Seats Available</th>
+              <th class="sorting">
+                <a href="javascript:void(0)" (click)="sort('fare')">Fare</a>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody
+            *ngFor="
+              let data of rotDetails.details | orderBy: key:reverse;
+              let i = index
+            "
+          >
+            <tr>
+              <td>
+                <p class="float-left text-left">
+                  <b>{{ data.vendorName }}</b> <br />
+                  <span>{{ data.brand }}</span
+                  ><br />
+                  <span>{{ data.boardPoint }} to {{ data.dropPoint }}</span>
+                </p>
+              </td>
+              <td>{{ data.boardTime }}</td>
+              <td>{{ data.dropTime }}</td>
+              <td>
+                {{
+                  seatAvailableCheck(data.routeDetailID) != null
+                    ? seatAvailableCheck(data.routeDetailID)
+                    : 36
+                }}
+              </td>
+              <td>
+                <ng-template #template>
+                  <div class="modal-body">
+                    <button
+                      type="button"
+                      class="close pull-right"
+                      aria-label="Close"
+                      (click)="modalRef.hide()"
                     >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <bus-layout
+                      [bus]="data"
+                      (closeModal)="closeModal()"
+                    ></bus-layout>
                   </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                </ng-template>
+
+                <p class="fare text-right col-md-12">৳ {{ data.fare }}</p>
+
+                <div class="float-right col-md-12 text-right">
+                  <button
+                    class="btn grey btnSelect "
+                    style="color: white !important;"
+                    (click)="loadSeatLayout(template, data.routeDetailID)"
+                  >
+                    View Seats
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </main>
-<div
-  id="ui-datepicker-div"
-  class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"
-></div>
-<script>
-  $("#mdate").bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-</script>

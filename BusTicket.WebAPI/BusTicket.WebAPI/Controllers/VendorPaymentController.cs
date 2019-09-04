@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BusTicket.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class VendorPaymentController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,10 +26,11 @@ namespace BusTicket.WebAPI.Controllers
         {
             var vendorPayments = await _unitOfWork.VendorPayment.GetAll();
             return Ok(vendorPayments);
+            return Ok();
         }
 
         // GET: api/VendorPayment/5
-        [HttpGet]
+        [HttpGet,Route("{id}")]
         public async Task<IHttpActionResult> GetVendorPayment(int id)
         {
             var vendorPayment = await _unitOfWork.VendorPayment.Get(id);
@@ -51,6 +53,7 @@ namespace BusTicket.WebAPI.Controllers
             return Ok(vendorPayment);
         }
 
+
         // PUT: api/VendorPayment/5
         [HttpPut]
         public async Task<IHttpActionResult> PutVendorPayment(VendorPayment vendorPayment)
@@ -62,7 +65,7 @@ namespace BusTicket.WebAPI.Controllers
         }
 
         // DELETE: api/VendorPayment/5
-        [HttpDelete]
+        [HttpDelete,Route("{id}")]
         public async Task<IHttpActionResult> DeleteVendorPayment(int id)
         {
             var vendorPayment = await _unitOfWork.VendorPayment.Get(id);

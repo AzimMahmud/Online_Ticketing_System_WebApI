@@ -11,9 +11,18 @@ namespace BusTicket.WebAPI.Core.Domain
         [Key]
         public int VendorPaymentID { get; set; }
         public int VendorID { get; set; }
+
+        [Required]
         public decimal TotalAmount { get; set; }
+
+        [Required]
         public string PaymentDescription { get; set; }
+
+        [Required]
         public string PaymentMethod { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public DateTime PaymentDate { get; set; }
 
         public Vendor Vendor { get; set; }

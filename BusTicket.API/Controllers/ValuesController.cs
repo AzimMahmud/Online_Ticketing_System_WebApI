@@ -9,30 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
-        public ValuesController(UserManager<ApplicationUser> userManager)
+
+        public ValuesController()
         {
-            _userManager = userManager;
+
         }
 
-        [HttpGet]
-        [Authorize]
-        //GET : /api/UserProfile
-        public async Task<Object> GetUserProfile()
-        {
-            string userId = User.Claims.First(c => c.Type == "UserID").Value;
-            var user = await _userManager.FindByIdAsync(userId);
-            return new
-            {
-                user.Email,
-                user.UserName,
-                user.IsActive
-            };
-        }
+
 
         [HttpGet]
         [Authorize(Roles = "Admin")]

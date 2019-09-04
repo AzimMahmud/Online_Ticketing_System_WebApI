@@ -28,6 +28,8 @@ namespace BusTicket.API.Persistence
             SeatLayout = new SeatLayoutRepository(_context);
             TicketReservation = new TicketReservationRepository(_context);
             VendorPayment = new VendorPaymentRepository(_context);
+            Payment = new PaymentRepository(_context);
+
 
         }
 
@@ -42,6 +44,7 @@ namespace BusTicket.API.Persistence
         public ISeatLayout SeatLayout { get; set; }
         public ITicketReservation TicketReservation { get; set; }
         public IVendorPayment VendorPayment { get; set; }
+        public IPayment Payment { get; set; }
 
 
         public async Task<int> Complete()

@@ -19,33 +19,125 @@ namespace BusTicket.API.Persistence.Repositories
 {
     public class BusDetailRepository : Repository<BusDetail>, IBusDetails
     {
-        
+
         public BusDetailRepository(BusTicketContext context)
             : base(context)
         {
         }
 
-        public IEnumerable<BusDetail> GetBusDetailWithVendor()
+        public async Task<IEnumerable<object>> GetALLDetailsWithVendorCategoryBrand(int busDetailsid)
         {
-            return BusTicketContext.BusDetails.Include(b => b.Vendor).ToList();
+            return await BusTicketContext.BusDetails
+                .Join(BusTicketContext.Vendors, b => b.VendorID, br => br.VendorID, (b, br) => new
+                {
+                    b,
+                    BusDetailID = b.BusDetailID,
+                    VendorID = br.VendorID,
+                    Vendor = br.VendorName
+                }).Join(BusTicketContext.Brands, b => b.b.BrandID, br => br.BrandID, (b, br) => new
+                {
+                    b,
+                    BusDetailID = b.BusDetailID,
+                    VendorID = b.VendorID,
+                    Vendor = b.Vendor,
+                    BrandID = br.BrandID,
+                    Brand = br.Name
+                })
+                .Join(BusTicketContext.BusCategories, b => b.b.b.BusCategoryID, br => br.BusCategoryID, (b, br) => new
+                {
+                    BusDetailID = b.BusDetailID,
+                    VendorID = b.VendorID,
+                    Vendor = b.Vendor,
+                    BrandID = b.BrandID,
+                    Brand = b.Brand,
+                    CategoryID = br.BusCategoryID,
+                    Category = br.Name
+                }).Where(id => id.BusDetailID == busDetailsid)
+                .ToListAsync();
         }
 
- 
-        public IEnumerable<BusDetail> GetBusDetailWithBrand()
+
+        public async Task<IEnumerable<object>> GetBusDetailWithBrand()
         {
-            return BusTicketContext.BusDetails
-                .Include(b => b.Brand)
-                .ToList();
+            return await BusTicketContext.BusDetails
+                .Join(BusTicketContext.Brands, b => b.BrandID, br => br.BrandID, (b, br) => new
+                {
+                    BrandID = br.BrandID,
+                    Brand = br.Name
+                }).Distinct()
+                .ToListAsync();
         }
 
-        public IEnumerable<BusDetail> GetBusDetailWithCategory()
+        public async Task<IEnumerable<object>> GetBusDetailWithVendor()
         {
-            return BusTicketContext.BusDetails
-                .Include(b => b.BusCategory)
-                .ToList();
+            return await BusTicketContext.BusDetails
+                .Join(BusTicketContext.Vendors, b => b.VendorID, br => br.VendorID, (b, br) => new
+                {
+                    VendorID = br.VendorID,
+                    Vendor = br.VendorName
+                }).Distinct()
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<object>> GetBusDetailWithCategory()
+        {
+            return await BusTicketContext.BusDetails
+                .Join(BusTicketContext.BusCategories, b => b.BusCategoryID, br => br.BusCategoryID, (b, br) => new
+                {
+                    BusCategoryID = br.BusCategoryID,
+                    BusCategory = br.Name
+                }).Distinct()
+                .ToListAsync();
         }
 
-        public BusTicketContext  BusTicketContext 
+        public async Task<IEnumerable<Object>> GetBusInfo()
+        {
+            var data = await BusTicketContext.BusDetails.Join(BusTicketContext.Brands, r => r.BrandID, b => b.BrandID, (bs, br) => new
+            {
+                BusDetailID = bs.BusDetailID,
+                BrandName = br.Name,
+                IsActive = bs.IsActive
+            }).Join(BusTicketContext.BusCategories, b => b.BusDetailID, bc => bc.BusCategoryID, (b, bc) => new
+            {
+                BusDetailID = b.BusDetailID,
+                BrandName = b.BrandName,
+                Catetory = bc.Name,
+                IsActive = b.IsActive
+            }).Join(BusTicketContext.Vendors, b => b.BusDetailID, v => v.VendorID, (b, v) => new
+            {
+                BusDetailID = b.BusDetailID,
+                BrandName = b.BrandName,
+                Catetory = b.Catetory,
+                Vendor = v.VendorName,
+                IsActive = b.IsActive
+            }).Where(i => i.IsActive == true).ToListAsync();
+            return data;
+        }
+
+        public async Task<IEnumerable<Object>> GetArchiveBusInfo()
+        {
+            var data = await BusTicketContext.BusDetails.Join(BusTicketContext.Brands, r => r.BrandID, b => b.BrandID, (bs, br) => new
+            {
+                BusDetailID = bs.BusDetailID,
+                BrandName = br.Name,
+                IsActive = bs.IsActive
+            }).Join(BusTicketContext.BusCategories, b => b.BusDetailID, bc => bc.BusCategoryID, (b, bc) => new
+            {
+                BusDetailID = b.BusDetailID,
+                BrandName = b.BrandName,
+                Catetory = bc.Name,
+                IsActive = b.IsActive
+            }).Join(BusTicketContext.Vendors, b => b.BusDetailID, v => v.VendorID, (b, v) => new
+            {
+                BusDetailID = b.BusDetailID,
+                BrandName = b.BrandName,
+                Catetory = b.Catetory,
+                Vendor = v.VendorName,
+                IsActive = b.IsActive
+            }).Where(i => i.IsActive == false).ToListAsync();
+            return data;
+        }
+
+        public BusTicketContext BusTicketContext
         {
             get { return Context as BusTicketContext; }
         }

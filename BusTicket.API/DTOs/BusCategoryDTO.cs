@@ -9,5 +9,6 @@ namespace BusTicket.API.DTOs
     {
         public int BusCategoryID { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }

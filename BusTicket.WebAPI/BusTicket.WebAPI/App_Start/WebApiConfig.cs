@@ -25,6 +25,7 @@ namespace BusTicket.WebAPI
 
             var container = new UnityContainer();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
+            //container.RegisterType<IMapper, Mapper>();
             config.DependencyResolver = new UnityResolver(container);
 
 

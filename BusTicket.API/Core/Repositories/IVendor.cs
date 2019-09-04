@@ -9,5 +9,6 @@ namespace BusTicket.API.Core.Repositories
 {
     public interface IVendor : IRepository<Vendor>
     {
+        object GetTotalVendor();
     }
 }

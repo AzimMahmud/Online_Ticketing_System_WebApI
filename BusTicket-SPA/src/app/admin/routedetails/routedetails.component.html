@@ -7,169 +7,261 @@
             <h4 class="m-b-0 text-white">Add Routes Details</h4>
           </div>
 
+
           <div class="col-md-12 clearfix">
             <div class="button-box m-t-20 m-b-20 pull-right">
-              <button type="button" class="btn btn-primary" (click)="openModal(routeDetailsModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+              <button type="button" class="btn btn-primary" (click)="addStart(routeDetailsModal)">
+                <i class="fa fa-plus-circle"></i>&nbsp;Add New
+              </button>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table id="routeDetailsTable" class="table table-bordered table-striped">
+
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-left">
+              <button type="button" *ngIf="!buttonLogic.archiveData" class="btn btn-primary" (click)="loadActiveRoute()">
+                <i class="fa fa-plus-circle"></i>&nbsp;Active Data
+              </button>
+              <button type="button" *ngIf="buttonLogic.archiveData" class="btn btn-primary" (click)="loadArchivedData()">
+                <i class="fa fa-plus-circle"></i>&nbsp;Archive Data
+              </button>
+            </div>
+          </div>
+
+          <div class=" row">
+            <ng-template #nodata>
+              <h3 class="row offset-1">There is no data to show</h3>
+            </ng-template>
+            <div class="col-sm-12 col-md-6">
+
+              <div class="dataTables_length" id="myTable_length"><label>Show <select name="myTable_length"
+                    [(ngModel)]="row" aria-controls="myTable" class="form-control form-control-sm">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                  </select> entries</label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div id="myTable_filter" class="dataTables_filter float-right">
+                <label>Search: <input type="search" [(ngModel)]="search" class="form-control form-control-sm "
+                    placeholder="Search" aria-controls="myTable"></label>
+
+              </div>
+            </div>
+            <div class="table-responsive" *ngIf="(allRoute | async)?.length > 0; else nodata">
+
+
+              <table class="table table-bordered table-striped dataTable no-footer" role="grid"
+                aria-describedby="myTable_info">
                 <thead>
                   <tr>
-                    <th>Route Details ID</th>
-                    <th>Price</th>
-                    <th>Board Point</th>
-                    <th>End Point</th>
-                    <th>Board Time</th>
-                    <th>Drop Time</th>
-                    <th>Created By</th>
-                    <th class="text-nowrap">Action</th>
+                    <th class="sorting">ID</th>
+                    <th class="sorting" (click)="sort('boardPoint')">Board Point</th>
+                    <th class="sorting" (click)="sort('boardTime')">Board Time</th>
+                    <th class="sorting" (click)="sort('dropPoint')">Drop Point</th>
+                    <th class="sorting" (click)="sort('dropTime')">Drop Time</th>
+                    <th class="sorting" (click)="sort('fare')">Fare</th>
+                    <th class="sorting">IsActive</th>
+                    <!-- <th>Is Actice</th> -->
+                    <th class="text-nowrap sorting">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody
+                  *ngFor="let item of allRoute | async | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: row, currentPage: p };let i=index; ">
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                    <td>$320,800</td>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.boardPoint }}</td>
+                    <td>{{ item.boardTime }}</td>
+                    <td>{{ item.dropPoint }}</td>
+                    <td>{{ item.dropTime }}</td>
+                    <td>{{ item.fare }}</td>
+                    <td>{{ item.isActive }}</td>
+
                     <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
-
-                      
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Gavin Cortez</td>
-                    <td>Team Leader</td>
-                    <td>San Francisco</td>
-                    <td>22</td>
-                    <td>2008/10/26</td>
-                    <td>$235,500</td>
-                    <td>$235,500</td>
-                    <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
-
-                     
+                      <a href="javascript:void(0)" tooltip="Edit"
+                        (click)="editStart(routeDetailsModal, item.routeDetailID)">
+                        <i class="fa fa-pencil text-inverse m-r-10"></i>
+                      </a>
+                      <a href="javascript:void(0)" tooltip="Delete"
+                        (click)="deleteStart(deleteConfirmation, item.routeDetailID)">
+                        <i class="fa fa-trash-o text-danger"></i>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <pagination-controls (pageChange)="p = $event" maxSize="2" directionLinks="true"></pagination-controls>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!--This Is Modal Template-->
+  <!--This Is Modal Template-->
 
-<ng-template #routeDetailsModal>
-  <div class="modal-header bg-info">
-    <h4 class="modal-title text-white">Route Details</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form action="#" class="form-horizontal form-bordered">
-    <div class="modal-body">
-      <div class="form-body">
-        <div class="row p-l-30 p-r-30">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="selectBus" class="control-label text-right col-md-5 label-input">Select Bus</label>
-              <div class="col-md-7">
-                <select id="selectBus" class="form-control custom-select">
-                  <option value="">Bus 1</option>
-                  <option value="">Bus 2</option>
-                </select>
+  <ng-template #routeDetailsModal>
+    <div class="modal-header bg-info ">
+      <h4 class="modal-title text-white">Route Details</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <form class="form-horizontal form-bordered" [formGroup]="routeForm" (ngSubmit)="submit()">
+
+      <div class="modal-body">
+        <div class="form-body">
+          <div class="row p-l-30 p-r-30">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="selectBus" class="control-label text-right col-md-5 label-input">Select Bus</label>
+                <div class="col-md-7">
+
+
+
+                  <mat-form-field>
+                    <mat-label>Select Bus</mat-label>
+                    <mat-select formControlName="busDetailID">
+                      <mat-option *ngFor="let b of busDetails" [value]="b.busDetailID">
+                        {{b.vendor + ' (' + b.catetory + ' - ' + b.brandName + ')'}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="fare" class="control-label text-right col-md-5 label-input">Fare</label>
+                <div class="col-md-7">
+                    <mat-form-field>
+                      <input matInput placeholder="ex. 100.00" type="number" formControlName="fare">
+                    </mat-form-field>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="fare" class="control-label text-right col-md-5 label-input">Fare</label>
-              <div class="col-md-7">
-                <input id="fare" type="number" min="0" class="form-control" placeholder="Route Fare">
+          <div class="row p-l-30 p-r-30">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="boardPiont" class="control-label text-right col-md-5 label-input">Board Point</label>
+                <div class="col-md-7">
+                 
+
+                <mat-form-field class="example-full-width">
+                  <input type="text" formControlName='boardPoint' placeholder="Select District" aria-label="Number" matInput
+                    [matAutocomplete]="auto" (ngModelChange)="updatedVal($event)">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredBoardOptions | async" [value]="option"
+                      [ngClass]="{'hide-autocomplete': !showAutocomplete}">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                  
+                </mat-form-field>
+
+
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row p-l-30 p-r-30">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="boardPiont" class="control-label text-right col-md-5 label-input">Board Point</label>
-              <div class="col-md-7">
-                <input id="boardPiont" type="text" class="form-control" placeholder="Put the Pick Up Point">
+            <!--/span-->
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="dropPoint" class="control-label text-right col-md-5 label-input">Drop Point</label>
+                <div class="col-md-7">
+                    <mat-form-field class="example-full-width">
+                      <input type="text" formControlName='dropPoint' placeholder="Select District" aria-label="Number" matInput
+                        [matAutocomplete]="auto" (ngModelChange)="updatedVal($event)">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredDropOptions | async" [value]="option"
+                          [ngClass]="{'hide-autocomplete': !showAutocomplete}">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    
+                    </mat-form-field>
+                 
+                </div>
               </div>
             </div>
+            <!--/span-->
           </div>
-          <!--/span-->
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="dropPoint" class="control-label text-right col-md-5 label-input">Drop Point</label>
-              <div class="col-md-7">
-                <input id="dropPoint" type="text" class="form-control" placeholder="Put the Drop Point">
+          <div class="row p-l-30 p-r-30">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="boardTime" class="control-label text-right col-md-5">Board Time</label>
+                <div class="col-md-7">
+
+                  <mat-form-field appearance="fill">
+                    <input matInput placeholder="ex. 21.30" aria-label="Board Time" [ngxTimepicker]="boardTime" [format]="24"
+                      readonly formControlName="boardTime">
+                      <!-- <i class="fa fa-clock-o float-right text-dark"></i> -->
+                    <ngx-material-timepicker #boardTime></ngx-material-timepicker>
+                    
+                    
+                  </mat-form-field>
+
+                
+                    
+                 
+                </div>
               </div>
             </div>
-          </div>
-          <!--/span-->
-        </div>
-        <div class="row p-l-30 p-r-30">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="boardTime" class="control-label text-right col-md-5 label-input-timePicker">Board Time</label>
-              <div class="col-md-7">
-                <timepicker id="boardTime" [showMeridian]="isMeridian" [showSpinners]="showSpinners"></timepicker>
+            <!--/span-->
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="dropTime" class="control-label text-right col-md-5">Drop Time</label>
+                <div class="col-md-7">
+
+                  <mat-form-field appearance="fill">
+                    <input matInput placeholder="ex. 21.30" aria-label="Drop Time" [ngxTimepicker]="dropTime" [format]="24" readonly
+                      formControlName="dropTime">
+                      <!-- <i class="fa fa-clock-o float-right text-dark"></i> -->
+                  <ngx-material-timepicker #dropTime></ngx-material-timepicker>
+                  
+                   
+                  </mat-form-field>
+                 
+                </div>
               </div>
             </div>
+            <!--/span-->
           </div>
-          <!--/span-->
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label for="dropTime" class="control-label text-right col-md-5 label-input-timePicker">Drop Time</label>
-              <div class="col-md-7">
-                <timepicker id="dropTime" [showMeridian]="isMeridian" [showSpinners]="showSpinners"></timepicker>
+          <div class="from-group row p-l-30">
+            <div class="col-md-12">
+              <div class="offset-sm-5 col-sm-6">
+                <div class="checkbox checkbox-success">
+
+                  <mat-checkbox formControlName="isActive">IsActive!</mat-checkbox>
+
+                </div>
               </div>
             </div>
-          </div>
-          <!--/span-->
-        </div>
-        <div class="from-group row p-l-30 p-r-30">
-          <div class="col-md-6">
-            <div class="offset-sm-5 col-sm-7">
-              <div class="checkbox checkbox-success">
-                <input id="activeCheckbox" type="checkbox" />
-                <label for="activeCheckbox" class="form-check-lebel">IsActive?</label>
-              </div>
+            <div class="col-md-6">
             </div>
-          </div>
-          <div class="col-md-6">
           </div>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+        <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+  <!--This is Delete Confirmation Template-->
+
+  <ng-template #deleteConfirmation>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
     </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
-      <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
-    </div>
-  </form>
-</ng-template>
-
-
-<!--This is Delete Confirmation Template-->
-
-<ng-template #deleteConfirmation>
-  <div class="modal-body text-center">
-    <p>Do you want to confirm?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
-    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
-  </div>
-</ng-template>
+  </ng-template>

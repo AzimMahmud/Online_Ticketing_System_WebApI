@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusTicket.API.Core.Domain;
+using BusTicket.API.Helper;
 
 namespace BusTicket.API.DTOs
 {
@@ -11,6 +12,13 @@ namespace BusTicket.API.DTOs
     {
         public MappingProfile()
         {
+
+            CreateMap<User, UserForListDto>();
+            CreateMap<User, UserForDetailedDto>();
+
+            CreateMap<User, UserForRegisterDto>();
+           
+
             CreateMap<BusDetail, BusDetailDTO>();
             CreateMap<BusDetailDTO, BusDetail>();
 
@@ -20,13 +28,14 @@ namespace BusTicket.API.DTOs
             CreateMap<Vendor, VendorDTO>();
             CreateMap<VendorDTO, Vendor>();
 
-            CreateMap<Route, RouteDTO>();
-            CreateMap<RouteDTO, Route>();
+            CreateMap<RouteDetail, RouteDTO>();
+            CreateMap<RouteDTO, RouteDetail>();
 
             CreateMap<Brand, BrandDTO>();
             CreateMap<BrandDTO, Brand>();
 
-
+            CreateMap<Payment, PaymentDTO>();
+            CreateMap<PaymentDTO, Payment>();
 
 
 

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusTicket.API.Core.Repositories
 {
-    public interface ITicketReservation:IRepository<TicketReservation>
+    public interface ITicketReservation : IRepository<TicketReservation>
     {
+        object GetTotalSales();
     }
 }

@@ -1,0 +1,60 @@
+<main class="main-client" role="main">
+  <div class="wrap-client custom-m-t m-b-20 clearfix-client">
+    <div class="col-md-12">
+      <div class="card border-success">
+        <div class="card-header bg-success">
+          <h4 class="m-b-0 text-white p-t-20">Print Your Ticket</h4>
+        </div>
+        <div class="card-body" id="print-section">
+          <table border="0" cellpadding="0" cellspacing="0" id="templateBody">
+            <tbody>
+              <tr>
+                <td valign="top" class="bodyContent">
+                  <p>Dear {{ ticketInfo.passengerName }},</p>
+                  <p>
+                    This is a notice that an invoice has been generated on
+                    {{ printDate }}.
+                  </p>
+                  <p>
+                    Your payment method is: bKash (beta)
+                  </p>
+                  <p>
+                    Invoice #{{ ticketInfo.ticketNo }}<br />
+                    Ticket Price: {{ ticketInfo.payments.paymentAmount }} Taka
+                    <br />
+                    Seat No.: {{ ticketInfo.seatNo }} <br />
+                    Journet Date: {{ routeDetails.journeyDate }} <br />
+                    Journey Time: {{ journeyDetails.bus.bordTime }} <br />
+                    Board Point: {{ journeyDetails.bus.boardPoint }} <br />
+                    Drop Point: {{ journeyDetails.bus.dropPoint }} <br />
+                    Brand: {{ journeyDetails.bus.vendorName }} <br />
+                  </p>
+
+                  <p>
+                    If you have any questions, comments, or concerns, feel free
+                    to contact us directly using this Link
+                    <b>Our Link</b>.<br />
+                    <br /><br /><br /><br />
+
+                    Thank you,<br />
+                    Busticket.Com
+                  </p>
+                  <br /><br />
+                  <br /><br />
+                  <div style="text-align:center">
+                    <!--<button class="btn btn bg-success" (click)="printTKT('PrintDiv')">Print</button>-->
+
+                    <button printSectionId="print-section" ngxPrint>
+                      print
+                    </button>
+                    <button (click)="back()">Back To Home</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

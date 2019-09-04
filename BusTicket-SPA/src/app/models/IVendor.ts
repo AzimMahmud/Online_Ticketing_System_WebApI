@@ -1,7 +1,8 @@
 export interface IVendor {
   vendorID: number;
-  vendorName: string;
-  vendorPhone: string;
-  vendorEmail: string;
-  vendorAddress: string;
+  vendorName: any ;
+  vendorPhone: any ;
+  vendorEmail: any;
+  vendorAddress: any;
+  isActive: boolean;
 }

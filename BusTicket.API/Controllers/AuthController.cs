@@ -15,8 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
-
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -27,78 +26,114 @@ namespace BusTicket.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _singInManager;
+        private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        private readonly ApplicationSettings _appSettings;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings, IMapper mapper)
+        public AuthController(IConfiguration config,
+            IMapper mapper,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
-            _singInManager = signInManager;
+            _signInManager = signInManager;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
+            _config = config;
         }
 
-        [HttpPost]
-        [Route("Register")]
-        //POST : /api/ApplicationUser/Register
-        public async Task<Object> PostApplicationUser(ApplicationUserDTO model)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            var applicationUser = new ApplicationUser()
+            var userToCreate = new User();
+            userToCreate.DateOfBirth = userForRegisterDto.DateOfBirth;
+            userToCreate.Address = userForRegisterDto.Address;
+            userToCreate.Created = userForRegisterDto.Created;
+            userToCreate.Gender = userForRegisterDto.Gender;
+            userToCreate.Status = userForRegisterDto.Status;
+            userToCreate.Email = userForRegisterDto.Email;
+            userToCreate.UserName = userForRegisterDto.UserName;
+
+            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+
+            //var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+
+            if (result.Succeeded)
             {
-                UserName = model.Username,
-                Email = model.Email,
-                DateOfBirth = model.DateOfBirth,
-                JoiningDate = model.JoiningDate,
-                Gender = model.Gender,
-                Address = model.Address,
-                Designation = model.Designation
+                //return CreatedAtRoute("GetUser",
+                //    new { controller = "Users", id = userToCreate.Id }, userToReturn);
+
+                return Ok("success");
+            }
+
+            return BadRequest(result.Errors);
+        }
+       
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        {
+            var user = await _userManager.FindByNameAsync(userForLoginDto.UserName);
+
+            var result = await _signInManager
+                .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+
+            if (result.Succeeded)
+            {
+                var appUser = await _userManager.Users
+                    .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.UserName.ToUpper());
+
+                //var userToReturn = _mapper.Map<UserForListDto>(appUser);
+                User userToReturn = new User();
+                userToReturn.Address = appUser.Address;
+                userToReturn.Id = appUser.Id;
+                userToReturn.UserName = appUser.UserName;
+                userToReturn.Gender = appUser.Gender;
+                userToReturn.DateOfBirth = appUser.DateOfBirth;
+                userToReturn.Created = appUser.Created;
+                userToReturn.Status = appUser.Status;
+
+                return Ok(new
+                {
+                    token = GenerateJwtToken(appUser).Result,
+                    user = userToReturn
+                });
+            }
+
+            return Unauthorized();
+        }
+
+        private async Task<string> GenerateJwtToken(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName)
             };
 
-            try
-            {
-                var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
+            var roles = await _userManager.GetRolesAsync(user);
 
-                throw ex;
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(_config.GetSection("AppSettings:Token").Value));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
-
-
-        [HttpPost]
-        [Route("Login")]
-        //POST : /api/ApplicationUser/Login
-        public async Task<IActionResult> Login(UserLoginDTO model)
-        {
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-                //Get role assigned to the user
-                var role = await _userManager.GetRolesAsync(user);
-                IdentityOptions _options = new IdentityOptions();
-
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim("UserID",user.Id.ToString()),
-                        new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
-            }
-            else
-                return BadRequest(new { message = "Username or password is incorrect." });
-        }
-
     }
 }

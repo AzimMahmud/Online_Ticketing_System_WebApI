@@ -1,5 +1,6 @@
 export interface IPromoOffer {
   promoID: number;
-  promoCode: string;
-  promoDetails: string;
+  promoCode: any;
+  promoDetails: any;
+  isActive: boolean;
 }

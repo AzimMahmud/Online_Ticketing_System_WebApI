@@ -8,57 +8,94 @@
           </div>
           <div class="col-md-12 clearfix">
             <div class="button-box m-t-20 m-b-20 pull-right">
-              <button type="button" class="btn btn-primary" (click)="openModal(vendorModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+              <button type="button"
+                      class="btn btn-primary"
+                      (click)="addStart(vendorModal)">
+                <i class="fa fa-plus-circle"></i>&nbsp;Add New
+              </button>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table id="vendorTable" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Vendor ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Is Active</th>
-                    <th class="text-nowrap">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td>Edinburgh</td>
-                    <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
-
-                      
-                    </td>
-                  </tr>
 
 
-                  <tr>
-                    <td>Donna Snider</td>
-                    <td>Customer Support</td>
-                    <td>New York</td>
-                    <td>New York</td>
-                    <td>New York</td>
-                    <td>New York</td>
-                    <td class="text-nowrap">
-                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
-
-                      
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="col-md-12 clearfix">
+            <div class="button-box m-t-20 m-b-20 pull-left">
+              <button type="button" class="btn btn-primary" (click)="loadArchivedData()">
+                <i class="fa fa-plus-circle"></i>&nbsp;Archive Data
+              </button>
             </div>
+          </div>
+
+          <div class=" col-md-12">
+            <ng-template #nodata>
+              <h3 class="row offset-1">There is no data to show</h3>
+            </ng-template>
+            <div class="table-responsive"
+                 *ngIf="(allVendor | async)?.length > 0; else nodata">
+              
+
+                <div class="col-sm-12 col-md-12">
+                  <div class="dataTables_length" id="myTable_length">
+                    <label>
+                      Show <select name="myTable_length" [(ngModel)]="row"
+                                   aria-controls="myTable" class="form-control form-control-sm">
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                      </select> entries
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div id="myTable_filter" class="dataTables_filter">
+                    <label>
+                      Search:<input type="search" [(ngModel)]="search"
+                                    class="form-control form-control-sm" placeholder="" aria-controls="myTable">
+                    </label>
+                  </div>
+                </div>
+              
+            <table class="table table-bordered table-striped dataTable no-footer"
+                   role="grid"
+                   aria-describedby="myTable_info">
+              <thead>
+                <tr>
+                  <th class="sorting">Vendor ID</th>
+                  <th class="sorting" (click)="sort('vendorName')">Name</th>
+                  <th>Phone</th>
+                  <th class="sorting" (click)="sort('vendorEmail')">Email</th>
+                  <th class="sorting" (click)="sort('vendorAddress')">Address</th>
+                  <th>Is Actice</th>
+                  <th class="text-nowrap sorting">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of allVendor | async | orderBy: key : reverse | filter:search | paginate: { itemsPerPage: row, currentPage: p };let i=index; ">
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.vendorName }}</td>
+                  <td>{{ item.vendorPhone }}</td>
+                  <td>{{ item.vendorEmail }}</td>
+                  <td>{{ item.vendorAddress }}</td>
+                  <td>{{ item.isActive }}</td>
+
+                  <td class="text-nowrap">
+                    <a href="javascript:void(0)"
+                       tooltip="Edit"
+                       (click)="editStart(vendorModal, item.vendorID)">
+                      <i class="fa fa-pencil text-inverse m-r-10"></i>
+                    </a>
+                    <a href="javascript:void(0)"
+                       tooltip="Delete"
+                       (click)="deleteStart(deleteConfirmation, item.vendorID)">
+                      <i class="fa fa-trash-o text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event" maxSize="2" directionLinks="true"></pagination-controls>
           </div>
         </div>
       </div>
@@ -75,37 +112,37 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form action="#" class="form-horizontal form-bordered">
+  <form action="#" class="form-horizontal form-bordered" [formGroup]="vendorForm"  (ngSubmit)="submit()">
     <div class="modal-body">
       <div class="form-body">
         <div class="form-group row p-l-30 p-r-30">
           <label for="name" class="control-label text-right col-md-3 label-input">Name</label>
           <div class="col-md-9">
-            <input id="name" type="text" class="form-control" placeholder="Name">
+            <input id="name" type="text" class="form-control" placeholder="Name" formControlName="vendorName">
           </div>
         </div>
         <div class="form-group row p-l-30 p-r-30">
           <label for="phone" class="control-label text-right col-md-3 label-input">Phone</label>
           <div class="col-md-9">
-            <input id="phone" type="number" class="form-control" placeholder="Phone Number">
+            <input id="phone" type="number" class="form-control" placeholder="Phone Number" formControlName="vendorPhone">
           </div>
         </div>
         <div class="form-group row p-l-30 p-r-30">
           <label for="email" class="control-label text-right col-md-3 label-input">Email</label>
           <div class="col-md-9">
-            <input id="email" type="email" class="form-control" placeholder="Email">
+            <input id="email" type="email" class="form-control" placeholder="Email" formControlName="vendorEmail">
           </div>
         </div>
         <div class="form-group row p-l-30 p-r-30">
           <label for="address" class="control-label text-right col-md-3 label-input">Address</label>
           <div class="col-md-9">
-            <textarea id="address" class="form-control" placeholder="Address"></textarea>
+            <textarea id="address" class="form-control" placeholder="Address" formControlName="vendorAddress"></textarea>
           </div>
         </div>
         <div class="form-group row p-l-30 p-r-30">
           <div class="offset-sm-3 col-sm-9">
             <div class="checkbox checkbox-success">
-              <input id="activeCheckBox" type="checkbox">
+              <input id="activeCheckBox" type="checkbox" formControlName="isActive">
               <label for="activeCheckBox" class="form-check-lebel">IsActive?</label>
             </div>
           </div>
@@ -113,7 +150,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-info"> <i class="fa fa-check"></i> Submit</button>
+      <button type="submit" class="btn btn-info" id="btnSubmit"> <i class="fa fa-check"></i> {{ btnText }}</button>
       <button type="button" class="btn btn-inverse" (click)="modalRef.hide()">Cancel</button>
     </div>
   </form>
@@ -125,7 +162,16 @@
 <ng-template #deleteConfirmation>
   <div class="modal-body text-center">
     <p>Do you want to confirm?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">Yes</button>
     <button type="button" class="btn btn-primary" (click)="decline()">No</button>
   </div>
 </ng-template>
+
+
+
+
+
+
+
+
+

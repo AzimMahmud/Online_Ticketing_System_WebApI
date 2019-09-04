@@ -44,7 +44,7 @@ namespace BusTicket.API.Persistence.Repositories
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-           Context.Set<TEntity>().AddRange(entities);
+            Context.Set<TEntity>().AddRange(entities);
         }
 
         public void Update(TEntity entities)
@@ -62,5 +62,7 @@ namespace BusTicket.API.Persistence.Repositories
         {
             Context.Set<TEntity>().RemoveRange(entities);
         }
+
+
     }
 }

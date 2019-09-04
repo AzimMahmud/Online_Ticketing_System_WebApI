@@ -25,6 +25,8 @@ namespace BusTicket.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsActive");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -36,17 +38,32 @@ namespace BusTicket.API.Migrations
                         new
                         {
                             BrandID = 1,
+                            IsActive = false,
                             Name = "Hino"
                         },
                         new
                         {
                             BrandID = 2,
+                            IsActive = false,
                             Name = "Mac"
                         },
                         new
                         {
                             BrandID = 3,
+                            IsActive = false,
                             Name = "Scania"
+                        },
+                        new
+                        {
+                            BrandID = 4,
+                            IsActive = false,
+                            Name = "Volvo"
+                        },
+                        new
+                        {
+                            BrandID = 5,
+                            IsActive = false,
+                            Name = "Mistsubishi"
                         });
                 });
 
@@ -55,6 +72,8 @@ namespace BusTicket.API.Migrations
                     b.Property<int>("BusCategoryID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<string>("Name");
 
@@ -66,12 +85,32 @@ namespace BusTicket.API.Migrations
                         new
                         {
                             BusCategoryID = 1,
+                            IsActive = false,
                             Name = "Non-AC"
                         },
                         new
                         {
                             BusCategoryID = 2,
+                            IsActive = false,
                             Name = "AC"
+                        },
+                        new
+                        {
+                            BusCategoryID = 3,
+                            IsActive = false,
+                            Name = "Double-Decker"
+                        },
+                        new
+                        {
+                            BusCategoryID = 4,
+                            IsActive = false,
+                            Name = "Slipper"
+                        },
+                        new
+                        {
+                            BusCategoryID = 5,
+                            IsActive = false,
+                            Name = "Chair-Coach"
                         });
                 });
 
@@ -84,6 +123,8 @@ namespace BusTicket.API.Migrations
                     b.Property<int>("BrandID");
 
                     b.Property<int>("BusCategoryID");
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<int>("VendorID");
 
@@ -103,28 +144,136 @@ namespace BusTicket.API.Migrations
                             BusDetailID = 1,
                             BrandID = 1,
                             BusCategoryID = 1,
+                            IsActive = false,
                             VendorID = 1
                         },
                         new
                         {
                             BusDetailID = 2,
-                            BrandID = 2,
-                            BusCategoryID = 2,
+                            BrandID = 1,
+                            BusCategoryID = 1,
+                            IsActive = false,
                             VendorID = 2
                         },
                         new
                         {
                             BusDetailID = 3,
-                            BrandID = 1,
+                            BrandID = 2,
                             BusCategoryID = 1,
+                            IsActive = false,
                             VendorID = 3
                         },
                         new
                         {
                             BusDetailID = 4,
+                            BrandID = 1,
+                            BusCategoryID = 2,
+                            IsActive = false,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            BusDetailID = 5,
+                            BrandID = 1,
+                            BusCategoryID = 2,
+                            IsActive = false,
+                            VendorID = 2
+                        },
+                        new
+                        {
+                            BusDetailID = 6,
+                            BrandID = 1,
+                            BusCategoryID = 2,
+                            IsActive = false,
+                            VendorID = 3
+                        },
+                        new
+                        {
+                            BusDetailID = 7,
+                            BrandID = 1,
+                            BusCategoryID = 3,
+                            IsActive = false,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            BusDetailID = 8,
+                            BrandID = 3,
+                            BusCategoryID = 3,
+                            IsActive = false,
+                            VendorID = 2
+                        },
+                        new
+                        {
+                            BusDetailID = 9,
+                            BrandID = 1,
+                            BusCategoryID = 3,
+                            IsActive = false,
+                            VendorID = 3
+                        },
+                        new
+                        {
+                            BusDetailID = 10,
+                            BrandID = 2,
+                            BusCategoryID = 1,
+                            IsActive = false,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            BusDetailID = 11,
                             BrandID = 2,
                             BusCategoryID = 2,
+                            IsActive = false,
                             VendorID = 2
+                        },
+                        new
+                        {
+                            BusDetailID = 12,
+                            BrandID = 3,
+                            BusCategoryID = 1,
+                            IsActive = false,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            BusDetailID = 13,
+                            BrandID = 3,
+                            BusCategoryID = 2,
+                            IsActive = false,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            BusDetailID = 14,
+                            BrandID = 4,
+                            BusCategoryID = 5,
+                            IsActive = false,
+                            VendorID = 4
+                        },
+                        new
+                        {
+                            BusDetailID = 15,
+                            BrandID = 4,
+                            BusCategoryID = 4,
+                            IsActive = false,
+                            VendorID = 4
+                        },
+                        new
+                        {
+                            BusDetailID = 16,
+                            BrandID = 5,
+                            BusCategoryID = 5,
+                            IsActive = false,
+                            VendorID = 3
+                        },
+                        new
+                        {
+                            BusDetailID = 17,
+                            BrandID = 5,
+                            BusCategoryID = 5,
+                            IsActive = false,
+                            VendorID = 4
                         });
                 });
 
@@ -151,6 +300,96 @@ namespace BusTicket.API.Migrations
                     b.HasKey("BusReservationID");
 
                     b.ToTable("BusReservations");
+
+                    b.HasData(
+                        new
+                        {
+                            BusReservationID = 1,
+                            Gender = "Male",
+                            NoOfBus = "2",
+                            PassengerEmail = "abir@gmail.com",
+                            PassengerName = "Abir",
+                            PassengerPhoneNo = "01999998888",
+                            ReservationDate = new DateTime(2019, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m
+                        },
+                        new
+                        {
+                            BusReservationID = 2,
+                            Gender = "Male",
+                            NoOfBus = "3",
+                            PassengerEmail = "faisal@gmail.com",
+                            PassengerName = "Faisal",
+                            PassengerPhoneNo = "01752676253",
+                            ReservationDate = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m
+                        },
+                        new
+                        {
+                            BusReservationID = 3,
+                            Gender = "Male",
+                            NoOfBus = "1",
+                            PassengerEmail = "mahamud@gmail.com",
+                            PassengerName = "Mahanud",
+                            PassengerPhoneNo = "01916783647",
+                            ReservationDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m
+                        },
+                        new
+                        {
+                            BusReservationID = 4,
+                            Gender = "Male",
+                            NoOfBus = "3",
+                            PassengerEmail = "faiaz@gmail.com",
+                            PassengerName = "Faiaz",
+                            PassengerPhoneNo = "01716263748",
+                            ReservationDate = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 400m
+                        },
+                        new
+                        {
+                            BusReservationID = 5,
+                            Gender = "Male",
+                            NoOfBus = "4",
+                            PassengerEmail = "orrvin@gmail.com",
+                            PassengerName = "Orvin",
+                            PassengerPhoneNo = "01613567893",
+                            ReservationDate = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 900m
+                        },
+                        new
+                        {
+                            BusReservationID = 6,
+                            Gender = "Female",
+                            NoOfBus = "2",
+                            PassengerEmail = "rasgeda@gmail.com",
+                            PassengerName = "Rasheda",
+                            PassengerPhoneNo = "01613567866",
+                            ReservationDate = new DateTime(2019, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 600m
+                        },
+                        new
+                        {
+                            BusReservationID = 7,
+                            Gender = "Female",
+                            NoOfBus = "1",
+                            PassengerEmail = "rohima@gmail.com",
+                            PassengerName = "Rohima",
+                            PassengerPhoneNo = "01613567852",
+                            ReservationDate = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m
+                        },
+                        new
+                        {
+                            BusReservationID = 8,
+                            Gender = "Female",
+                            NoOfBus = "3",
+                            PassengerEmail = "nasima@gmail.com",
+                            PassengerName = "Naima",
+                            PassengerPhoneNo = "01613567800",
+                            ReservationDate = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 380m
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusReservationCancel", b =>
@@ -170,6 +409,48 @@ namespace BusTicket.API.Migrations
                     b.HasKey("BusRsrvCnclID");
 
                     b.ToTable("BusReservationCancels");
+
+                    b.HasData(
+                        new
+                        {
+                            BusRsrvCnclID = 1,
+                            Comment = "For Wedding",
+                            InvoiceID = 1,
+                            NoOfBus = "3",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            BusRsrvCnclID = 2,
+                            Comment = "For Picnic",
+                            InvoiceID = 2,
+                            NoOfBus = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            BusRsrvCnclID = 3,
+                            Comment = "For Weading",
+                            InvoiceID = 3,
+                            NoOfBus = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            BusRsrvCnclID = 4,
+                            Comment = "For Campaign",
+                            InvoiceID = 4,
+                            NoOfBus = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            BusRsrvCnclID = 5,
+                            Comment = "For Tour",
+                            InvoiceID = 5,
+                            NoOfBus = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.Invoice", b =>
@@ -211,6 +492,152 @@ namespace BusTicket.API.Migrations
                     b.HasKey("InvoiceID");
 
                     b.ToTable("Invoices");
+
+                    b.HasData(
+                        new
+                        {
+                            InvoiceID = 1,
+                            BoardPoint = "Chittagong",
+                            BoardTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Dhaka",
+                            DropTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "faisaal@gmail.com",
+                            Gender = "Male",
+                            Name = "Faisal",
+                            NoOfTicket = "4",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01725635613",
+                            ReservationDate = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m,
+                            TransactionType = "bKash",
+                            UnitPrice = 500m
+                        },
+                        new
+                        {
+                            InvoiceID = 2,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Comilla",
+                            DropTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "abir@gmail.com",
+                            Gender = "Male",
+                            Name = "Abir",
+                            NoOfTicket = "1",
+                            PaymentMethod = "Card",
+                            PhoneNo = "01746357890",
+                            ReservationDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 600m,
+                            TransactionType = "Card",
+                            UnitPrice = 400m
+                        },
+                        new
+                        {
+                            InvoiceID = 3,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Rongpur",
+                            DropTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mahamud@gmail.com",
+                            Gender = "Male",
+                            Name = "Mahamud",
+                            NoOfTicket = "4",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01614562789",
+                            ReservationDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 800m,
+                            TransactionType = "bKash",
+                            UnitPrice = 600m
+                        },
+                        new
+                        {
+                            InvoiceID = 4,
+                            BoardPoint = "Chittagong",
+                            BoardTime = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Rongpur",
+                            DropTime = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "faiaz@gmail.com",
+                            Gender = "Male",
+                            Name = "Faiaz",
+                            NoOfTicket = "3",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01763526790",
+                            ReservationDate = new DateTime(2019, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 700m,
+                            TransactionType = "bKash",
+                            UnitPrice = 700m
+                        },
+                        new
+                        {
+                            InvoiceID = 5,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Borishal",
+                            DropTime = new DateTime(2019, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lopez@gmail.com",
+                            Gender = "Female",
+                            Name = "Lopez",
+                            NoOfTicket = "2",
+                            PaymentMethod = "Card",
+                            PhoneNo = "01712563479",
+                            ReservationDate = new DateTime(2019, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 900m,
+                            TransactionType = "Card",
+                            UnitPrice = 800m
+                        },
+                        new
+                        {
+                            InvoiceID = 6,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Borishal",
+                            DropTime = new DateTime(2019, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mahima@gmail.com",
+                            Gender = "Female",
+                            Name = "Mahima",
+                            NoOfTicket = "1",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01715589874",
+                            ReservationDate = new DateTime(2019, 8, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 600m,
+                            TransactionType = "bKash",
+                            UnitPrice = 800m
+                        },
+                        new
+                        {
+                            InvoiceID = 7,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Borishal",
+                            DropTime = new DateTime(2019, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sadia@gmail.com",
+                            Gender = "Female",
+                            Name = "Sadia",
+                            NoOfTicket = "3",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01548789548",
+                            ReservationDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 500m,
+                            TransactionType = "bKash",
+                            UnitPrice = 800m
+                        },
+                        new
+                        {
+                            InvoiceID = 8,
+                            BoardPoint = "Dhaka",
+                            BoardTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DropPoint = "Borishal",
+                            DropTime = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "costa@gmail.com",
+                            Gender = "Female",
+                            Name = "Costa",
+                            NoOfTicket = "1",
+                            PaymentMethod = "bKash",
+                            PhoneNo = "01848784532",
+                            ReservationDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 800m,
+                            TransactionType = "bKash",
+                            UnitPrice = 800m
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.Message", b =>
@@ -234,6 +661,77 @@ namespace BusTicket.API.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("BusTicket.API.Core.Domain.Payment", b =>
+                {
+                    b.Property<int>("PaymentID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("PaymentAmount");
+
+                    b.Property<DateTime>("PaymentDate");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<int>("TicketResrvID");
+
+                    b.Property<string>("TransactionID");
+
+                    b.Property<int?>("VendorID");
+
+                    b.Property<string>("VendorName");
+
+                    b.HasKey("PaymentID");
+
+                    b.HasIndex("TicketResrvID");
+
+                    b.HasIndex("VendorID");
+
+                    b.ToTable("Payments");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentID = 1,
+                            PaymentAmount = 1600.00m,
+                            PaymentDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = false,
+                            TicketResrvID = 1,
+                            TransactionID = "TX20190101001",
+                            VendorName = "Green Line"
+                        },
+                        new
+                        {
+                            PaymentID = 2,
+                            PaymentAmount = 1600.00m,
+                            PaymentDate = new DateTime(2019, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = false,
+                            TicketResrvID = 2,
+                            TransactionID = "TX20190101002",
+                            VendorName = "Green Line"
+                        },
+                        new
+                        {
+                            PaymentID = 3,
+                            PaymentAmount = 1600.00m,
+                            PaymentDate = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = false,
+                            TicketResrvID = 3,
+                            TransactionID = "TX20190101003",
+                            VendorName = "Silk Line"
+                        },
+                        new
+                        {
+                            PaymentID = 4,
+                            PaymentAmount = 1600.00m,
+                            PaymentDate = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = false,
+                            TicketResrvID = 4,
+                            TransactionID = "TX20190101004",
+                            VendorName = "S.Alom"
+                        });
+                });
+
             modelBuilder.Entity("BusTicket.API.Core.Domain.PaymentType", b =>
                 {
                     b.Property<int>("PayTypID")
@@ -247,6 +745,26 @@ namespace BusTicket.API.Migrations
                     b.HasKey("PayTypID");
 
                     b.ToTable("PaymentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            PayTypID = 1,
+                            IsActive = true,
+                            PaymentMethod = "bKash"
+                        },
+                        new
+                        {
+                            PayTypID = 2,
+                            IsActive = false,
+                            PaymentMethod = "Credit/Debit Card"
+                        },
+                        new
+                        {
+                            PayTypID = 3,
+                            IsActive = true,
+                            PaymentMethod = "iPay"
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.PromoOffer", b =>
@@ -255,6 +773,8 @@ namespace BusTicket.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsActive");
+
                     b.Property<string>("PromoCode");
 
                     b.Property<string>("PromoDetails");
@@ -262,31 +782,361 @@ namespace BusTicket.API.Migrations
                     b.HasKey("PromoID");
 
                     b.ToTable("PromoOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            PromoID = 1,
+                            IsActive = false,
+                            PromoCode = "pc-eid-1",
+                            PromoDetails = "For STAR passenger eid-ul-fitar promo offer"
+                        },
+                        new
+                        {
+                            PromoID = 2,
+                            IsActive = false,
+                            PromoCode = "pc-eid-2",
+                            PromoDetails = "For GOLD passenger eid-ul-fitar promo offer"
+                        },
+                        new
+                        {
+                            PromoID = 3,
+                            IsActive = false,
+                            PromoCode = "pc-eid-3",
+                            PromoDetails = "For SILVER passenger eid-ul-fitar promo offer"
+                        },
+                        new
+                        {
+                            PromoID = 4,
+                            IsActive = false,
+                            PromoCode = "pc-eid-4",
+                            PromoDetails = "For DIAMOND passenger eid-ul-fitar promo offer"
+                        },
+                        new
+                        {
+                            PromoID = 5,
+                            IsActive = false,
+                            PromoCode = "pc-eid-5",
+                            PromoDetails = "For NEW passenger eid-ul-fitar promo offer"
+                        });
                 });
 
-            modelBuilder.Entity("BusTicket.API.Core.Domain.Route", b =>
+            modelBuilder.Entity("BusTicket.API.Core.Domain.Role", b =>
                 {
-                    b.Property<int>("RouteID")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.RouteDetail", b =>
+                {
+                    b.Property<int>("RouteDetailID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BoardPoint");
 
-                    b.Property<TimeSpan>("BoardTime");
+                    b.Property<string>("BoardTime");
 
                     b.Property<int>("BusDetailID");
 
                     b.Property<string>("DropPoint");
 
-                    b.Property<TimeSpan>("DropTime");
+                    b.Property<string>("DropTime");
 
                     b.Property<decimal>("Fare");
 
-                    b.HasKey("RouteID");
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("RouteDetailID");
 
                     b.HasIndex("BusDetailID");
 
-                    b.ToTable("Routes");
+                    b.ToTable("RouteDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            RouteDetailID = 1,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "10.30",
+                            BusDetailID = 1,
+                            DropPoint = "Dhaka",
+                            DropTime = "12.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 2,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "10.30",
+                            BusDetailID = 2,
+                            DropPoint = "Dhaka",
+                            DropTime = "12.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 3,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "10.30",
+                            BusDetailID = 3,
+                            DropPoint = "Dhaka",
+                            DropTime = "12.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 4,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "10.30",
+                            BusDetailID = 4,
+                            DropPoint = "Dhaka",
+                            DropTime = "12.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 5,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "10.30",
+                            BusDetailID = 7,
+                            DropPoint = "Dhaka",
+                            DropTime = "12.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 6,
+                            BoardPoint = "Dhaka",
+                            BoardTime = "11.30",
+                            BusDetailID = 1,
+                            DropPoint = "Comilla",
+                            DropTime = "21.30",
+                            Fare = 500m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 7,
+                            BoardPoint = "Dhaka",
+                            BoardTime = "11.30",
+                            BusDetailID = 2,
+                            DropPoint = "Comilla",
+                            DropTime = "21.30",
+                            Fare = 500m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 8,
+                            BoardPoint = "Dhaka",
+                            BoardTime = "11.30",
+                            BusDetailID = 3,
+                            DropPoint = "Comilla",
+                            DropTime = "21.30",
+                            Fare = 500m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 9,
+                            BoardPoint = "Dhaka",
+                            BoardTime = "11.30",
+                            BusDetailID = 4,
+                            DropPoint = "Comilla",
+                            DropTime = "21.30",
+                            Fare = 500m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 10,
+                            BoardPoint = "Comilla",
+                            BoardTime = "9.30",
+                            BusDetailID = 1,
+                            DropPoint = "Shylet",
+                            DropTime = "23.30",
+                            Fare = 700m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 11,
+                            BoardPoint = "Comilla",
+                            BoardTime = "9.30",
+                            BusDetailID = 2,
+                            DropPoint = "Shylet",
+                            DropTime = "23.30",
+                            Fare = 700m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 12,
+                            BoardPoint = "Comilla",
+                            BoardTime = "9.30",
+                            BusDetailID = 3,
+                            DropPoint = "Shylet",
+                            DropTime = "23.30",
+                            Fare = 700m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 13,
+                            BoardPoint = "Comilla",
+                            BoardTime = "9.30",
+                            BusDetailID = 4,
+                            DropPoint = "Shylet",
+                            DropTime = "23.30",
+                            Fare = 700m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 14,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "8.30",
+                            BusDetailID = 13,
+                            DropPoint = "Comilla",
+                            DropTime = "20.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 15,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "8.30",
+                            BusDetailID = 12,
+                            DropPoint = "Comilla",
+                            DropTime = "20.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 16,
+                            BoardPoint = "Chittagong",
+                            BoardTime = "8.30",
+                            BusDetailID = 11,
+                            DropPoint = "Comilla",
+                            DropTime = "20.30",
+                            Fare = 800m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 17,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 10,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 18,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 9,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 19,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 8,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 20,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 5,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 21,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 1,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 22,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 2,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 23,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 3,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            RouteDetailID = 24,
+                            BoardPoint = "Rongpur",
+                            BoardTime = "7.30",
+                            BusDetailID = 6,
+                            DropPoint = "Dhaka",
+                            DropTime = "18.30",
+                            Fare = 200m,
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.SeatLayout", b =>
@@ -312,6 +1162,85 @@ namespace BusTicket.API.Migrations
                     b.HasIndex("BusDetailID");
 
                     b.ToTable("SeatLayout");
+
+                    b.HasData(
+                        new
+                        {
+                            SeatLayoutID = 1,
+                            BusDetailsID = 1,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 2,
+                            BusDetailsID = 2,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 3,
+                            BusDetailsID = 3,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 4,
+                            BusDetailsID = 4,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 5,
+                            BusDetailsID = 5,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 6,
+                            BusDetailsID = 6,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 7,
+                            BusDetailsID = 7,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 8,
+                            BusDetailsID = 8,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 9,
+                            BusDetailsID = 9,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 10,
+                            BusDetailsID = 10,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        },
+                        new
+                        {
+                            SeatLayoutID = 11,
+                            BusDetailsID = 11,
+                            LastSeat = 0,
+                            TotalSeat = 0
+                        });
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.TicketReservation", b =>
@@ -332,15 +1261,17 @@ namespace BusTicket.API.Migrations
 
                     b.Property<DateTime>("ReservationDate");
 
-                    b.Property<int>("RouteID");
+                    b.Property<int>("RouteDetailID");
 
                     b.Property<string>("SeatNo");
+
+                    b.Property<string>("TicketNo");
 
                     b.Property<decimal>("UnitPrice");
 
                     b.HasKey("TicketResrvID");
 
-                    b.HasIndex("RouteID");
+                    b.HasIndex("RouteDetailID");
 
                     b.ToTable("TicketReservations");
 
@@ -349,27 +1280,157 @@ namespace BusTicket.API.Migrations
                         {
                             TicketResrvID = 1,
                             Gender = "Male",
-                            NoOfTicket = 1,
+                            NoOfTicket = 2,
                             PassengerEmail = "faoasal@gmail.com",
                             PassengerName = "Faiasl",
-                            PassengerPhoneNo = "34242",
-                            ReservationDate = new DateTime(1910, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RouteID = 1,
-                            SeatNo = "4",
-                            UnitPrice = 900m
+                            PassengerPhoneNo = "01999998888",
+                            ReservationDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 1,
+                            SeatNo = "A2, E2",
+                            UnitPrice = 300m
                         },
                         new
                         {
                             TicketResrvID = 2,
                             Gender = "Male",
-                            NoOfTicket = 1,
-                            PassengerEmail = "faoaaal@gmail.com",
+                            NoOfTicket = 2,
+                            PassengerEmail = "abir@gmail.com",
                             PassengerName = "Abir",
-                            PassengerPhoneNo = "3488242",
-                            ReservationDate = new DateTime(1910, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RouteID = 2,
-                            SeatNo = "4",
-                            UnitPrice = 900m
+                            PassengerPhoneNo = "01514258965",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 2,
+                            SeatNo = "D1, D2",
+                            UnitPrice = 600m
+                        },
+                        new
+                        {
+                            TicketResrvID = 3,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "mahamud@gmail.com",
+                            PassengerName = "Mahamud",
+                            PassengerPhoneNo = "01248965478",
+                            ReservationDate = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 3,
+                            SeatNo = "E4",
+                            UnitPrice = 500m
+                        },
+                        new
+                        {
+                            TicketResrvID = 4,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "orvin@gmail.com",
+                            PassengerName = "Orvin",
+                            PassengerPhoneNo = "01245789587",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 4,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 5,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "mede@gmail.com",
+                            PassengerName = "Mehedi",
+                            PassengerPhoneNo = "01478549365",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 5,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 6,
+                            Gender = "Female",
+                            NoOfTicket = 1,
+                            PassengerEmail = "nasima@gmail.com",
+                            PassengerName = "Nasima",
+                            PassengerPhoneNo = "01715546859",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 6,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 7,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "asoe@gmail.com",
+                            PassengerName = "Azim",
+                            PassengerPhoneNo = "01758458968",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 7,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 8,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "gasks@gmail.com",
+                            PassengerName = "Fahad",
+                            PassengerPhoneNo = "01458879548",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 8,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 9,
+                            Gender = "Female",
+                            NoOfTicket = 1,
+                            PassengerEmail = "ksudi@gmail.com",
+                            PassengerName = "KUshi",
+                            PassengerPhoneNo = "01745598754",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 9,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 10,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "ses@gmail.com",
+                            PassengerName = "Noman",
+                            PassengerPhoneNo = "01571584567",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 10,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 11,
+                            Gender = "Female",
+                            NoOfTicket = 1,
+                            PassengerEmail = "sdfs@gmail.com",
+                            PassengerName = "Maimuna",
+                            PassengerPhoneNo = "01589965587",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 11,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
+                        },
+                        new
+                        {
+                            TicketResrvID = 12,
+                            Gender = "Male",
+                            NoOfTicket = 1,
+                            PassengerEmail = "sdwe@gmail.com",
+                            PassengerName = "Belal",
+                            PassengerPhoneNo = "01819878584",
+                            ReservationDate = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RouteDetailID = 12,
+                            SeatNo = "F2",
+                            UnitPrice = 300m
                         });
                 });
 
@@ -390,6 +1451,123 @@ namespace BusTicket.API.Migrations
                     b.HasKey("TicktReturnID");
 
                     b.ToTable("TicketReturns");
+
+                    b.HasData(
+                        new
+                        {
+                            TicktReturnID = 1,
+                            Comment = "Rearenge Program Schedule",
+                            InvoiceID = 1,
+                            NoOfTicket = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            TicktReturnID = 2,
+                            Comment = "For Sickness",
+                            InvoiceID = 2,
+                            NoOfTicket = "2",
+                            ReturnDate = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            TicktReturnID = 3,
+                            Comment = "Not Interested",
+                            InvoiceID = 3,
+                            NoOfTicket = "2",
+                            ReturnDate = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            TicktReturnID = 4,
+                            Comment = "Rearenge Program Schedule",
+                            InvoiceID = 4,
+                            NoOfTicket = "2",
+                            ReturnDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            TicktReturnID = 5,
+                            Comment = "Not Interested",
+                            InvoiceID = 5,
+                            NoOfTicket = "2",
+                            ReturnDate = new DateTime(2019, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.UserRole", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.Vendor", b =>
@@ -397,6 +1575,8 @@ namespace BusTicket.API.Migrations
                     b.Property<int>("VendorID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<string>("VendorAddress");
 
@@ -414,6 +1594,7 @@ namespace BusTicket.API.Migrations
                         new
                         {
                             VendorID = 1,
+                            IsActive = false,
                             VendorAddress = "120 A, Dhaka, Bangladesh",
                             VendorEmail = "greenline@gmail.com",
                             VendorName = "Green Line",
@@ -422,7 +1603,8 @@ namespace BusTicket.API.Migrations
                         new
                         {
                             VendorID = 2,
-                            VendorAddress = "130 B, Dhaka, Bangladesh",
+                            IsActive = false,
+                            VendorAddress = "130 B, Rongpur, Bangladesh",
                             VendorEmail = "shohag@gmail.com",
                             VendorName = "Shohag",
                             VendorPhone = "01731569165"
@@ -430,10 +1612,29 @@ namespace BusTicket.API.Migrations
                         new
                         {
                             VendorID = 3,
-                            VendorAddress = "140 A, Dhaka, Bangladesh",
+                            IsActive = false,
+                            VendorAddress = "140 A, Comilla, Bangladesh",
                             VendorEmail = "skyline@gmail.com",
                             VendorName = "Sky Line",
                             VendorPhone = "01861569155"
+                        },
+                        new
+                        {
+                            VendorID = 4,
+                            IsActive = false,
+                            VendorAddress = "10 A, Chittagong, Bangladesh",
+                            VendorEmail = "silkline@gmail.com",
+                            VendorName = "Silk Line",
+                            VendorPhone = "01861587955"
+                        },
+                        new
+                        {
+                            VendorID = 5,
+                            IsActive = false,
+                            VendorAddress = "40 B, Khulna, Bangladesh",
+                            VendorEmail = "salom@gmail.com",
+                            VendorName = "S. Alom",
+                            VendorPhone = "01861231155"
                         });
                 });
 
@@ -458,6 +1659,123 @@ namespace BusTicket.API.Migrations
                     b.HasIndex("VendorID");
 
                     b.ToTable("VendorPayments");
+
+                    b.HasData(
+                        new
+                        {
+                            VendorPaymentID = 1,
+                            PaymentDate = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentDescription = "By bKash",
+                            PaymentMethod = "bKash",
+                            TotalAmount = 55m,
+                            VendorID = 1
+                        },
+                        new
+                        {
+                            VendorPaymentID = 2,
+                            PaymentDate = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentDescription = "By bKash",
+                            PaymentMethod = "bKash",
+                            TotalAmount = 5775m,
+                            VendorID = 3
+                        },
+                        new
+                        {
+                            VendorPaymentID = 3,
+                            PaymentDate = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentDescription = "By bKash",
+                            PaymentMethod = "bKash",
+                            TotalAmount = 900m,
+                            VendorID = 2
+                        },
+                        new
+                        {
+                            VendorPaymentID = 4,
+                            PaymentDate = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentDescription = "By bKash",
+                            PaymentMethod = "bKash",
+                            TotalAmount = 900m,
+                            VendorID = 4
+                        },
+                        new
+                        {
+                            VendorPaymentID = 5,
+                            PaymentDate = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentDescription = "By Card",
+                            PaymentMethod = "Card",
+                            TotalAmount = 800m,
+                            VendorID = 5
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.BusDetail", b =>
@@ -478,10 +1796,22 @@ namespace BusTicket.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BusTicket.API.Core.Domain.Route", b =>
+            modelBuilder.Entity("BusTicket.API.Core.Domain.Payment", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.TicketReservation", "TicketReservation")
+                        .WithMany("Payments")
+                        .HasForeignKey("TicketResrvID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BusTicket.API.Core.Domain.Vendor")
+                        .WithMany("Payments")
+                        .HasForeignKey("VendorID");
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.RouteDetail", b =>
                 {
                     b.HasOne("BusTicket.API.Core.Domain.BusDetail", "BusDetails")
-                        .WithMany()
+                        .WithMany("RouteDetails")
                         .HasForeignKey("BusDetailID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -495,9 +1825,22 @@ namespace BusTicket.API.Migrations
 
             modelBuilder.Entity("BusTicket.API.Core.Domain.TicketReservation", b =>
                 {
-                    b.HasOne("BusTicket.API.Core.Domain.Route", "Route")
+                    b.HasOne("BusTicket.API.Core.Domain.RouteDetail", "RouteDetail")
                         .WithMany("TicketReservations")
-                        .HasForeignKey("RouteID")
+                        .HasForeignKey("RouteDetailID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BusTicket.API.Core.Domain.UserRole", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BusTicket.API.Core.Domain.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -506,6 +1849,38 @@ namespace BusTicket.API.Migrations
                     b.HasOne("BusTicket.API.Core.Domain.Vendor", "Vendor")
                         .WithMany("VendorPayments")
                         .HasForeignKey("VendorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("BusTicket.API.Core.Domain.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

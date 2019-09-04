@@ -11,16 +11,38 @@ namespace BusTicket.WebAPI.Core.Domain
 
         [Key]
         public int TicketResrvID { get; set; }
+
+        [Required]
+        public string TicketNo { get; set; }
+
+        [Required]
         public string PassengerName { get; set; }
+
+        [Required]
         public string PassengerPhoneNo { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string PassengerEmail { get; set; }
+
+        [Required]
         public string Gender { get; set; }
-        public string NoOfTicket { get; set; }
+
+        [Required]
+        public int NoOfTicket { get; set; }
+
+        [Required]
         public decimal UnitPrice { get; set; }
+
+        [Required]
         public string SeatNo { get; set; }
-        public int RouteDetailsID { get; set; }
+        public int RouteDetailID { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
 
-        public RouteDetails RouteDetails { get; set; }
+        public RouteDetail RouteDetails { get; set; }
+
+        public ICollection<Payment> Payments { get; set; }
     }
 }

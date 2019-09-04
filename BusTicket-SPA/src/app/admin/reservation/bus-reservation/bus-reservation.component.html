@@ -41,7 +41,7 @@
                       <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                       <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
 
-                      
+
                     </td>
                   </tr>
 
@@ -59,7 +59,7 @@
                       <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                       <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
 
-                      
+
                     </td>
                   </tr>
                 </tbody>
@@ -115,7 +115,11 @@
             </select>
           </div>
         </div>
-
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
         <div class="form-group row p-l-30 p-r-30">
           <label for="noOfBus" class="control-label text-right col-md-3 label-input">No of Bus</label>
           <div class="col-md-9">

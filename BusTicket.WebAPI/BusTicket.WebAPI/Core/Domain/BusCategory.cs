@@ -10,9 +10,11 @@ namespace BusTicket.WebAPI.Core.Domain
     {
         [Key]
         public int BusCategoryID { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
-
+        public bool IsActive { get; set; }
         public ICollection<BusDetail> BusDetails { get; set; }
     }
 }

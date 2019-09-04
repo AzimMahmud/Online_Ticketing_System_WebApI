@@ -45,13 +45,14 @@ namespace BusTicket.WebAPI.Persistence.Repositories
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-           Context.Set<TEntity>().AddRange(entities);
+            Context.Set<TEntity>().AddRange(entities);
         }
 
-        public void Update(TEntity entity)
+        public void Update(TEntity entities)
         {
-            Context.Entry(entity).State = EntityState.Modified;
+            Context.Entry<TEntity>(entities).State = EntityState.Modified;
         }
+
 
         public void Remove(TEntity entity)
         {

@@ -6,23 +6,25 @@ using AutoMapper;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentTypeController : ControllerBase
     {
-      
+
         private readonly IUnitOfWork _unitOfWork;
-     
+
 
         public PaymentTypeController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-           
+
         }
 
         // GET: api/PaymentType
@@ -31,6 +33,7 @@ namespace BusTicket.API.Controllers
         {
             var paymentType = await _unitOfWork.PaymentType.GetAll();
             return Ok(paymentType);
+
         }
 
 

@@ -13,5 +13,6 @@ namespace BusTicket.API.Core.Domain
         public int PromoID { get; set; }
         public string PromoCode { get; set; }
         public string PromoDetails { get; set; }
+        public bool IsActive { get; set; }
     }
 }

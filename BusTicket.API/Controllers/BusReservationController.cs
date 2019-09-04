@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Persistence;
 using BusTicket.API.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class BusReservationController : ControllerBase
@@ -28,6 +30,7 @@ namespace BusTicket.API.Controllers
         {
             var busReservations = await _unitOfWork.BusReservation.GetAll();
             return Ok(busReservations);
+
         }
 
         // GET: api/BusReservation/5
@@ -63,7 +66,7 @@ namespace BusTicket.API.Controllers
             await _unitOfWork.Complete();
             return Ok(busReservation);
         }
-       
+
 
         // DELETE: api/BusReservation/5
         [HttpDelete("{id}")]
@@ -74,6 +77,6 @@ namespace BusTicket.API.Controllers
             _unitOfWork.BusReservation.Remove(busReservation);
             await _unitOfWork.Complete();
             return Ok(busReservation);
-        }        
+        }
     }
 }

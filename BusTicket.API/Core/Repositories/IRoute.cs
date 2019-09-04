@@ -6,8 +6,9 @@ using BusTicket.API.Core.Domain;
 
 namespace BusTicket.API.Core.Repositories
 {
-    public interface IRoute : IRepository<Route>
+    public interface IRoute : IRepository<RouteDetail>
     {
-        Task<object> GetAllRoutesDetails(string boardPoint, string dropPoint, string journeyDate);
+        Task<object> GetAllRoutesForTicketReservation(string boardPoint, string dropPoint, string journeyDate);
+
     }
 }

@@ -1,0 +1,187 @@
+<main class="main-client" role="main">
+  <!-- Search -->
+  <div class="output color twoway">
+    <div class="wrap-client">
+      <h1 class="text-center"><strong>Payment Confirmation</strong></h1>
+    </div>
+  </div>
+  <!-- //Search -->
+
+  <div class="wrap-client custom-m-t m-b-20 clearfix-client">
+    <div class="row-client">
+      <div class="col-md-9 float-left">
+        <form>
+          <h1 style="color: #cc2262;">
+            NEW PASSENGER,Your ticket is reserved!
+          </h1>
+          <h5>
+            <b
+              >Resurvation confirmation SMS has sent to
+              <span style="color: #cc2262;"
+                >{{ ticketInfo.passengerPhoneNo }}.</span
+              ></b
+            >
+          </h5>
+          <h1>
+            <b
+              >But you are not done yet! Please do not close the page, but
+              follow the steps below:</b
+            >
+          </h1>
+          <br />
+          <br />
+          <br />
+          <div style="margin-left: 30px;">
+            <h3>
+              <b
+                >1. Please pay for your tickets through bKash to our Merchant
+                Account number given below within next 120 minutes, else your
+                ticket will be cancelled.</b
+              >
+            </h3>
+
+            <div>
+              <table class="paytable">
+                <tr class="payhead">
+                  <th>Merchant No.</th>
+                  <th>Amount Due</th>
+                  <th>Reservation Ref.</th>
+                </tr>
+                <tr>
+                  <td>01731569155</td>
+                  <td>{{ ticketInfo.payments[0].paymentAmount }}</td>
+                  <td>{{ ticketInfo.payments[0].transactionID }}</td>
+                </tr>
+              </table>
+            </div>
+            <br />
+            <br />
+            <h3>
+              <b
+                >2. After paying through bKash, enter the transaction ID
+                received from bKash below</b
+              >
+            </h3>
+            <br />
+
+            <div
+              style="margin:0px; padding: 30px; border: 1px gray !important;"
+            >
+              <h1 style="color: #cc2262;">
+                Our Merchant Account No: 01731569155
+              </h1>
+              <form [formGroup]="paymentConfirmForm" (ngSubmit)="onSubmit()">
+                <input
+                  class="form-control boder-color-dark col-md-9"
+                  placeholder="Enter your bKash Transaction ID"
+                  formControlName="transactionID"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.transactionID.errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f.transactionID.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.transactionID.errors.required">
+                    Transaction Number is required
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary col-md-3">
+                  Verify Transaction
+                </button>
+              </form>
+              <br />
+              <br />
+              <br />
+              <h1 style="color: #cc2262;">How to pay using bKash</h1>
+
+              <ul>
+                <li>
+                  You MUST verfy your bKash Trangction ID wthin 120 minutes of
+                  booking the ticket, else your ticket wiII be cancelled
+                  automatically by the system.
+                </li>
+                <li>
+                  In case you close the psge by mistake, you can always visit
+                  the link -verify bKash/Print from the top menu and verify your
+                  bKash transaction.
+                </li>
+                <li>
+                  Plesse save your bKash Reservation Reference Number (starting
+                  with "BK") for future reference
+                </li>
+              </ul>
+            </div>
+            <br />
+            <h3><b>3. Print your ticket!</b></h3>
+            <ul>
+              <li>Most of the bus operators require paper printed tickets.</li>
+              <li>
+                You may not be allowed to travel in case you are carrying a PDF
+                cf ticket.
+              </li>
+              <li>
+                A courtesy email with your ticket wil be sent to you in few
+                hours but emails MAY GET DELAYED. Hence Bus Ticketing System
+                encorage you to PRINT YOUR TICKET YOURSELF.
+              </li>
+              <li>
+                If you do not get the email in hours, you may raise a support
+                request on our "Contact us" page.
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <!--- Sidebar -->
+      <aside class="one-fourth sidebar right">
+        <!-- Widget -->
+        <div class="widget">
+          <h4>JURNEY DETAILS</h4>
+          <div class="summary">
+            <div>
+              <ul class="paside-ul">
+                <li class="paside-li">
+                  Date
+                  <span class="pull-right">{{ routeDetails.journeyDate }}</span>
+                </li>
+                <li class="paside-li">
+                  From
+                  <span class="pull-right">{{ routeDetails.boardPoint }}</span>
+                </li>
+                <li class="paside-li">
+                  To<span class="pull-right">{{ routeDetails.dropPoint }}</span>
+                </li>
+                <li class="paside-li">
+                  Time
+                  <span class="pull-right"
+                    >{{ journeyDetails.bus.bordTime }} To
+                    {{ journeyDetails.bus.dropTime }}</span
+                  >
+                </li>
+                <li class="paside-li">
+                  Brand<span class="pull-right">{{
+                    journeyDetails.bus.vendorName
+                  }}</span>
+                </li>
+                <li class="paside-li">
+                  <b
+                    >Site No.
+                    <span class="pull-right">
+                      {{ journeyDetails.seats }}
+                    </span></b
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- //Widget -->
+      </aside>
+      <!--- //Sidebar -->
+    </div>
+  </div>
+</main>

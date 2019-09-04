@@ -15,9 +15,14 @@ export class PromoService {
     this.baseUrl = window.localStorage.getItem("apikey");
   }
 
-  getPromo(): Observable<IPromoOffer> {
+  getPromo(): Observable<IPromoOffer[]> {
     return this.http
       .get(this.baseUrl + "/api/PromoOffer")
+      .pipe(map(res => res.json()));
+  }
+  getArchivePromo() {
+    return this.http
+      .get(this.baseUrl + "/api/PromoOffer/GetArchive")
       .pipe(map(res => res.json()));
   }
   getPromoById(id): Observable<IPromoOffer> {
@@ -31,9 +36,17 @@ export class PromoService {
       .post(this.baseUrl + "/api/PromoOffer", formData)
       .pipe(map(res => res.json()));
   }
-  updatePromo(formData) {
+  updatePromo(id: number, formData: IPromoOffer) {
+    formData.promoID = id;
     return this.http
       .put(this.baseUrl + "/api/PromoOffer", formData)
+      .pipe(map(res => res.json()));
+  }
+
+
+  softDelete(promoID: number) {
+    return this.http
+      .put(this.baseUrl + "/api/PromoOffer/PromoDelete/" + promoID, null)
       .pipe(map(res => res.json()));
   }
   deletePromo(id) {

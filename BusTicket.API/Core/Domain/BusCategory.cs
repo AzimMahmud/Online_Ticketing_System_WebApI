@@ -11,6 +11,7 @@ namespace BusTicket.API.Core.Domain
         [Key]
         public int BusCategoryID { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; }
 
 
         public ICollection<BusDetail> BusDetails { get; set; }

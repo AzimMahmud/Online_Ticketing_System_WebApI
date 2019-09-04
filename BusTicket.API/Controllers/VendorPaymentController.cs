@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BusTicket.API.Core.Domain;
 using BusTicket.API.Persistence;
 using BusTicket.API.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class VendorPaymentController : ControllerBase
@@ -28,6 +30,7 @@ namespace BusTicket.API.Controllers
         {
             var vendorPayments = await _unitOfWork.VendorPayment.GetAll();
             return Ok(vendorPayments);
+
         }
 
         // GET: api/VendorPayment/5

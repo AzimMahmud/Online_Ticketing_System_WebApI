@@ -4,34 +4,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusTicket.API.Core;
 using BusTicket.API.Core.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusTicket.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class PromoOfferController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
 
+        private readonly IUnitOfWork _unitOfWork;
 
         public PromoOfferController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
         }
 
-        // GET: api/PaymentType
+
+
+        // GET: api/PromoOffer
         [HttpGet]
-        public async Task<IActionResult> GetPromoOffer()
+        public async Task<IActionResult> GetPromoOffers()
         {
-            var promoOffer = await _unitOfWork.PromoOffer.GetAll();
-            return Ok(promoOffer);
+            var promoOffers = await _unitOfWork.PromoOffer.Find(i => i.IsActive == true);
+            return Ok(promoOffers);
+        }
+
+        // GET: api/PromoOffer
+        [HttpGet("GetArchive")]
+        public async Task<IActionResult> GetArchiveBrands()
+        {
+            var promoOffers = await _unitOfWork.PromoOffer.Find(i => i.IsActive == false);
+            return Ok(promoOffers);
         }
 
 
-        // GET: api/PaymentType/5
+        // GET: api/PromoOffer/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPromoOffer(int id)
         {
@@ -45,20 +56,34 @@ namespace BusTicket.API.Controllers
             return Ok(promoOffer);
         }
 
-        // POST: api/PaymentType
+        // POST: api/PromoOffer
         [HttpPost]
         public async Task<IActionResult> PostPromoOffer(PromoOffer promoOffer)
         {
-
+            if (promoOffer == null) return BadRequest();
             _unitOfWork.PromoOffer.Add(promoOffer);
             await _unitOfWork.Complete();
             return Ok(promoOffer);
         }
 
-        // PUT: api/BusCategory/5
-        [HttpPut("{id}")]
+        // PUT: api/PromoOffer/5
+        [HttpPut]
         public async Task<IActionResult> PutPromoOffer(PromoOffer promoOffer)
         {
+            if (promoOffer == null) return BadRequest();
+            _unitOfWork.PromoOffer.Update(promoOffer);
+            await _unitOfWork.Complete();
+            return Ok(promoOffer);
+        }
+
+
+        //Soft Delete
+        [HttpPut("PromoDelete/{id}")]
+        public async Task<ActionResult<PromoOffer>> PromoSoftDelete(int id)
+        {
+            var promoOffer = await _unitOfWork.PromoOffer.Get(id);
+            if (promoOffer == null) return BadRequest();
+            promoOffer.IsActive = false;
             _unitOfWork.PromoOffer.Update(promoOffer);
             await _unitOfWork.Complete();
             return Ok(promoOffer);
@@ -69,11 +94,7 @@ namespace BusTicket.API.Controllers
         public async Task<ActionResult<PromoOffer>> DeletePromoOffer(int id)
         {
             var promoOffer = await _unitOfWork.PromoOffer.Get(id);
-
-            if (promoOffer == null)
-            {
-                return BadRequest();
-            }
+            if (promoOffer == null) return BadRequest();
             _unitOfWork.PromoOffer.Remove(promoOffer);
             await _unitOfWork.Complete();
             return Ok(promoOffer);

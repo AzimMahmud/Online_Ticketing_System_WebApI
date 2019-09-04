@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header bg-info">
+            <h4 class="m-b-0 text-white">Bus Reservation</h4>
+          </div>
+          <div class="col-md-12 clearfix">
+            <h2>tHIS iS ONLY tABLE</h2>
+            <!--<div class="button-box m-t-20 m-b-20 pull-right">
+              <button type="button" class="btn btn-primary" (click)="openModal(busReservationModal)"><i class="fa fa-plus-circle"></i>&nbsp;Add New</button>
+            </div>-->
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table id="busReservationTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Bus Reservation ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>No Of Bus</th>
+                    <th>Reservation Date</th>
+                    <th>Total</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td>Edinburgh</td>
+                    <td class="text-nowrap">
+                      <a href="javascript:void(0)" tooltip="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a href="javascript:void(0)" tooltip="Delete" (click)="confirmModal(deleteConfirmation)"> <i class="fa fa-trash-o text-danger"></i> </a>
+
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--This is Delete Confirmation Template-->
+
+<ng-template #deleteConfirmation>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirmDelete()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

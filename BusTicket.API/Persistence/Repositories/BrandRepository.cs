@@ -16,5 +16,7 @@ namespace BusTicket.API.Persistence.Repositories
         {
         }
         public BusTicketContext BusTicketContext => Context as BusTicketContext;
+
+       
     }
 }

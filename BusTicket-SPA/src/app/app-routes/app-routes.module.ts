@@ -11,9 +11,11 @@ import { AdminHomeComponent } from "../admin/admin-home.component";
 import { DashboardComponent } from "../admin/dashboard/dashboard.component";
 import { AdminRoutesModule } from "../admin/admin-routes/admin-routes.module";
 import { ClientRoutesModule } from "../client/client-routes/client-routes.module";
+import { LoginComponent } from "../Auth/login/login.component";
 
 const routes: Routes = [
-  { path: "", component: RootComponent, pathMatch: "full" }
+  { path: "", component: RootComponent, pathMatch: "full" },
+  { path: "login", component: LoginComponent }
 ];
 
 @NgModule({

@@ -6,11 +6,11 @@
       <ul id="sidebarnav">
 
         <li class="user-pro">
-          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="assets/images/1.jpg" alt="user-img" class="img-circle"><span class="hide-menu">Mark Jeckson</span></a>
+          <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="assets/images/logoHeader2.png" alt="user-img" class="img-circle"><span class="hide-menu">&nbsp;Bus Ticket </span></a>
           <ul aria-expanded="false" class="collapse">
             <li><a [routerLink]="['userProfile']"><i class="ti-user"></i> My Profile</a></li>
-            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>           
-            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+           
+            <li><a href="javascript:void(0)" (click)="logOut()"><i class="fa fa-power-off"></i> Logout</a></li>
           </ul>
         </li>
 
@@ -36,14 +36,39 @@
 
 
 
+        <!--<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="hide-menu">Reservation</span></a>
+    <ul aria-expanded="false" class="collapse">
+      <li><a [routerLink]="['ticketReservation']">Ticket Reservation</a></li>
+      <li><a [routerLink]="['busReservation']">Bus Reservation</a></li>
+    </ul>
+  </li>-->
         <li>
           <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-shopping-basket"></i><span class="hide-menu">Reservation</span></a>
           <ul aria-expanded="false" class="collapse">
-            <li><a [routerLink]="['ticketReservation']">Ticket Reservation</a></li>
-            <li><a [routerLink]="['busReservation']">Bus Reservation</a></li>
+            <li>
+              <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-ticket">&nbsp;</i><span class="hide-menu">Ticket Reservation</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLink]="['ticketReservation']">Reserve Ticket</a></li>
+                <li><a [routerLink]="['tktResrvDetails']">Reservation Details</a></li>
+                <li><a [routerLink]="['ticketConfirmation']">Ticket Confirmation</a></li>
+                <li><a [routerLink]="['paymentConfirmation']">Pmt Confirmation</a></li>
+                <li><a [routerLink]="['ticketPrint']">Email Confirmation</a></li>
+
+              </ul>
+            </li>
+
+
+            <li>
+              <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-bus">&nbsp;</i><span class="hide-menu">Bus Reservation</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLink]="['busReservation']">Reserve Bus</a></li>
+                <li><a [routerLink]="['busResrvDetails']">Reservation Details</a></li>
+
+              </ul>
+            </li>
           </ul>
         </li>
-
         <li>
           <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Vendor</span></a>
           <ul aria-expanded="false" class="collapse">
@@ -52,7 +77,7 @@
 
           </ul>
         </li>
-        
+
         <li>
           <a class="waves-effect waves-dark" [routerLink]="['user']" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">User</span></a>
         </li>

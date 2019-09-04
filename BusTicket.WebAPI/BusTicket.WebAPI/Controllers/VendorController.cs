@@ -1,4 +1,6 @@
-﻿using BusTicket.WebAPI.Core;
+﻿using AutoMapper;
+using BusTicket.API.DTOs;
+using BusTicket.WebAPI.Core;
 using BusTicket.WebAPI.Core.Domain;
 using System;
 using System.Collections.Generic;
@@ -10,66 +12,101 @@ using System.Web.Http;
 
 namespace BusTicket.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class VendorController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public VendorController(IUnitOfWork unitOfWork)
+        public VendorController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET: api/Vendor
         [HttpGet]
-        public async Task<IHttpActionResult> GetVendors()
+        public async Task<IHttpActionResult> GetVendorDetails()
         {
-            var vendors = await _unitOfWork.Brand.GetAll();
+            var vendors = await _unitOfWork.Vendor.Find(i => i.IsActive == true);
+
             return Ok(vendors);
         }
 
-        // GET: api/Vendor/5
-        [HttpGet]
-        public async Task<IHttpActionResult> GetVendor(int id)
-        {
-            var vendor = await _unitOfWork.Vendor.Get(id);
 
-            if (vendor == null)
+        // GET: api/BusDetail
+        [HttpGet,Route("GetArchive")]
+        public async Task<IHttpActionResult> GetArchiveVendorDetails()
+        {
+            var vendors = await _unitOfWork.Vendor.Find(i => i.IsActive == false);
+            return Ok(vendors);
+        }
+
+        // GET: api/BusDetail/5
+        [HttpGet,Route("{id}")]
+        public async Task<IHttpActionResult> GetVendorDetail(int id)
+        {
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
+
+            if (vendorDetail == null)
             {
                 return NotFound();
             }
 
-            return Ok(vendor);
+            return Ok(vendorDetail);
         }
 
-        // POST: api/Vendor
-        [HttpPost]
-        public async Task<IHttpActionResult> PostVendor(Vendor vendor)
-        {
-            if (vendor == null) return BadRequest();
-            _unitOfWork.Vendor.Add(vendor);
-            await _unitOfWork.Complete();
-            return Ok(vendor);
-        }
-
-        // PUT: api/Vendor/5
+        // PUT: api/BusDetail/5
         [HttpPut]
-        public async Task<IHttpActionResult> PutVendor(Vendor vendor)
+        public async Task<IHttpActionResult> PutVendorDetail(VendorDTO vendorDetail)
         {
-            if (vendor == null) return BadRequest();
-            _unitOfWork.Vendor.Update(vendor);
+
+            var model = _mapper.Map<Vendor>(vendorDetail);
+
+            _unitOfWork.Vendor.Update(model);
             await _unitOfWork.Complete();
-            return Ok(vendor);
+            return Ok(vendorDetail);
         }
 
-        // DELETE: api/Vendor/5
-        [HttpDelete]
-        public async Task<IHttpActionResult> DeleteVendor(int id)
+        // POST: api/BusDetail
+        [HttpPost]
+        public async Task<IHttpActionResult> PostBusDetail(VendorDTO vendorDetail)
         {
-            var vendor = await _unitOfWork.Vendor.Get(id);
-            if (vendor == null) return BadRequest();
-            _unitOfWork.Vendor.Remove(vendor);
+            var model = _mapper.Map<Vendor>(vendorDetail);
+
+            _unitOfWork.Vendor.Add(model);
             await _unitOfWork.Complete();
-            return Ok(vendor);
+            return Ok(vendorDetail);
+        }
+
+
+        //Soft Delete
+        [HttpPut,Route("VendorDelete/{id}")]
+        public async Task<IHttpActionResult> VendorSoftDelete(int id)
+        {
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
+            if (vendorDetail == null) return BadRequest();
+            vendorDetail.IsActive = false;
+            _unitOfWork.Vendor.Update(vendorDetail);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
+        }
+
+        // DELETE: api/BusDetail/5
+        [HttpDelete,Route("{id}")]
+        public async Task<IHttpActionResult> DeleteVendorDetail(int id)
+        {
+            var vendorDetail = await _unitOfWork.Vendor.Get(id);
+
+            if (vendorDetail == null)
+            {
+                return NotFound();
+            }
+
+
+            _unitOfWork.Vendor.Remove(vendorDetail);
+            await _unitOfWork.Complete();
+            return Ok(vendorDetail);
         }
     }
 }

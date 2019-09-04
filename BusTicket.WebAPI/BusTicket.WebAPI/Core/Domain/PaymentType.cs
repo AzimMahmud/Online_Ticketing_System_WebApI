@@ -10,6 +10,9 @@ namespace BusTicket.WebAPI.Core.Domain
     {
         [Key]
         public int PayTypID { get; set; }
+
+        [Required]
         public string PaymentMethod { get; set; }
+        public bool IsActive { get; set; }
     }
 }
